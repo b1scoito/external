@@ -60,6 +60,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -82,6 +83,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <Optimization>Full</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,6 +96,7 @@
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
     <ClInclude Include="glow.hpp" />
+    <ClInclude Include="keybind.hpp" />
     <ClInclude Include="lazy_importer.hpp" />
     <ClInclude Include="memory.hpp" />
     <ClInclude Include="offsets.hpp" />

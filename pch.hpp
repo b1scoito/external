@@ -1,6 +1,5 @@
 // defs
 #define JM_XORSTR_DISABLE_AVX_INTRINSICS
-#define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 
 // global incs
@@ -13,3 +12,4 @@
 #include "console.hpp"
 #include "var.hpp"
 #include "utils.hpp"
+#include "keybind.hpp"

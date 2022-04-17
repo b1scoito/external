@@ -1,13 +1,19 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
-void c_glow::run()
+void c_glow::run(keybind kb)
 {
 	log_debug("starting glow thread");
 
 	std::thread([&] {
 		while (var::b_is_running)
 		{
+			if (!kb.get())
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+				continue;
+			}
+
 			// Only update each tick
 			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdk::base->get_engine_image().base + sdk::offsets::dwGlobalVars);
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);

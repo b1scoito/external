@@ -37,6 +37,9 @@
     <Filter Include="cheats\glow">
       <UniqueIdentifier>{d286b7b5-6d21-4525-9543-683ca9e1bfc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\keybind">
+      <UniqueIdentifier>{600bc4ae-9567-4ae0-8a48-bc7f1ee88da9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="glow.hpp">
       <Filter>cheats\glow</Filter>
+    </ClInclude>
+    <ClInclude Include="keybind.hpp">
+      <Filter>utils\keybind</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
