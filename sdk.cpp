@@ -1,7 +1,7 @@
 #include "pch.hpp"
 #include "sdk.hpp"
 
-void c_sdkbase::run()
+void c_basesdk::run()
 {
 	log_debug("Waiting for CS:GO to open...");
 
@@ -21,8 +21,7 @@ void c_sdkbase::run()
 
 	} while (engine.first <= 0x0);
 
-	enginebase = engine.first;
-	log_debug("engine.dll address -> 0x%x", enginebase);
+	log_debug("engine.dll address -> 0x%X", get_engine_image().base);
 
 	do
 	{
@@ -31,31 +30,34 @@ void c_sdkbase::run()
 
 	} while (client.first <= 0x0);
 
-	clientbase = client.first;
-	log_debug("client.dll address -> 0x%x", clientbase);
+	log_debug("client.dll address -> 0x%X", get_client_image().base);
 
-	local_player = g_mem->read<std::int32_t>(clientbase + sdk::offsets::dwLocalPlayer);
+}
+
+std::uintptr_t c_basesdk::get_local_player()
+{
+	auto local_player = g_mem->read<std::int32_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
 	if (!local_player)
 	{
 		while (!local_player)
 		{
-			local_player = g_mem->read<std::int32_t>(clientbase + sdk::offsets::dwLocalPlayer);
+			local_player = g_mem->read<std::int32_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
 			std::this_thread::sleep_for(std::chrono::milliseconds(250));
 		}
 	}
 
-	log_debug("localplayer address -> 0x%x", local_player);
+	return local_player;
 }
 
-bool c_sdkbase::in_game()
+bool c_basesdk::in_game()
 {
-	const auto client_state = g_mem->read<std::uintptr_t>(this->enginebase + sdk::offsets::dwClientState);
-	const auto state = (g_mem->read<int>(client_state + sdk::offsets::dwClientState_State) == 6);
+	const auto client_state = g_mem->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
+	const auto state = (g_mem->read<int>(client_state + sdk::offsets::dwClientState_State) == SIGNONSTATE_FULL);
 
 	return state;
 }
 
-bool c_sdkbase::in_menu()
+bool c_basesdk::in_menu()
 {
 	CURSORINFO ci { sizeof(CURSORINFO) };
 	if (!GetCursorInfo(&ci))
@@ -68,7 +70,7 @@ bool c_sdkbase::in_menu()
 	return false;
 }
 
-c_sdkbase::~c_sdkbase()
+c_basesdk::~c_basesdk()
 {
 	g_mem->unload();
 }

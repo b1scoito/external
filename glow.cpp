@@ -15,7 +15,7 @@ void c_glow::run()
 			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))
 				continue;
 
-			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdkbase->enginebase + sdk::offsets::dwGlobalVars);
+			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdk::base->get_engine_image().base + sdk::offsets::dwGlobalVars);
 
 			// Only update each tick
 			auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
@@ -23,11 +23,11 @@ void c_glow::run()
 				continue;
 
 			// Check if in a game
-			if (!sdkbase->in_game())
+			if (!sdk::base->in_game())
 				continue;
 
 			// Check if in menu
-			if (sdkbase->in_menu())
+			if (sdk::base->in_menu())
 				continue;
 
 			log_debug("coiso");
@@ -36,5 +36,5 @@ void c_glow::run()
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-		}).join();
+		}).detach();
 }
