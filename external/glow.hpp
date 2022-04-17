@@ -6,8 +6,8 @@
 #include "structs.hpp"
 
 // Classes
-#include "entity.hpp"
 #include "world.hpp"
+#include "entity.hpp"
 
 class c_glow
 {
@@ -19,7 +19,7 @@ public:
 	c_glow() = default;
 	~c_glow() = default;
 
-	void run(keybind kb);
+	void run(keybind& keybd);
 };
 
 inline auto glow = std::make_unique<c_glow>();

@@ -41,8 +41,7 @@ void c_bhop::run()
 				continue;
 
 			// Check if onground and jump, otherwise, set jumped to false
-			const auto flags = local_player.flags();
-			if ((flags & sdk::structs::entity_flags::FL_ONGROUND))
+			if ((local_player.flags() & sdk::structs::entity_flags::FL_ONGROUND))
 				memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceJump, 5); // +jump
 			else
 				memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceJump, 4); // -jump

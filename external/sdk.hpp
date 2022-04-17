@@ -5,9 +5,6 @@
 #include "offsets.hpp"
 #include "structs.hpp"
 
-// Classes
-#include "entity.hpp"
-
 class c_basesdk
 {
 private:

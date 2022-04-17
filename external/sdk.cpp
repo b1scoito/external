@@ -32,17 +32,6 @@ void c_basesdk::run()
 	} while (get_client_image().base <= 0x0);
 
 	log_debug("client.dll -> 0x%x", get_client_image().base);
-
-	// Thread to update localplayer every once 5 seconds
-	std::thread([&] {
-		while (var::b_is_running)
-		{
-			entity->update_local_player(this->get_local_player());
-			std::this_thread::sleep_for(5s);
-
-			log_debug("Update localplayer thread");
-		}	
-	}).detach();
 }
 
 std::uintptr_t c_basesdk::get_local_player()

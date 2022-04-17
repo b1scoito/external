@@ -6,8 +6,8 @@
 #include "structs.hpp"
 
 // Classes
-#include "entity.hpp"
 #include "world.hpp"
+#include "entity.hpp"
 
 class c_bhop
 {
@@ -20,7 +20,6 @@ public:
 	~c_bhop() = default;
 
 	void run();
-
 };
 
 inline auto bhop = std::make_unique<c_bhop>();
