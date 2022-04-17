@@ -56,7 +56,12 @@ void c_glow::run()
 					const auto entity_team_id = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iTeamNum);
 					if (local_team_id != entity_team_id)
 					{
-						glow.set(245.f / 255.f, 162.f / 255.f, 255.f / 255.f, 0.8f);
+						glow.set(
+							245.f / 255.f, // R
+							162.f / 255.f, // G
+							255.f / 255.f, // B
+							0.7f		   // A
+						);
 
 						g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
 					}
