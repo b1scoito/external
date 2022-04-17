@@ -44,9 +44,9 @@ void c_bhop::run()
 			// Check if onground and jump, otherwise, set jumped to false
 			const auto m_fFlags = g_mem->read<std::uint8_t>(sdkbase->local_player + sdk::netvars::m_fFlags);
 			if ((m_fFlags & sdk::structs::entity_flags::FL_ONGROUND))
-				g_mem->write<std::int32_t>(sdkbase->clientbase + sdk::offsets::dwForceJump, 5);
+				g_mem->write<std::int32_t>(sdkbase->clientbase + sdk::offsets::dwForceJump, 5); // +jump
 			else
-				g_mem->write<std::int32_t>(sdkbase->clientbase + sdk::offsets::dwForceJump, 4);
+				g_mem->write<std::int32_t>(sdkbase->clientbase + sdk::offsets::dwForceJump, 4); // -jump
 
 			// Update last frame and last tick
 			last_frame = global_vars.iFrameCount;
