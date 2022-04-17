@@ -1,3 +1,5 @@
+//#define JM_XORSTR_DISABLE_AVX_INTRINSICS
+
 // global incs
 #include <iostream>
 #include <Windows.h>
