@@ -3,7 +3,7 @@
 
 void c_glow::run(keybind kb)
 {
-	log_debug("initializing glow thread");
+	log_debug("Initializing Glow thread.");
 
 	std::thread([&] {
 		while (var::b_is_running)
