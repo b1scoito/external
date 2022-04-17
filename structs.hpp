@@ -79,6 +79,14 @@ namespace sdk
 			MOVETYPE_LAST = MOVETYPE_CUSTOM,
 			MOVETYPE_MAX_BITS = 4
 		};
+
+		enum entity_team_id : int
+		{
+			TEAM_UNASSIGNED = 0,
+			TEAM_SPECTATOR,
+			TEAM_TT,
+			TEAM_CT
+		};
 	}
 }
 

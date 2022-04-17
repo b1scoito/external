@@ -16,7 +16,7 @@ private:
 	struct image_t {
 		std::uintptr_t base;
 		std::uintptr_t size;
-	} image;
+	} image = {};
 
 public:
 	c_basesdk() = default;

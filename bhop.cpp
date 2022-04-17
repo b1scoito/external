@@ -49,5 +49,5 @@ void c_bhop::run()
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-	}).join();
+	}).detach();
 }
