@@ -10,5 +10,6 @@
 
 ## keybinds
 
+- `MOUSE 5` Hold for triggerbot
 - `HOME` Toggle for glow
 - `DEL` Unload
