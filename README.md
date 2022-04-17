@@ -1,6 +1,6 @@
 # external
  
- CS:GO external cheat with the most basic features that I like to use, bhop and glow.
+ CS:GO external cheat with the most basic features that I like to use, bhop and glow, really focused on performance.
  This is a personal and for fun project, don't expect it to be that reliable for you.
 
 ## licensed content
