@@ -5,7 +5,8 @@
 
 ## licensed content
 
-Most of the structs taken from: https://github.com/rollraw/qo0-base
+Most of the structs taken from: https://github.com/rollraw/qo0-base  
+All offsets from hazedumper: https://github.com/frk1/hazedumper
 
 ## keybinds
 
