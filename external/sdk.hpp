@@ -5,11 +5,12 @@
 #include "offsets.hpp"
 #include "structs.hpp"
 
+// Classes
+#include "entity.hpp"
+
 class c_basesdk
 {
 private:
-	//process proc = {};
-
 	std::pair<std::uintptr_t, std::uintptr_t> engine = {};
 	std::pair<std::uintptr_t, std::uintptr_t> client = {};
 

@@ -1,7 +1,7 @@
 #include "pch.hpp"
 #include "memory.hpp"
 
-bool memory::memory_compare(const std::uint8_t* bData, const std::uint8_t* bMask, const char* szMask)
+bool c_memory::memory_compare(const std::uint8_t* bData, const std::uint8_t* bMask, const char* szMask)
 {
 	for (; *szMask; ++szMask, ++bData, ++bMask)
 	{
@@ -12,7 +12,7 @@ bool memory::memory_compare(const std::uint8_t* bData, const std::uint8_t* bMask
 	return (*szMask == NULL);
 }
 
-std::uintptr_t memory::pattern_scan(std::uintptr_t dll_base, const char* sig, const char* mask)
+std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char* sig, const char* mask)
 {
 	// for signatures that are hardcoded and not set
 	if (!dll_base || sig == nullptr || mask == nullptr)
@@ -80,7 +80,7 @@ std::uintptr_t memory::pattern_scan(std::uintptr_t dll_base, const char* sig, co
 	return NULL;
 }
 
-std::uintptr_t memory::read_chain(std::uintptr_t dw_address, const std::vector<uintptr_t>& offsets)
+std::uintptr_t c_memory::read_chain(std::uintptr_t dw_address, const std::vector<uintptr_t>& offsets)
 {
 	auto result = read<std::uintptr_t>(dw_address + offsets.at(0));
 
@@ -90,24 +90,24 @@ std::uintptr_t memory::read_chain(std::uintptr_t dw_address, const std::vector<u
 	return result;
 }
 
-bool memory::read(std::uintptr_t dw_address, LPVOID lp_buffer, std::uintptr_t dw_size) const
+bool c_memory::read(std::uintptr_t dw_address, LPVOID lp_buffer, std::uintptr_t dw_size) const
 {
 	auto ret = ReadProcessMemory(process_handle, (LPCVOID)dw_address, lp_buffer, dw_size, nullptr);
 	return ret != 0;
 }
 
-bool memory::write(std::uintptr_t dw_address, LPCVOID lp_buffer, std::uintptr_t dw_size) const
+bool c_memory::write(std::uintptr_t dw_address, LPCVOID lp_buffer, std::uintptr_t dw_size) const
 {
 	auto ret = WriteProcessMemory(process_handle, (LPVOID)dw_address, lp_buffer, dw_size, nullptr);
 	return ret != 0;
 }
 
-bool memory::unload()
+bool c_memory::unload()
 {
 	return CloseHandle(process_handle) != 0;
 }
 
-bool memory::get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data)
+bool c_memory::get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data)
 {
 	HANDLE handle = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, process_id);
 	if (handle == INVALID_HANDLE_VALUE)
@@ -135,7 +135,7 @@ bool memory::get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::ui
 	return false;
 }
 
-bool memory::attach()
+bool c_memory::attach()
 {
 	HANDLE handle = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
 	if (handle == INVALID_HANDLE_VALUE)

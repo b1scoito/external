@@ -1,8 +1,13 @@
 #pragma once
 
+// SDK
 #include "memory.hpp"
 #include "sdk.hpp"
 #include "structs.hpp"
+
+// Classes
+#include "entity.hpp"
+#include "world.hpp"
 
 class c_bhop
 {

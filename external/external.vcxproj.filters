@@ -40,6 +40,9 @@
     <Filter Include="utils\process">
       <UniqueIdentifier>{3543c591-7678-4583-8315-a38cf7c1206a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sdk\classes">
+      <UniqueIdentifier>{4a36981a-fa04-4e12-9d67-68cc1c448749}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -83,6 +86,12 @@
     </ClInclude>
     <ClInclude Include="process.hpp">
       <Filter>utils\process</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="world.hpp">
+      <Filter>sdk\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

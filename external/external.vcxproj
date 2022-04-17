@@ -99,6 +99,7 @@
   <ItemGroup>
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
+    <ClInclude Include="entity.hpp" />
     <ClInclude Include="glow.hpp" />
     <ClInclude Include="keybind.hpp" />
     <ClInclude Include="lazy_importer.hpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="structs.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
+    <ClInclude Include="world.hpp" />
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
   <ItemGroup>
