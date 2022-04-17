@@ -8,14 +8,21 @@ void c_bhop::run()
 	std::thread([&] {
 		while (var::b_is_running)
 		{
-			// Sleep for performance
-			timer::sleep(1.f);
 
 			// Only update each tick
 			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdk::base->get_engine_image().base + sdk::offsets::dwGlobalVars);
 			const auto update = ( global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame );
 			if (!update)
-				continue;
+			{
+				// Sleep for performance
+				timer::sleep(1.f);
+				//continue;
+			}
+			else
+			{
+				// Sleep for performance
+				timer::sleep(1.f);
+			}
 
 			// Check if active window is CS:GO
 			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))

@@ -22,6 +22,11 @@ void c_glow::run(keybind kb)
 				// Sleep for performance
 				timer::sleep(1.f);
 			}
+			else
+			{
+				// Sleep for performance
+				timer::sleep(1.f);
+			}
 
 			// Check if active window is CS:GO
 			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))
@@ -63,8 +68,8 @@ void c_glow::run(keybind kb)
 					if (local_team_id != entity_team_id)
 					{
 						glow.set(
-							245.f / 255.f, // R
-							162.f / 255.f, // G
+							153.f / 255.f, // R
+							117.f / 255.f, // G
 							255.f / 255.f, // B
 							0.7f		   // A
 						);
