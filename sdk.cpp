@@ -36,17 +36,25 @@ void c_basesdk::run()
 
 std::uintptr_t c_basesdk::get_local_player()
 {
-	auto local_player = g_mem->read<std::int32_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
+	auto local_player = g_mem->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
 	if (!local_player)
 	{
 		while (!local_player)
 		{
-			local_player = g_mem->read<std::int32_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
+			local_player = g_mem->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 	}
 
 	return local_player;
+}
+
+std::int32_t c_basesdk::get_max_player_count()
+{
+	const auto client_state = g_mem->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
+	const auto max_player_count = g_mem->read<std::int32_t>(client_state + sdk::offsets::dwClientState_MaxPlayer);
+
+	return max_player_count;
 }
 
 bool c_basesdk::in_game()

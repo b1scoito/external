@@ -25,6 +25,50 @@ namespace sdk
 			int		iTimestampRandomizeWindow;	// 0x3A
 		}; // Size: 0x3E
 
+		enum entity_glow_render_style : int
+		{
+			GLOWRENDERSTYLE_DEFAULT = 0,
+			GLOWRENDERSTYLE_RIMGLOW3D,
+			GLOWRENDERSTYLE_EDGE_HIGHLIGHT,
+			GLOWRENDERSTYLE_EDGE_HIGHLIGHT_PULSE,
+			GLOWRENDERSTYLE_COUNT
+		};
+
+		struct glow_object_t
+		{
+			void set(const float red, const float green, const float blue, const float alpha, const int nRenderStyle = GLOWRENDERSTYLE_DEFAULT) // @note: styles not used cuz other styles doesnt have ignorez flag and needed to rebuild glow
+			{
+				this->R = red;
+				this->G = green;
+				this->B = blue;
+				this->A = alpha;
+
+				//this->flBloomAmount = 1.0f;
+				this->bRenderWhenOccluded = true;
+				this->bRenderWhenUnoccluded = false;
+				this->nRenderStyle = nRenderStyle;
+			}
+
+			std::int32_t			m_nNextFreeSlot;				// 0x00
+			std::uint32_t			pEntity;						// 0x04
+			float					R;								// 0x08
+			float					G;								// 0x0C
+			float					B;								// 0x10
+			float					A;								// 0x14
+			bool					bAlphaCappedByRenderAlpha;		// 0x18
+			std::byte				pad0[0x3];						// 0x19 - pack 1 bool as 4 bytes
+			float					flAlphaFunctionOfMaxVelocity;	// 0x1C
+			float					flBloomAmount;					// 0x20
+			float					flPulseOverdrive;				// 0x24
+			bool					bRenderWhenOccluded;			// 0x28
+			bool					bRenderWhenUnoccluded;			// 0x29
+			bool					bFullBloomRender;				// 0x2A
+			std::byte				pad1[0x1];						// 0x2B  - pack 3 bool as 4 bytes
+			int						iFullBloomStencilTestValue;		// 0x2C
+			int						nRenderStyle;					// 0x30
+			int						nSplitScreenSlot;				// 0x34
+		}; // Size: 0x38
+
 		/* baseentity flags */
 		enum entity_flags : int
 		{

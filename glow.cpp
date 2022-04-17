@@ -29,35 +29,44 @@ void c_glow::run()
 			if (!sdk::base->in_game())
 				continue;
 
-			const auto glow_obj_manager = g_mem->read<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
+			const auto glow_obj_manager = g_mem->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
+			const auto local_team_id = g_mem->read<std::int32_t>(sdk::base->get_local_player() + sdk::netvars::m_iTeamNum);
 
-			for (size_t i = 1; i < 32; i++)
+			const auto max_player_count = sdk::base->get_max_player_count();
+			if (max_player_count <= 1)
+				continue;
+
+			for (std::int32_t i = 1; i < max_player_count; i++)
 			{
-				const auto entity = g_mem->read<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + i * 0x10);
-
+				const auto entity = g_mem->read<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10));
 				if (entity)
 				{
 					const auto entity_team_id = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iTeamNum);
-					const auto entity_glow = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iGlowIndex);
 
-					if (entity_team_id == sdk::structs::entity_team_id::TEAM_TT) 
-					{
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0x8, 1.238f); // R
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0xC, 190.f); // G
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0x10, 255.f); // B
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0x14, 255.f); // A
+					const auto entity_health = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iHealth);
+					if (entity_health < 1 || entity_health > 100)
+						continue;
 
-						g_mem->write<bool>(glow_obj_manager + entity_glow * 0x38 + 0x28, true); // Enable glow
-					}
-					else if (entity_team_id == sdk::structs::entity_team_id::TEAM_CT)
-					{
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0x8, 255.f); // R
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0xC, 200.f); // G
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0x10, 142.f); // B
-						g_mem->write<float>(glow_obj_manager + entity_glow * 0x38 + 0x14, 255.f); // A
+					const auto entity_dormant = g_mem->read<bool>(entity + sdk::offsets::m_bDormant);
+					if (entity_dormant)
+						continue;
 
-						g_mem->write<bool>(glow_obj_manager + entity_glow * 0x38 + 0x28, true); // Enable glow
-					}
+					const auto entity_glow_index = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iGlowIndex);
+					const auto entity_glow_offset = (glow_obj_manager + (entity_glow_index * 0x38));
+
+					auto current_glow = g_mem->read<sdk::structs::glow_object_t>(entity_glow_offset);
+
+					current_glow.set(1.f, 1.f, 1.f, 1.f);
+					g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, current_glow); // Set glow
+
+					//if (local_team_id == entity_team_id) // Team
+					//{
+					//}
+					//else // Enemy
+					//{
+					//	current_glow.set(0.f, 1.f, 0.f, 1.7f);
+					//	g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, current_glow); // Set glow
+					//}
 				}
 			}
 

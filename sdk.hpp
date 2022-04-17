@@ -28,6 +28,8 @@ public:
 
 	std::uintptr_t get_local_player();
 
+	std::int32_t get_max_player_count();
+
 	constexpr auto& get_engine_image() { 
 		image = { .base = engine.first, .size = engine.second }; 
 		return image; 
