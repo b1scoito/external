@@ -43,7 +43,7 @@ namespace sdk
 				this->B = blue;
 				this->A = alpha;
 
-				//this->flBloomAmount = 1.0f;
+				this->flBloomAmount = 1.0f;
 				this->bRenderWhenOccluded = true;
 				this->bRenderWhenUnoccluded = false;
 				this->nRenderStyle = nRenderStyle;
@@ -130,6 +130,16 @@ namespace sdk
 			TEAM_SPECTATOR,
 			TEAM_TT,
 			TEAM_CT
+		};
+
+		/* baseentity lifestate */
+		enum entity_life_state : int
+		{
+			LIFE_ALIVE = 0,
+			LIFE_DYING,
+			LIFE_DEAD,
+			LIFE_RESPAWNABLE,
+			LIFE_DISCARDBODY
 		};
 	}
 }

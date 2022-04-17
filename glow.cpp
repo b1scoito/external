@@ -8,14 +8,15 @@ void c_glow::run()
 	std::thread([&] {
 		while (var::b_is_running)
 		{
-			// Sleep for performance
-			timer::sleep(1.f);
 
 			// Only update each tick
 			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdk::base->get_engine_image().base + sdk::offsets::dwGlobalVars);
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			if (!update)
-				continue;
+			{
+				// Sleep for performance
+				timer::sleep(1.f);
+			}
 
 			// Check if active window is CS:GO
 			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))
@@ -38,9 +39,13 @@ void c_glow::run()
 
 			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
-				const auto entity = g_mem->read<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10));
+				const auto entity = g_mem->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10));
 				if (entity)
 				{
+					const auto entity_life_state = g_mem->read<std::int32_t>(entity + sdk::netvars::m_lifeState);
+					if (!(entity_life_state == sdk::structs::entity_life_state::LIFE_ALIVE))
+						continue;
+
 					const auto entity_dormant = g_mem->read<bool>(entity + sdk::offsets::m_bDormant);
 					if (entity_dormant)
 						continue;
@@ -52,7 +57,8 @@ void c_glow::run()
 					const auto entity_team_id = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iTeamNum);
 					if (local_team_id != entity_team_id)
 					{
-						glow.set(1.f, 1.f, 1.f, 0.5f);
+						glow.set(245.f / 255.f, 162.f / 255.f, 255.f / 255.f, 0.8f);
+
 						g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
 					}
 				}
