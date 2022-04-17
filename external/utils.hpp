@@ -36,3 +36,12 @@ namespace timer
         oNtDelayExecution(false, &time);
 	}
 }
+
+namespace string
+{
+    inline std::wstring to_lower(std::wstring str)
+    {
+        std::transform(str.begin(), str.end(), str.begin(), static_cast<int(*)(int)>(::tolower));
+        return str;
+    }
+}

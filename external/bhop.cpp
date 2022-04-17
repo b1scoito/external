@@ -3,12 +3,11 @@
 
 void c_bhop::run()
 {
-	log_debug("starting bhop thread");
+	log_debug("initializing bhop thread");
 
 	std::thread([&] {
 		while (var::b_is_running)
 		{
-
 			// Only update each tick
 			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdk::base->get_engine_image().base + sdk::offsets::dwGlobalVars);
 			const auto update = ( global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame );

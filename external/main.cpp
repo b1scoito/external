@@ -18,7 +18,7 @@ INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	glow->run(kb);
 
 	while (!(GetAsyncKeyState(VK_DELETE)))
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(50ms);
 
 	var::b_is_running = false;
 	

@@ -8,7 +8,7 @@
 class c_basesdk
 {
 private:
-	process proc = {};
+	//process proc = {};
 
 	std::pair<std::uintptr_t, std::uintptr_t> engine = {};
 	std::pair<std::uintptr_t, std::uintptr_t> client = {};

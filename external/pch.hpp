@@ -4,7 +4,11 @@
 
 // global incs
 #include <iostream>
+#include <thread>
+
 #include <Windows.h>
+
+using namespace std::chrono_literals;
 
 // incs
 #include "xorstr.hpp"

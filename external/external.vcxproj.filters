@@ -22,9 +22,6 @@
     <Filter Include="utils\li">
       <UniqueIdentifier>{ac5f3c1b-9dc1-4f31-985f-2d9915123ab2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="utils\process">
-      <UniqueIdentifier>{87ef4fe2-986e-46fc-bbf1-0b53d632abba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="sdk">
       <UniqueIdentifier>{4475b62b-6b8d-4d29-92ef-1336f5b666d7}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="utils\keybind">
       <UniqueIdentifier>{600bc4ae-9567-4ae0-8a48-bc7f1ee88da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\process">
+      <UniqueIdentifier>{3543c591-7678-4583-8315-a38cf7c1206a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +63,6 @@
     <ClInclude Include="offsets.hpp">
       <Filter>sdk</Filter>
     </ClInclude>
-    <ClInclude Include="process.hpp">
-      <Filter>utils\process</Filter>
-    </ClInclude>
     <ClInclude Include="structs.hpp">
       <Filter>sdk</Filter>
     </ClInclude>
@@ -83,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="keybind.hpp">
       <Filter>utils\keybind</Filter>
+    </ClInclude>
+    <ClInclude Include="process.hpp">
+      <Filter>utils\process</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

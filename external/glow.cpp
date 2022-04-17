@@ -3,14 +3,14 @@
 
 void c_glow::run(keybind kb)
 {
-	log_debug("starting glow thread");
+	log_debug("initializing glow thread");
 
 	std::thread([&] {
 		while (var::b_is_running)
 		{
 			if (!kb.get())
 			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+				std::this_thread::sleep_for(50ms);
 				continue;
 			}
 
