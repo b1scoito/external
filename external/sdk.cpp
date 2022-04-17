@@ -13,12 +13,12 @@ void c_basesdk::run()
 	} while (!proc.is_valid());
 
 	log_debug("Attaching to process");
-	g_mem->attach();
+	memory->attach();
 
 	log_debug("Waiting for engine.dll to load...");
 	do
 	{
-		g_mem->get_module(L"engine.dll", engine);
+		memory->get_module(L"engine.dll", engine);
 		std::this_thread::sleep_for(250ms);
 	} while (get_engine_image().base <= 0x0);
 
@@ -27,7 +27,7 @@ void c_basesdk::run()
 	log_debug("Waiting for client.dll to load...");
 	do
 	{
-		g_mem->get_module(L"client.dll", client);
+		memory->get_module(L"client.dll", client);
 		std::this_thread::sleep_for(250ms);
 	} while (get_client_image().base <= 0x0);
 
@@ -36,12 +36,12 @@ void c_basesdk::run()
 
 std::uintptr_t c_basesdk::get_local_player()
 {
-	auto local_player = g_mem->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
+	auto local_player = memory->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
 	if (!local_player)
 	{
 		while (!local_player)
 		{
-			local_player = g_mem->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
+			local_player = memory->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
 			std::this_thread::sleep_for(100ms);
 		}
 	}
@@ -51,16 +51,16 @@ std::uintptr_t c_basesdk::get_local_player()
 
 std::int32_t c_basesdk::get_max_player_count()
 {
-	const auto client_state = g_mem->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
-	const auto max_player_count = g_mem->read<std::int32_t>(client_state + sdk::offsets::dwClientState_MaxPlayer);
+	const auto client_state = memory->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
+	const auto max_player_count = memory->read<std::int32_t>(client_state + sdk::offsets::dwClientState_MaxPlayer);
 
 	return max_player_count;
 }
 
 bool c_basesdk::in_game()
 {
-	const auto client_state = g_mem->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
-	const auto state = (g_mem->read<int>(client_state + sdk::offsets::dwClientState_State) == SIGNONSTATE_FULL);
+	const auto client_state = memory->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
+	const auto state = (memory->read<int>(client_state + sdk::offsets::dwClientState_State) == SIGNONSTATE_FULL);
 
 	return state;
 }
@@ -80,5 +80,5 @@ bool c_basesdk::in_menu()
 
 c_basesdk::~c_basesdk()
 {
-	g_mem->unload();
+	memory->unload();
 }

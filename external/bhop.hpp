@@ -1,8 +1,13 @@
 #pragma once
 
+// SDK
 #include "memory.hpp"
 #include "sdk.hpp"
 #include "structs.hpp"
+
+// Classes
+#include "world.hpp"
+#include "entity.hpp"
 
 class c_bhop
 {
@@ -15,7 +20,6 @@ public:
 	~c_bhop() = default;
 
 	void run();
-
 };
 
 inline auto bhop = std::make_unique<c_bhop>();

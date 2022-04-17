@@ -2,7 +2,7 @@
 
 #include <TlHelp32.h>
 
-class memory
+class c_memory
 {
 private:
 	std::once_flag grab_text_section_once = {};
@@ -14,8 +14,8 @@ private:
 	bool memory_compare(const std::uint8_t* bData, const std::uint8_t* bMask, const char* szMask);
 
 public:
-	memory() = default;
-	~memory() = default;
+	c_memory() = default;
+	~c_memory() = default;
 
 	std::uintptr_t pattern_scan(std::uintptr_t dll_base, const char* sig, const char* mask);
 	std::uintptr_t read_chain(std::uintptr_t dw_address, const std::vector<std::uintptr_t>& offsets);
@@ -74,4 +74,4 @@ public:
 	}
 };
 
-inline std::unique_ptr<memory> g_mem = std::make_unique<memory>();
+inline std::unique_ptr<c_memory> memory = std::make_unique<c_memory>();

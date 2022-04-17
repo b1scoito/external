@@ -14,6 +14,6 @@ using namespace std::chrono_literals;
 #include "xorstr.hpp"
 #include "lazy_importer.hpp"
 #include "console.hpp"
-#include "var.hpp"
 #include "utils.hpp"
 #include "keybind.hpp"
+#include "var.hpp"

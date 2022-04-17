@@ -1,8 +1,13 @@
 #pragma once
 
+// SDK
 #include "memory.hpp"
 #include "sdk.hpp"
 #include "structs.hpp"
+
+// Classes
+#include "world.hpp"
+#include "entity.hpp"
 
 class c_glow
 {
@@ -14,7 +19,7 @@ public:
 	c_glow() = default;
 	~c_glow() = default;
 
-	void run(keybind kb);
+	void run(keybind& keybd);
 };
 
 inline auto glow = std::make_unique<c_glow>();

@@ -1,32 +1,28 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
-void c_glow::run(keybind kb)
+void c_glow::run(keybind& keybd)
 {
 	log_debug("Initializing Glow thread.");
 
 	std::thread([&] {
 		while (var::b_is_running)
 		{
-			if (!kb.get())
+			if (!keybd.get())
 			{
 				std::this_thread::sleep_for(50ms);
 				continue;
 			}
 
 			// Only update each tick
-			const auto global_vars = g_mem->read<sdk::structs::globalvars_t>(sdk::base->get_engine_image().base + sdk::offsets::dwGlobalVars);
+			const auto global_vars = world->get_globalvars();
+
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
+			// Sleep for performance
 			if (!update) // Why does this have to make sense?
-			{
-				// Sleep for performance
 				timer::sleep(1.f);
-			}
 			else
-			{
-				// Sleep for performance
 				timer::sleep(1.f);
-			}
 
 			// Check if active window is CS:GO
 			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))
@@ -40,8 +36,9 @@ void c_glow::run(keybind kb)
 			if (!sdk::base->in_game())
 				continue;
 
-			const auto glow_obj_manager = g_mem->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
-			const auto local_team_id = g_mem->read<std::int32_t>(sdk::base->get_local_player() + sdk::netvars::m_iTeamNum);
+			const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
+			
+			c_entity local_player = {};
 
 			const auto max_player_count = sdk::base->get_max_player_count();
 			if (max_player_count <= 1)
@@ -49,23 +46,20 @@ void c_glow::run(keybind kb)
 
 			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
-				const auto entity = g_mem->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10));
-				if (entity)
+				c_entity entity(i);
+
+				if (entity.get_entity())
 				{
-					const auto entity_life_state = g_mem->read<std::int32_t>(entity + sdk::netvars::m_lifeState);
-					if (!(entity_life_state == sdk::structs::entity_life_state::LIFE_ALIVE))
+					if (!(entity.life_state() == sdk::structs::entity_life_state::LIFE_ALIVE))
 						continue;
 
-					const auto entity_dormant = g_mem->read<bool>(entity + sdk::offsets::m_bDormant);
-					if (entity_dormant)
+					if (entity.dormant())
 						continue;
 
-					const auto entity_glow_index = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iGlowIndex);
-					const auto entity_glow_offset = (glow_obj_manager + (entity_glow_index * 0x38));
-					auto glow = g_mem->read<sdk::structs::glow_object_t>(entity_glow_offset);
+					const auto entity_glow_offset = (glow_obj_manager + (entity.glow_index() * 0x38));
+					auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
 
-					const auto entity_team_id = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iTeamNum);
-					if (local_team_id != entity_team_id)
+					if (local_player.team() != entity.team())
 					{
 						glow.set(
 							153.f / 255.f, // R
@@ -74,7 +68,7 @@ void c_glow::run(keybind kb)
 							0.7f		   // A
 						);
 
-						g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
+						memory->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
 					}
 				}
 			}
