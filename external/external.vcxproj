@@ -109,8 +109,10 @@
     <ClInclude Include="process.hpp" />
     <ClInclude Include="sdk.hpp" />
     <ClInclude Include="structs.hpp" />
+    <ClInclude Include="triggerbot.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
+    <ClInclude Include="vector.hpp" />
     <ClInclude Include="world.hpp" />
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
@@ -126,6 +128,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.hpp</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="triggerbot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,9 @@
 #include "pch.hpp"
-#include "glow.hpp"
+#include "triggerbot.hpp"
 
-void c_glow::run(keybind& keybd)
+void c_triggerbot::run(keybind& keybd)
 {
-	log_debug("initializing glow thread.");
+	log_debug("initializing triggerbot thread.");
 
 	std::thread([&] {
 		while (var::b_is_running)
@@ -36,8 +36,6 @@ void c_glow::run(keybind& keybd)
 			if (!sdk::base->in_game())
 				continue;
 
-			const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
-			
 			c_entity local_player = {};
 
 			const auto max_player_count = sdk::base->get_max_player_count();
@@ -47,28 +45,13 @@ void c_glow::run(keybind& keybd)
 			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
 				c_entity entity(i);
-
 				if (entity.get_entity())
 				{
-					if (!(entity.life_state() == sdk::structs::entity_life_state::LIFE_ALIVE))
-						continue;
-
-					if (entity.dormant())
-						continue;
-
-					const auto entity_glow_offset = (glow_obj_manager + (entity.glow_index() * 0x38));
-					auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
-
+					const auto crosshair_id = local_player.crosshair_id();
 					if (local_player.team() != entity.team())
 					{
-						glow.set(
-							153.f / 255.f, // R
-							117.f / 255.f, // G
-							255.f / 255.f, // B
-							0.7f		   // A
-						);
-
-						memory->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
+						if (crosshair_id > 0 && crosshair_id <= 64)
+							memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceAttack, 6);
 					}
 				}
 			}

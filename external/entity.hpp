@@ -27,38 +27,47 @@ public:
 
 	constexpr auto& get_entity() { return base_address; }
 
-	const auto health()
-	{
-		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iHealth);
+	const auto health() {
+		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iHealth); 
 	}
 
-	const auto dormant()
-	{
-		return memory->read<bool>(get_entity_address() + sdk::offsets::m_bDormant);
+	const auto dormant() {
+		return memory->read<bool>(get_entity_address() + sdk::offsets::m_bDormant); 
 	}
 
-	const auto team()
-	{
+	const auto team() {
 		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iTeamNum);
+	} 
+
+	const auto move_type() {
+		return memory->read<std::uint8_t>(get_entity_address() + sdk::netvars::m_MoveType); 
 	}
 
-	const auto move_type()
-	{
-		return memory->read<std::uint8_t>(get_entity_address() + sdk::netvars::m_MoveType);
+	const auto flags() {
+		return memory->read<std::uint8_t>(get_entity_address() + sdk::netvars::m_fFlags); 
 	}
 
-	const auto flags()
-	{
-		return memory->read<std::uint8_t>(get_entity_address() + sdk::netvars::m_fFlags);
+	const auto life_state() {
+		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_lifeState); 
 	}
 
-	const auto life_state()
-	{
-		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_lifeState);
+	const auto glow_index() {
+		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iGlowIndex); 
 	}
 
-	const auto glow_index()
-	{
-		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iGlowIndex);
+	const auto crosshair_id() {
+		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iCrosshairId);
+	}
+
+	const auto bone_matrix(const int& bone) {
+		Vector out = {};
+
+		const auto temp = memory->read<std::ptrdiff_t>(get_entity_address() + sdk::netvars::m_dwBoneMatrix);
+
+		out.x = memory->read<float>(temp + 0x30 * bone + 0xC);
+		out.y = memory->read<float>(temp + 0x30 * bone + 0x1C);
+		out.z = memory->read<float>(temp + 0x30 * bone + 0x2C);
+
+		return out;
 	}
 };

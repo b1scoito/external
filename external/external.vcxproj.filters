@@ -43,6 +43,12 @@
     <Filter Include="sdk\classes">
       <UniqueIdentifier>{4a36981a-fa04-4e12-9d67-68cc1c448749}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cheats\triggerbot">
+      <UniqueIdentifier>{9522a8e2-d518-46b0-9e4f-c4b9544ac212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\datatypes">
+      <UniqueIdentifier>{73113ea4-9508-47e7-9f78-d5f749301b3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -93,6 +99,12 @@
     <ClInclude Include="world.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
+    <ClInclude Include="triggerbot.hpp">
+      <Filter>cheats\triggerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="vector.hpp">
+      <Filter>sdk\datatypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -110,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="glow.cpp">
       <Filter>cheats\glow</Filter>
+    </ClCompile>
+    <ClCompile Include="triggerbot.cpp">
+      <Filter>cheats\triggerbot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

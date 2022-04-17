@@ -3,7 +3,7 @@
 
 void c_bhop::run()
 {
-	log_debug("Initializing Bhop thread.");
+	log_debug("initializing bhop thread.");
 
 	std::thread([&] {
 		while (var::b_is_running)
