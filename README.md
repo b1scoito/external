@@ -10,4 +10,5 @@
 
 ## keybinds
 
-`HOME`: Toggle for glow.
+`HOME`: Toggle for glow
+`DEL`: Unload
