@@ -36,37 +36,25 @@ void c_glow::run()
 			if (max_player_count <= 1)
 				continue;
 
-			for (std::int32_t i = 1; i < max_player_count; i++)
+			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
 				const auto entity = g_mem->read<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10));
 				if (entity)
 				{
-					const auto entity_team_id = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iTeamNum);
-
-					const auto entity_health = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iHealth);
-					if (entity_health < 1 || entity_health > 100)
-						continue;
-
 					const auto entity_dormant = g_mem->read<bool>(entity + sdk::offsets::m_bDormant);
 					if (entity_dormant)
 						continue;
 
 					const auto entity_glow_index = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iGlowIndex);
 					const auto entity_glow_offset = (glow_obj_manager + (entity_glow_index * 0x38));
+					auto glow = g_mem->read<sdk::structs::glow_object_t>(entity_glow_offset);
 
-					auto current_glow = g_mem->read<sdk::structs::glow_object_t>(entity_glow_offset);
-
-					current_glow.set(1.f, 1.f, 1.f, 1.f);
-					g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, current_glow); // Set glow
-
-					//if (local_team_id == entity_team_id) // Team
-					//{
-					//}
-					//else // Enemy
-					//{
-					//	current_glow.set(0.f, 1.f, 0.f, 1.7f);
-					//	g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, current_glow); // Set glow
-					//}
+					const auto entity_team_id = g_mem->read<std::int32_t>(entity + sdk::netvars::m_iTeamNum);
+					if (local_team_id != entity_team_id)
+					{
+						glow.set(1.f, 1.f, 1.f, 0.5f);
+						g_mem->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
+					}
 				}
 			}
 
