@@ -46,11 +46,14 @@ void c_triggerbot::run(keybind& keybd)
 
 				if (entity.get_entity())
 				{
+					if (!entity.is_alive())
+						continue;
+
 					if (local_player.team() != entity.team())
 					{
 						const auto crosshair_id = local_player.crosshair_id();
 						if (crosshair_id > 0 && crosshair_id <= 64)
-							memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceAttack, 6);
+							local_player.force_attack(6);
 					}
 				}
 			}
