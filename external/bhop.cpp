@@ -34,17 +34,19 @@ void c_bhop::run()
 			if (!sdk::base->in_game())
 				continue;
 
+			// Localplayer
+			c_entity local_player = {};
+
 			// Check if in ladder, noclip or observer
-			static c_entity local_player = {};
 			const auto move_type = local_player.move_type();
 			if (move_type == sdk::structs::entity_move_type::MOVETYPE_LADDER || move_type == sdk::structs::entity_move_type::MOVETYPE_NOCLIP || move_type == sdk::structs::entity_move_type::MOVETYPE_OBSERVER)
 				continue;
 
 			// Check if onground and jump, otherwise, set jumped to false
 			if ((local_player.flags() & sdk::structs::entity_flags::FL_ONGROUND))
-				memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceJump, 5); // +jump
+				local_player.force_jump(5); // +jump
 			else
-				memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceJump, 4); // -jump
+				local_player.force_jump(4); // -jump
 			
 			// Update last frame and last tick
 			last_frame = global_vars.iFrameCount;

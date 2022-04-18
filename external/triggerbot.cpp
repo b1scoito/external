@@ -36,20 +36,19 @@ void c_triggerbot::run(keybind& keybd)
 			if (!sdk::base->in_game())
 				continue;
 
+			// Localplayer
 			c_entity local_player = {};
 
 			const auto max_player_count = sdk::base->get_max_player_count();
-			if (max_player_count <= 1)
-				continue;
-
 			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
 				c_entity entity(i);
+
 				if (entity.get_entity())
 				{
-					const auto crosshair_id = local_player.crosshair_id();
 					if (local_player.team() != entity.team())
 					{
+						const auto crosshair_id = local_player.crosshair_id();
 						if (crosshair_id > 0 && crosshair_id <= 64)
 							memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceAttack, 6);
 					}

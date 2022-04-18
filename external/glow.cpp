@@ -35,15 +35,11 @@ void c_glow::run(keybind& keybd)
 			// Check if in a game
 			if (!sdk::base->in_game())
 				continue;
-
-			const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
 			
+			// Local player
 			c_entity local_player = {};
 
 			const auto max_player_count = sdk::base->get_max_player_count();
-			if (max_player_count <= 1)
-				continue;
-
 			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
 				c_entity entity(i);
@@ -56,11 +52,13 @@ void c_glow::run(keybind& keybd)
 					if (entity.is_dormant())
 						continue;
 
-					const auto entity_glow_offset = (glow_obj_manager + (entity.glow_index() * 0x38));
-					auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
-
 					if (local_player.team() != entity.team())
 					{
+						const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
+						const auto entity_glow_offset = glow_obj_manager + (entity.glow_index() * 0x38);
+
+						auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
+
 						glow.set(
 							153.f / 255.f, // R
 							117.f / 255.f, // G

@@ -75,4 +75,8 @@ public:
 	const auto is_alive() {
 		return this->life_state() == sdk::structs::entity_life_state::LIFE_ALIVE;
 	}
+
+	const auto force_jump(const std::int32_t state) {
+		return memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceJump, state);
+	}
 };
