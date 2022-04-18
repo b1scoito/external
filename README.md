@@ -1,7 +1,7 @@
 # external
  
  CS:GO external cheat with the most basic features that I like to use such as perfect bhop and non-flickering glow, really focused on performance.  
- I made this for fun for personal use, don't expect it to be reliable for you.
+ I made this for fun and personal use, don't expect it to be reliable for you.
 
 ## credits
 
@@ -10,6 +10,6 @@
 
 ## keybinds
 
-- `MOUSE 5` Hold for triggerbot
-- `HOME` Toggle for glow
-- `DEL` Unload
+- `mouse 5` Hold for triggerbot
+- `home` Toggle for glow
+- `del` Unload
