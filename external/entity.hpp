@@ -1,4 +1,5 @@
 #pragma once
+#include "vector.hpp"
 
 class c_entity
 {
@@ -31,7 +32,7 @@ public:
 		return memory->read<std::int32_t>(get_entity_address() + sdk::netvars::m_iHealth); 
 	}
 
-	const auto dormant() {
+	const auto is_dormant() {
 		return memory->read<bool>(get_entity_address() + sdk::offsets::m_bDormant); 
 	}
 
@@ -69,5 +70,9 @@ public:
 		out.z = memory->read<float>(temp + 0x30 * bone + 0x2C);
 
 		return out;
+	}
+
+	const auto is_alive() {
+		return this->life_state() == sdk::structs::entity_life_state::LIFE_ALIVE;
 	}
 };

@@ -50,10 +50,10 @@ void c_glow::run(keybind& keybd)
 
 				if (entity.get_entity())
 				{
-					if (!(entity.life_state() == sdk::structs::entity_life_state::LIFE_ALIVE))
+					if (!entity.is_alive())
 						continue;
 
-					if (entity.dormant())
+					if (entity.is_dormant())
 						continue;
 
 					const auto entity_glow_offset = (glow_obj_manager + (entity.glow_index() * 0x38));
@@ -65,7 +65,7 @@ void c_glow::run(keybind& keybd)
 							153.f / 255.f, // R
 							117.f / 255.f, // G
 							255.f / 255.f, // B
-							0.7f		   // A
+							0.6f		   // A
 						);
 
 						memory->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
