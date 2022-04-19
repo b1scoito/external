@@ -45,7 +45,7 @@ void c_triggerbot::run(keybind& keybd)
 			if (!entity.get_entity())
 				continue;
 
-			if ((entity.team() > sdk::structs::entity_team_id::TEAM_SPECTATOR) && (local_player.team() == entity.team()))
+			if ((entity.get_team() > sdk::structs::team_id::TEAM_SPECTATOR) && (local_player.get_team() == entity.get_team()))
 				continue;
 
 			if (entity.has_immunity())
