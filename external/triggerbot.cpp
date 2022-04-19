@@ -38,7 +38,7 @@ void c_triggerbot::run(keybind& keybd)
 
 			// Localplayer
 			const c_entity local_player = {};
-							
+			
 			const auto crosshair_id = local_player.crosshair_id();
 			const c_entity entity(crosshair_id - 1);
 
@@ -48,6 +48,7 @@ void c_triggerbot::run(keybind& keybd)
 			if ((entity.team() > sdk::structs::entity_team_id::TEAM_SPECTATOR) && (local_player.team() == entity.team()))
 				continue;
 
+			// thanks bruno for the help
 			if (crosshair_id > 0 && crosshair_id <= 64)
 				local_player.force_attack(6);
 
