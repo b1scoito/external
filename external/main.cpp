@@ -15,7 +15,7 @@ INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	bhop->run();
 
 	// Run glow
-	glow->run(var::keybinds::toggle_glow_key);
+	// glow->run(var::keybinds::toggle_glow_key);
 
 	// Run triggerbot
 	triggerbot->run(var::keybinds::hold_triggerbot_key);
