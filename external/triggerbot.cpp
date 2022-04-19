@@ -38,29 +38,33 @@ void c_triggerbot::run(keybind& keybd)
 
 			// Localplayer
 			c_entity local_player = {};
-
+			
 			const auto max_player_count = sdk::base->get_max_player_count();
 			for (std::int32_t i = 0; i < max_player_count; i++)
 			{
 				c_entity entity(i);
+				
+				if (!entity.get_entity())
+					continue;
 
-				if (entity.get_entity())
-				{
-					if (!entity.is_alive())
-						continue;
+				if (entity.is_localplayer())
+					continue;
 
-					if (local_player.team() != entity.team())
-					{
-						const auto crosshair_id = local_player.crosshair_id();
-						if (crosshair_id > 0 && crosshair_id <= 64)
-							local_player.force_attack(6);
-					}
-				}
+				if (!entity.is_alive())
+					continue;
+
+				if (local_player.team() == entity.team())
+					continue;
+
+				log_debug("antes [%d] entity -> 0x%X localplayer -> 0x%X is_alive -> %s localplayer team -> %d entity team -> %d", i, entity.get_entity(), local_player.get_entity(), entity.is_alive() ? "true" : "false", local_player.team(), entity.team());
+				const auto crosshair_id = local_player.crosshair_id();
+				if (crosshair_id > 0 && crosshair_id <= 64)
+					local_player.force_attack(6);
 			}
 
 			// Update last frame and last tick
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-	}).detach();
+		}).detach();
 }

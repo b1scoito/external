@@ -44,31 +44,34 @@ void c_glow::run(keybind& keybd)
 			{
 				c_entity entity(i);
 
-				if (entity.get_entity())
-				{
-					if (!entity.is_alive())
-						continue;
+				if (!entity.get_entity())
+					continue;
 
-					if (entity.is_dormant())
-						continue;
+				if (entity.is_localplayer())
+					continue;
 
-					if (local_player.team() != entity.team())
-					{
-						const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
-						const auto entity_glow_offset = glow_obj_manager + (entity.glow_index() * 0x38);
+				if (!entity.is_alive())
+					continue;
 
-						auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
+				if (entity.is_dormant())
+					continue;
 
-						glow.set(
-							153.f / 255.f, // R
-							117.f / 255.f, // G
-							255.f / 255.f, // B
-							0.6f		   // A
-						);
+				if (local_player.team() == entity.team())
+					continue;
 
-						memory->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
-					}
-				}
+				const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
+				const auto entity_glow_offset = glow_obj_manager + (entity.glow_index() * 0x38);
+
+				auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
+
+				glow.set(
+					153.f / 255.f, // R
+					117.f / 255.f, // G
+					255.f / 255.f, // B
+					0.6f		   // A
+				);
+
+				memory->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow
 			}
 
 			// Update last frame and last tick
