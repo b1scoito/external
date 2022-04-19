@@ -56,10 +56,14 @@ void c_triggerbot::run(keybind& keybd)
 				if (local_player.team() == entity.team())
 					continue;
 
-				log_debug("antes [%d] entity -> 0x%X localplayer -> 0x%X is_alive -> %s localplayer team -> %d entity team -> %d", i, entity.get_entity(), local_player.get_entity(), entity.is_alive() ? "true" : "false", local_player.team(), entity.team());
+
+				//log_debug("[%d] entity -> 0x%X localplayer -> 0x%X is_alive -> %s localplayer team -> %d entity team -> %d", i, entity.get_entity(), local_player.get_entity(), entity.is_alive() ? "true" : "false", local_player.team(), entity.team());
 				const auto crosshair_id = local_player.crosshair_id();
-				if (crosshair_id > 0 && crosshair_id <= 64)
-					local_player.force_attack(6);
+				if (crosshair_id > 0 && crosshair_id <= 64) {
+					log_debug("inimigo kkkk");
+					//log_debug("crosshair_id -> %d, entity id -> %d", crosshair_id, i - 1);
+					//local_player.force_attack(6);
+				}
 			}
 
 			// Update last frame and last tick
