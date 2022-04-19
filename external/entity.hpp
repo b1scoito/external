@@ -76,4 +76,8 @@ public:
 	const auto is_localplayer() const {
 		return base_address == sdk::base->get_local_player();
 	}
+
+	const auto has_immunity() const {
+		return memory->read<bool>(base_address + sdk::netvars::m_bGunGameImmunity);
+	}
 };

@@ -48,6 +48,9 @@ void c_triggerbot::run(keybind& keybd)
 			if ((entity.team() > sdk::structs::entity_team_id::TEAM_SPECTATOR) && (local_player.team() == entity.team()))
 				continue;
 
+			if (entity.has_immunity())
+				continue;
+
 			// thanks bruno for the help
 			if (crosshair_id > 0 && crosshair_id <= 64)
 				local_player.force_attack(6);
