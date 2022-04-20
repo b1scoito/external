@@ -91,7 +91,7 @@
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <Optimization>MaxSpeed</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=3 -mllvm -split -mllvm -split_num=3 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-mllvm -bcf -mllvm -bcf_prob=73 -mllvm -bcf_loop=1 -mllvm -sub -mllvm -sub_loop=5 -mllvm -fla -mllvm -split_num=5 -mllvm -aesSeed=DEADBEEFDEADCODEDEADBEEFDEADCODE %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
