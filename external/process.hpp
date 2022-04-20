@@ -162,7 +162,7 @@ public:
 public:
 	inline bool terminate() const
 	{
-		const auto proc = OpenProcess(PROCESS_TERMINATE, false, pid);
+		const auto proc = LI_FN(OpenProcess).cached()(PROCESS_TERMINATE, false, pid);
 		if (proc == INVALID_HANDLE_VALUE)
 			return {};
 
@@ -193,51 +193,5 @@ public:
 	inline std::wstring get_name() const
 	{
 		return file;
-	}
-
-public:
-	inline std::wstring get_cmd_line()
-	{
-		auto proc = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
-		if (proc == INVALID_HANDLE_VALUE)
-			return {};
-
-		CloseHandlePtr handle_guard(proc, CloseHandleCall);
-
-		static auto _NtQueryInformationProcess = (decltype(&NtQueryInformationProcess))GetProcAddress(GetModuleHandle(L"ntdll.dll"), "NtQueryInformationProcess");
-		if (!_NtQueryInformationProcess)
-			return {};
-
-		PROCESS_BASIC_INFORMATION pbi = {};
-		if (!NT_SUCCESS(_NtQueryInformationProcess(proc, ProcessBasicInformation, &pbi, sizeof(pbi), NULL)))
-			return {};
-
-		if (!pbi.PebBaseAddress)
-			return {};
-
-		PVOID params;
-		if (!ReadProcessMemory(proc, (PBYTE)pbi.PebBaseAddress + FIELD_OFFSET(PEB, ProcessParameters), &params, sizeof(params), nullptr))
-			return {};
-
-		UNICODE_STRING cmdline = {};
-		if (!ReadProcessMemory(proc, (PBYTE)params + FIELD_OFFSET(RTL_USER_PROCESS_PARAMETERS, CommandLine), &cmdline, sizeof(cmdline), nullptr))
-			return {};
-
-		if (!cmdline.Length || !cmdline.Buffer)
-			return {};
-
-		const int size = cmdline.Length / sizeof(wchar_t);
-		if (!size)
-			return {};
-
-		std::unique_ptr<wchar_t[]> content = std::make_unique<wchar_t[]>(size + 1);
-		RtlSecureZeroMemory(content.get(), size + 1);
-
-		if (!ReadProcessMemory(proc, cmdline.Buffer, content.get(), cmdline.Length, nullptr))
-			return {};
-
-		content[size] = L'\0';
-
-		return content.get();
 	}
 };

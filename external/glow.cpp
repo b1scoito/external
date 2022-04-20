@@ -3,7 +3,7 @@
 
 void c_glow::run(keybind& keybd)
 {
-	log_debug("initializing glow thread.");
+	log_debug(xorstr("initializing glow thread."));
 
 	std::thread([&] {
 		while (var::b_is_running)
@@ -25,7 +25,7 @@ void c_glow::run(keybind& keybd)
 				timer::sleep(1.f);
 
 			// Check if active window is CS:GO
-			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))
+			if (const auto hwnd = FindWindow(xorstr(L"Valve001"), nullptr); !(hwnd == GetForegroundWindow()))
 				continue;
 
 			// Check if in menu
@@ -37,12 +37,11 @@ void c_glow::run(keybind& keybd)
 				continue;
 			
 			// Local player
-			c_entity local_player = {};
+			const c_entity local_player = {};
 
-			const auto max_player_count = sdk::base->get_max_player_count();
-			for (std::int32_t i = 0; i < max_player_count; i++)
+			for (std::int32_t i = 0; i < sdk::base->get_max_player_count(); i++)
 			{
-				c_entity entity(i);
+				const c_entity entity(i);
 
 				if (!entity.get_entity())
 					continue;
@@ -56,19 +55,17 @@ void c_glow::run(keybind& keybd)
 				if (entity.is_dormant())
 					continue;
 
-				if (local_player.team() == entity.team())
+				if (local_player.get_team() == entity.get_team())
 					continue;
 
-				const auto glow_obj_manager = memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
-				const auto entity_glow_offset = glow_obj_manager + (entity.glow_index() * 0x38);
-
+				const auto entity_glow_offset = sdk::base->get_glow_object_manager() + (entity.glow_index() * 0x38);
 				auto glow = memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
 
 				glow.set(
-					153.f / 255.f, // R
-					117.f / 255.f, // G
-					255.f / 255.f, // B
-					0.6f		   // A
+					153.f / 255.f,	// R
+					117.f / 255.f,	// G
+					255.f / 255.f,	// B
+					0.5f			// A
 				);
 
 				memory->write<sdk::structs::glow_object_t>(entity_glow_offset, glow); // Set glow

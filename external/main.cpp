@@ -20,7 +20,7 @@ INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	// Run triggerbot
 	triggerbot->run(var::keybinds::hold_triggerbot_key);
 
-	while (!(GetAsyncKeyState(VK_DELETE)))
+	while (!GetAsyncKeyState(VK_DELETE))
 		std::this_thread::sleep_for(50ms);
 
 	var::b_is_running = false;

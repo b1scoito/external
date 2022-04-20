@@ -163,5 +163,5 @@ namespace sdk
 		constexpr ::std::ptrdiff_t model_ambient_min = 0x59003C;
 		constexpr ::std::ptrdiff_t set_abs_angles = 0x1E5430;
 		constexpr ::std::ptrdiff_t set_abs_origin = 0x1E5270;
-	} // namespace signatures
+	} // namespace offsets
 } // namespace sdk

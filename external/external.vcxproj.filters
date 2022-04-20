@@ -19,9 +19,6 @@
     <Filter Include="utils\xorstr">
       <UniqueIdentifier>{3a962fc3-607b-41f9-b120-ce657bcd3acd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="utils\li">
-      <UniqueIdentifier>{ac5f3c1b-9dc1-4f31-985f-2d9915123ab2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="sdk">
       <UniqueIdentifier>{4475b62b-6b8d-4d29-92ef-1336f5b666d7}</UniqueIdentifier>
     </Filter>
@@ -49,6 +46,9 @@
     <Filter Include="sdk\datatypes">
       <UniqueIdentifier>{73113ea4-9508-47e7-9f78-d5f749301b3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\lazyimporter">
+      <UniqueIdentifier>{ac5f3c1b-9dc1-4f31-985f-2d9915123ab2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -67,7 +67,7 @@
       <Filter>utils\xorstr</Filter>
     </ClInclude>
     <ClInclude Include="lazy_importer.hpp">
-      <Filter>utils\li</Filter>
+      <Filter>utils\lazyimporter</Filter>
     </ClInclude>
     <ClInclude Include="offsets.hpp">
       <Filter>sdk</Filter>

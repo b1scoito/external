@@ -21,12 +21,14 @@ public:
 	~c_basesdk();
 
 	void run();
-	bool in_game();
-	bool in_menu();
+	const std::uintptr_t get_local_player();
+	const bool in_game();
+	const std::int32_t get_max_player_count();
 
-	std::uintptr_t get_local_player();
+	const bool in_menu() const;
+	const std::int32_t get_game_type() const;
+	const std::uintptr_t get_glow_object_manager() const;
 
-	std::int32_t get_max_player_count();
 
 	constexpr auto& get_engine_image() { 
 		image = { .base = engine.first, .size = engine.second }; 

@@ -70,7 +70,7 @@ namespace sdk
 		}; // Size: 0x38
 
 		/* baseentity flags */
-		enum entity_flags : int
+		enum flags : int
 		{
 			FL_ONGROUND = (1 << 0),
 			FL_DUCKING = (1 << 1),
@@ -106,7 +106,7 @@ namespace sdk
 			FL_UNBLOCKABLE_BY_PLAYER = (1 << 31)
 		};
 
-		enum entity_move_type : int
+		enum move_type : int
 		{
 			MOVETYPE_NONE = 0,
 			MOVETYPE_ISOMETRIC,
@@ -124,7 +124,7 @@ namespace sdk
 			MOVETYPE_MAX_BITS = 4
 		};
 
-		enum entity_team_id : int
+		enum team_id : int
 		{
 			TEAM_UNASSIGNED = 0,
 			TEAM_SPECTATOR,
@@ -133,7 +133,7 @@ namespace sdk
 		};
 
 		/* baseentity lifestate */
-		enum entity_life_state : int
+		enum life_state : int
 		{
 			LIFE_ALIVE = 0,
 			LIFE_DYING,
@@ -142,7 +142,7 @@ namespace sdk
 			LIFE_DISCARDBODY
 		};
 
-		enum entity_bone_index : int
+		enum bone_index : int
 		{
 			BONE_INVALID = -1,
 			BONE_PELVIS,
@@ -229,6 +229,18 @@ namespace sdk
 			BONE_VALVEBIPED_WEAPON_BONE,
 			BONE_LH_IK_DRIVER,
 			BONE_PRIMARY_JIGGLE_JNT,
+		};
+
+		enum game_type : int
+		{
+			GAMETYPE_UNKNOWN = -1,
+			GAMETYPE_CLASSIC,
+			GAMETYPE_GUNGAME,
+			GAMETYPE_TRAINING,
+			GAMETYPE_CUSTOM,
+			GAMETYPE_COOPERATIVE,
+			GAMETYPE_SKIRMISH,
+			GAMETYPE_FREEFORALL
 		};
 	}
 }

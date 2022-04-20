@@ -30,18 +30,9 @@ namespace timer
         if (ms < 0.5f)
             ms = 0.5f;
 
-        LARGE_INTEGER time = { 0 };
+        LARGE_INTEGER time = {};
         time.QuadPart = -1 * (LONGLONG)(ms * 10000.f);
 
         oNtDelayExecution(false, &time);
 	}
-}
-
-namespace string
-{
-    inline std::wstring to_lower(std::wstring str)
-    {
-        std::transform(str.begin(), str.end(), str.begin(), static_cast<int(*)(int)>(::tolower));
-        return str;
-    }
 }
