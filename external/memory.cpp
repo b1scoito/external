@@ -53,7 +53,7 @@ std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char* sig, 
 
 			if (read(section + FIELD_OFFSET(IMAGE_SECTION_HEADER, Name), section_name, sizeof(section_name)))
 			{
-				if (!strcmp(section_name, ".text"))
+				if (!strcmp(section_name, xorstr(".text")))
 				{
 					section_base_addr = read<std::uint32_t>(section + FIELD_OFFSET(IMAGE_SECTION_HEADER, VirtualAddress));
 					section_size = read<std::uint32_t>(section + FIELD_OFFSET(IMAGE_SECTION_HEADER, Misc.VirtualSize));
@@ -92,13 +92,13 @@ std::uintptr_t c_memory::read_chain(std::uintptr_t dw_address, const std::vector
 
 bool c_memory::read(std::uintptr_t dw_address, LPVOID lp_buffer, std::uintptr_t dw_size) const
 {
-	auto ret = ReadProcessMemory(process_handle, (LPCVOID)dw_address, lp_buffer, dw_size, nullptr);
+	auto ret = LI_FN(ReadProcessMemory).cached()(process_handle, (LPCVOID)dw_address, lp_buffer, dw_size, nullptr);
 	return ret != 0;
 }
 
 bool c_memory::write(std::uintptr_t dw_address, LPCVOID lp_buffer, std::uintptr_t dw_size) const
 {
-	auto ret = WriteProcessMemory(process_handle, (LPVOID)dw_address, lp_buffer, dw_size, nullptr);
+	auto ret = LI_FN(WriteProcessMemory).cached()(process_handle, (LPVOID)dw_address, lp_buffer, dw_size, nullptr);
 	return ret != 0;
 }
 
@@ -155,7 +155,7 @@ bool c_memory::attach()
 			process_id = entry.th32ProcessID;
 			CloseHandle(handle);
 
-			process_handle = OpenProcess(PROCESS_ALL_ACCESS, false, process_id);
+			process_handle = LI_FN(OpenProcess).cached()(PROCESS_ALL_ACCESS, false, process_id);
 			attached = true;
 
 			return true;

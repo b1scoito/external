@@ -3,7 +3,7 @@
 
 void c_triggerbot::run(keybind& keybd)
 {
-	log_debug("initializing triggerbot thread.");
+	log_debug(xorstr("initializing triggerbot thread."));
 
 	std::thread([&] {
 		while (var::b_is_running)
@@ -25,7 +25,7 @@ void c_triggerbot::run(keybind& keybd)
 				timer::sleep(1.f);
 
 			// Check if active window is CS:GO
-			if (const auto hwnd = FindWindow(L"Valve001", nullptr); !(hwnd == GetForegroundWindow()))
+			if (const auto hwnd = FindWindow(xorstr(L"Valve001"), nullptr); !(hwnd == GetForegroundWindow()))
 				continue;
 
 			// Check if in menu
@@ -59,5 +59,5 @@ void c_triggerbot::run(keybind& keybd)
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-		}).detach();
+	}).detach();
 }

@@ -59,11 +59,11 @@ public:
 		switch (i_mode)
 		{
 			case keybind_state_t::always:
-				return std::wstring(L"on");
+				return std::wstring(xorstr(L"on"));
 			case keybind_state_t::hold:
-				return std::wstring(L"hold");
+				return std::wstring(xorstr(L"hold"));
 			case keybind_state_t::toggle:
-				return std::wstring(L"toggle");
+				return std::wstring(xorstr(L"toggle"));
 		}
 
 		return {};

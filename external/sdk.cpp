@@ -3,7 +3,7 @@
 
 void c_basesdk::run()
 {
-	log_debug("Waiting for CS:GO to open...");
+	log_debug(xorstr("Waiting for CS:GO to open..."));
 
 	process proc = {};
 	do
@@ -12,26 +12,26 @@ void c_basesdk::run()
 		std::this_thread::sleep_for(250ms);
 	} while (!proc.is_valid());
 
-	log_debug("Attaching to process");
+	log_debug(xorstr("Attaching to process"));
 	memory->attach();
 
-	log_debug("Waiting for engine.dll to load...");
+	log_debug(xorstr("Waiting for engine.dll to load..."));
 	do
 	{
-		memory->get_module(L"engine.dll", engine);
+		memory->get_module(xorstr(L"engine.dll"), engine);
 		std::this_thread::sleep_for(250ms);
 	} while (get_engine_image().base <= 0x0);
 
-	log_debug("engine.dll -> 0x%x", get_engine_image().base);
+	log_debug(xorstr("engine.dll -> 0x%x"), get_engine_image().base);
 
-	log_debug("Waiting for client.dll to load...");
+	log_debug(xorstr("Waiting for client.dll to load..."));
 	do
 	{
-		memory->get_module(L"client.dll", client);
+		memory->get_module(xorstr(L"client.dll"), client);
 		std::this_thread::sleep_for(250ms);
 	} while (get_client_image().base <= 0x0);
 
-	log_debug("client.dll -> 0x%x", get_client_image().base);
+	log_debug(xorstr("client.dll -> 0x%x"), get_client_image().base);
 }
 
 const std::uintptr_t c_basesdk::get_local_player()
