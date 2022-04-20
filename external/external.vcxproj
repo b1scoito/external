@@ -91,6 +91,7 @@
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <Optimization>MaxSpeed</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=3 -mllvm -split -mllvm -split_num=3 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
