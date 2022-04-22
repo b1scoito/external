@@ -72,6 +72,11 @@ public:
 	{
 		return true;
 	}
+
+	constexpr auto& get_handle() const 
+	{
+		return process_handle;
+	}
 };
 
 inline std::unique_ptr<c_memory> memory = std::make_unique<c_memory>();

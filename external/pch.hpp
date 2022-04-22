@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <thread>
 #include <vector>
+#include <cstddef>
 
 #include <Windows.h>
 

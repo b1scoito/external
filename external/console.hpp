@@ -52,18 +52,17 @@ public:
 	}
 
 	template< typename ... arg >
-	void print(const msg_type_t type, const std::string_view func, const std::string_view format, arg ... a)
+	void print(const msg_type_t type, const std::string_view& func, const std::string& format, arg ... a)
 	{
 		static auto* h_console = GetStdHandle(STD_OUTPUT_HANDLE);
 		std::unique_lock<decltype(mutex)> lock(mutex);
-
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
 #endif
-		const size_t size = (size_t)(1) + std::snprintf(nullptr, 0, format.data(), a ...);
+		const size_t size = (size_t)(1) + std::snprintf(nullptr, 0, format.c_str(), a ...);
 		const std::unique_ptr<char[]> buf(new char[size]);
-		std::snprintf(buf.get(), size, format.data(), a ...);
+		std::snprintf(buf.get(), size, format.c_str(), a ...);
 		const auto formated = std::string(buf.get(), buf.get() + size - 1);
 #ifdef __clang__
 #pragma clang diagnostic pop
