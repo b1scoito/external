@@ -10,7 +10,7 @@ void c_glow::run(keybind& keybd)
 		{
 			if (!keybd.get())
 			{
-				std::this_thread::sleep_for(50ms);
+				timer::sleep(50);
 				continue;
 			}
 
@@ -25,7 +25,7 @@ void c_glow::run(keybind& keybd)
 				timer::sleep(1.f);
 
 			// Check if active window is CS:GO
-			if (const auto hwnd = FindWindow(xorstr(L"Valve001"), nullptr); !(hwnd == GetForegroundWindow()))
+			if (const auto hwnd = FindWindow(xorstr("Valve001"), nullptr); !(hwnd == GetForegroundWindow()))
 				continue;
 
 			// Check if in menu

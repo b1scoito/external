@@ -3,7 +3,7 @@
 namespace var
 {
 	namespace game {
-		inline std::wstring str_process = xorstr(L"csgo.exe");
+		inline std::string str_process = xorstr("csgo.exe");
 	}
 
 	namespace keybinds {

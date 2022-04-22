@@ -15,7 +15,7 @@ private:
 	std::uint32_t parent_pid = {};
 	std::uint32_t flags = {};
 
-	std::wstring file = {};
+	std::string file = {};
 
 public:
 	process() = default;
@@ -26,7 +26,7 @@ public:
 		pid = entry.th32ProcessID;
 		parent_pid = entry.th32ParentProcessID;
 		flags = entry.dwFlags;
-		file = std::wstring(entry.szExeFile);
+		file = std::string(entry.szExeFile);
 	}
 
 public:
@@ -49,7 +49,7 @@ public:
 		return procs;
 	}
 
-	static process get_by_name(std::wstring_view name, const std::vector<process>& cached_procs = {})
+	static process get_by_name(std::string_view name, const std::vector<process>& cached_procs = {})
 	{
 		if (name.empty())
 			return {};
@@ -62,9 +62,9 @@ public:
 		for (const auto& ctx : procs)
 		{
 			auto current = ctx.get_name();
-			if (name.find(L".exe") == std::wstring_view::npos)
+			if (name.find(".exe") == std::string_view::npos)
 			{
-				if (current.find(name) == std::wstring_view::npos)
+				if (current.find(name) == std::string_view::npos)
 					continue;
 			}
 			else
@@ -97,7 +97,7 @@ public:
 		return {};
 	}
 
-	static process get_by_window(std::wstring_view window, std::wstring_view clss = {}, const std::vector<process>& cached_procs = {})
+	static process get_by_window(std::string_view window, std::string_view clss = {}, const std::vector<process>& cached_procs = {})
 	{
 		if (window.empty())
 			return {};
@@ -126,14 +126,14 @@ public:
 	}
 
 public:
-	static process spawn_using_shell(std::wstring_view file, std::wstring_view params, std::wstring_view path)
+	static process spawn_using_shell(std::string_view file, std::string_view params, std::string_view path)
 	{
 		SHELLEXECUTEINFO pi;
 		{
 			pi.cbSize = sizeof(SHELLEXECUTEINFO);
 			pi.fMask = SEE_MASK_NOCLOSEPROCESS;
 			pi.hwnd = nullptr;
-			pi.lpVerb = L"runas";
+			pi.lpVerb = "runas";
 			pi.lpFile = file.data();
 			pi.lpParameters = params.data();
 			pi.lpDirectory = path.data();
@@ -190,7 +190,7 @@ public:
 		return flags;
 	}
 
-	inline std::wstring get_name() const
+	inline std::string get_name() const
 	{
 		return file;
 	}

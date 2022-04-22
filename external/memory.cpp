@@ -107,7 +107,7 @@ bool c_memory::unload()
 	return CloseHandle(process_handle) != 0;
 }
 
-bool c_memory::get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data)
+bool c_memory::get_module(std::string_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data)
 {
 	HANDLE handle = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, process_id);
 	if (handle == INVALID_HANDLE_VALUE)
