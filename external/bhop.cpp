@@ -19,7 +19,7 @@ void c_bhop::run()
 				timer::sleep(1.f);
 
 			// Check if active window is CS:GO
-			if (const auto hwnd = FindWindow(xorstr("Valve001"), nullptr); !(hwnd == GetForegroundWindow()))
+			if (const auto hwnd = FindWindow(xorstr(L"Valve001"), nullptr); !(hwnd == GetForegroundWindow()))
 				continue;
 
 			// Check if space is pressed down

@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <LLVMInstallDir>C:\llvm\ollvm-13</LLVMInstallDir>
+  </PropertyGroup>
+</Project>
