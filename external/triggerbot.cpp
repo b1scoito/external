@@ -51,9 +51,15 @@ void c_triggerbot::run(keybind& keybd)
 			if (entity.has_immunity())
 				continue;
 
+			const auto attack = [&]() {
+				local_player.force_attack(5);
+				timer::sleep(5);
+				local_player.force_attack(4);
+			};
+
 			// thanks bruno for the help
 			if (crosshair_id > 0 && crosshair_id <= 64)
-				local_player.force_attack(6);
+				attack();
 
 			// Update last frame and last tick
 			last_frame = global_vars.iFrameCount;
