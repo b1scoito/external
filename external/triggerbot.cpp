@@ -37,24 +37,24 @@ void c_triggerbot::run(keybind& keybd)
 				continue;
 
 			// Localplayer
-			const c_entity local_player = {};
+			const c_entity localplayer = {};
 			
-			const auto crosshair_id = local_player.crosshair_id();
+			const auto crosshair_id = localplayer.crosshair_id();
 			const c_entity entity(crosshair_id - 1);
 
 			if (!entity.get_entity())
 				continue;
 
-			if ((entity.get_team() > sdk::structs::team_id::TEAM_SPECTATOR) && (local_player.get_team() == entity.get_team()))
+			if ((entity.get_team() > sdk::structs::team_id::TEAM_SPECTATOR) && (localplayer.get_team() == entity.get_team()))
 				continue;
 
 			if (entity.has_immunity())
 				continue;
 
 			const auto attack = [&]() {
-				local_player.force_attack(5);
+				localplayer.force_attack(5); // +attack
 				timer::sleep(5);
-				local_player.force_attack(4);
+				localplayer.force_attack(4); // -attack
 			};
 
 			// thanks bruno for the help

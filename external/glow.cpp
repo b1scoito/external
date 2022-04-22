@@ -37,7 +37,7 @@ void c_glow::run(keybind& keybd)
 				continue;
 			
 			// Local player
-			const c_entity local_player = {};
+			const c_entity localplayer = {};
 
 			for (std::int32_t i = 0; i < sdk::base->get_max_player_count(); i++)
 			{
@@ -55,7 +55,7 @@ void c_glow::run(keybind& keybd)
 				if (entity.is_dormant())
 					continue;
 
-				if (local_player.get_team() == entity.get_team())
+				if (localplayer.get_team() == entity.get_team())
 					continue;
 
 				const auto entity_glow_offset = sdk::base->get_glow_object_manager() + (entity.glow_index() * 0x38);

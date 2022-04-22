@@ -9,7 +9,8 @@ INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	std::atexit([] { var::b_is_running = false; });
 
 	// Run SDK
-	sdk::base->run();
+	if (!sdk::base->run())
+		return EXIT_FAILURE;
 
 	// Run bhop
 	bhop->run();

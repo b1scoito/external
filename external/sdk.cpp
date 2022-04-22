@@ -1,19 +1,27 @@
 #include "pch.hpp"
 #include "sdk.hpp"
 
-void c_basesdk::run()
+bool c_basesdk::run()
 {
 	log_debug(xorstr("Waiting for CS:GO to open..."));
 
-	process proc = {};
 	do
 	{
 		proc = process::get_by_name(var::game::str_process);
 		timer::sleep(250);
-	} while (!proc.is_valid());
+	} while (!proc.is_running());
+
 
 	log_debug(xorstr("Attaching to process"));
 	memory->attach();
+
+	if (!sdk::base->check_for_outdated_offsets())
+	{
+		log_debug("Cheat is outdated! exiting.");
+		timer::sleep(3000);
+
+		return false;
+	}
 
 	log_debug(xorstr("Waiting for engine.dll to load..."));
 	do
@@ -32,6 +40,8 @@ void c_basesdk::run()
 	} while (get_client_image().base <= 0x0);
 
 	log_debug(xorstr("client.dll -> 0x%x"), get_client_image().base);
+
+	return true;
 }
 
 const std::uintptr_t c_basesdk::get_local_player()
@@ -89,6 +99,28 @@ const std::int32_t c_basesdk::get_game_type() const
 const std::uintptr_t c_basesdk::get_glow_object_manager() const
 {
 	return memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
+}
+
+const bool c_basesdk::check_for_outdated_offsets() const
+{
+	wchar_t filename[MAX_PATH] = {};
+	if (!GetModuleFileNameEx(memory->get_handle(), NULL, filename, MAX_PATH))
+		return false;
+
+	const std::wstring name = filename;
+	const auto path = name.substr(0, name.find_last_of(L"/\\")) + L"\\csgo\\steam.inf";
+
+	std::ifstream in(path);
+	std::string line;
+	if (in.good())
+		std::getline(in, line);
+
+	const auto csgo_version = string::split(line, "=")[1];
+
+	if (var::game::current_game_version != csgo_version)
+		return false;
+
+	return true;
 }
 
 c_basesdk::~c_basesdk()

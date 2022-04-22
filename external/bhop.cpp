@@ -39,7 +39,9 @@ void c_bhop::run()
 
 			// Check if in ladder, noclip or observer
 			const auto move_type = localplayer.move_type();
-			if (move_type == sdk::structs::move_type::MOVETYPE_LADDER || move_type == sdk::structs::move_type::MOVETYPE_NOCLIP || move_type == sdk::structs::move_type::MOVETYPE_OBSERVER)
+			if (move_type == sdk::structs::move_type::MOVETYPE_LADDER || 
+				move_type == sdk::structs::move_type::MOVETYPE_NOCLIP || 
+				move_type == sdk::structs::move_type::MOVETYPE_OBSERVER)
 				continue;
 
 			// Check if onground and jump, otherwise, set jumped to false
