@@ -29,7 +29,7 @@ private:
 	std::shared_timed_mutex mutex;
 
 public:
-	logger(const std::string_view title_name = {})
+	logger(const std::wstring_view title_name = {})
 	{
 		AllocConsole();
 		AttachConsole(GetCurrentProcessId());
@@ -46,7 +46,7 @@ public:
 
 	~logger()
 	{
-		const auto handle = FindWindow(xorstr("ConsoleWindowClass"), nullptr);
+		const auto handle = FindWindow(xorstr(L"ConsoleWindowClass"), nullptr);
 		ShowWindow(handle, SW_HIDE);
 		FreeConsole();
 	}
@@ -95,7 +95,7 @@ public:
 	}
 };
 
-inline auto g_logger = logger(xorstr("> external"));
+inline auto g_logger = logger(xorstr(L""));
 #define log_debug(...)	g_logger.print( msg_type_t::LDEBUG, __FUNCTION__, __VA_ARGS__ )
 #define log_ok(...)		g_logger.print( msg_type_t::LSUCCESS, __FUNCTION__, __VA_ARGS__ )
 #define log_err(...)	g_logger.print( msg_type_t::LERROR, __FUNCTION__, __VA_ARGS__ )

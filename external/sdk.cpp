@@ -18,7 +18,7 @@ void c_basesdk::run()
 	log_debug(xorstr("Waiting for engine.dll to load..."));
 	do
 	{
-		memory->get_module(xorstr("engine.dll"), engine);
+		memory->get_module(xorstr(L"engine.dll"), engine);
 		timer::sleep(250);
 	} while (get_engine_image().base <= 0x0);
 
@@ -27,7 +27,7 @@ void c_basesdk::run()
 	log_debug(xorstr("Waiting for client.dll to load..."));
 	do
 	{
-		memory->get_module(xorstr("client.dll"), client);
+		memory->get_module(xorstr(L"client.dll"), client);
 		timer::sleep(250);
 	} while (get_client_image().base <= 0x0);
 
