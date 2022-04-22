@@ -10,6 +10,7 @@
 
 ## compiling
 You need [obfuscator-llvm](https://github.com/heroims/obfuscator) for [clang-13](https://github.com/heroims/obfuscator/tree/llvm-13.x) to successfully compile this project in Release.
+Once installed, change the `LLVMInstallDir` property in the file `Directory.build.props`.
 
 ## keybinds
 
