@@ -1,6 +1,10 @@
+#ifdef __clang__
+// warning: precompiled header uses __DATE__ or __TIME__
+#pragma clang diagnostic ignored "-Wpch-date-time"
+#endif
+
 // defs
 #define JM_XORSTR_DISABLE_AVX_INTRINSICS
-#define NOMINMAX
 
 // global incs
 #include <iostream>
@@ -10,8 +14,6 @@
 #include <vector>
 
 #include <Windows.h>
-
-using namespace std::chrono_literals;
 
 // incs
 #include "xorstr.hpp"

@@ -29,7 +29,7 @@ private:
 	std::shared_timed_mutex mutex;
 
 public:
-	logger(const std::wstring_view title_name = {})
+	logger(const std::string_view title_name = {})
 	{
 		AllocConsole();
 		AttachConsole(GetCurrentProcessId());
@@ -46,21 +46,28 @@ public:
 
 	~logger()
 	{
-		const auto handle = FindWindow(xorstr(L"ConsoleWindowClass"), nullptr);
+		const auto handle = FindWindow(xorstr("ConsoleWindowClass"), nullptr);
 		ShowWindow(handle, SW_HIDE);
 		FreeConsole();
 	}
 
 	template< typename ... arg >
-	void print(const msg_type_t type, const std::string_view& func, const std::string& format, arg ... a)
+	void print(const msg_type_t type, const std::string_view func, const std::string_view format, arg ... a)
 	{
 		static auto* h_console = GetStdHandle(STD_OUTPUT_HANDLE);
 		std::unique_lock<decltype(mutex)> lock(mutex);
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-security"
+#endif
 		const size_t size = (size_t)(1) + std::snprintf(nullptr, 0, format.data(), a ...);
 		const std::unique_ptr<char[]> buf(new char[size]);
 		std::snprintf(buf.get(), size, format.data(), a ...);
 		const auto formated = std::string(buf.get(), buf.get() + size - 1);
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 		if (type != msg_type_t::LNONE)
 		{
@@ -88,7 +95,7 @@ public:
 	}
 };
 
-inline auto g_logger = logger(xorstr(L"> external"));
+inline auto g_logger = logger(xorstr("> external"));
 #define log_debug(...)	g_logger.print( msg_type_t::LDEBUG, __FUNCTION__, __VA_ARGS__ )
 #define log_ok(...)		g_logger.print( msg_type_t::LSUCCESS, __FUNCTION__, __VA_ARGS__ )
 #define log_err(...)	g_logger.print( msg_type_t::LERROR, __FUNCTION__, __VA_ARGS__ )

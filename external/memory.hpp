@@ -20,7 +20,7 @@ public:
 	std::uintptr_t pattern_scan(std::uintptr_t dll_base, const char* sig, const char* mask);
 	std::uintptr_t read_chain(std::uintptr_t dw_address, const std::vector<std::uintptr_t>& offsets);
 
-	bool get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data);
+	bool get_module(std::string_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data);
 
 	bool attach();
 

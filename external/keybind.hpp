@@ -54,16 +54,16 @@ public:
 		return b_state;
 	}
 
-	inline std::wstring get_mode_as_string() const
+	inline std::string get_mode_as_string() const
 	{
 		switch (i_mode)
 		{
 			case keybind_state_t::always:
-				return std::wstring(xorstr(L"on"));
+				return std::string(xorstr("on"));
 			case keybind_state_t::hold:
-				return std::wstring(xorstr(L"hold"));
+				return std::string(xorstr("hold"));
 			case keybind_state_t::toggle:
-				return std::wstring(xorstr(L"toggle"));
+				return std::string(xorstr("toggle"));
 		}
 
 		return {};

@@ -9,7 +9,7 @@ void c_basesdk::run()
 	do
 	{
 		proc = process::get_by_name(var::game::str_process);
-		std::this_thread::sleep_for(250ms);
+		timer::sleep(250);
 	} while (!proc.is_valid());
 
 	log_debug(xorstr("Attaching to process"));
@@ -18,8 +18,8 @@ void c_basesdk::run()
 	log_debug(xorstr("Waiting for engine.dll to load..."));
 	do
 	{
-		memory->get_module(xorstr(L"engine.dll"), engine);
-		std::this_thread::sleep_for(250ms);
+		memory->get_module(xorstr("engine.dll"), engine);
+		timer::sleep(250);
 	} while (get_engine_image().base <= 0x0);
 
 	log_debug(xorstr("engine.dll -> 0x%x"), get_engine_image().base);
@@ -27,8 +27,8 @@ void c_basesdk::run()
 	log_debug(xorstr("Waiting for client.dll to load..."));
 	do
 	{
-		memory->get_module(xorstr(L"client.dll"), client);
-		std::this_thread::sleep_for(250ms);
+		memory->get_module(xorstr("client.dll"), client);
+		timer::sleep(250);
 	} while (get_client_image().base <= 0x0);
 
 	log_debug(xorstr("client.dll -> 0x%x"), get_client_image().base);
@@ -42,7 +42,7 @@ const std::uintptr_t c_basesdk::get_local_player()
 		while (!local_player)
 		{
 			local_player = memory->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
-			std::this_thread::sleep_for(100ms);
+			timer::sleep(100);
 		}
 	}
 

@@ -31,12 +31,12 @@ public:
 
 
 	constexpr auto& get_engine_image() { 
-		image = { .base = engine.first, .size = engine.second }; 
+		image = { engine.first, engine.second }; 
 		return image; 
 	};
 
 	constexpr auto& get_client_image() { 
-		image = { .base = client.first, .size = client.second };
+		image = { client.first, client.second };
 		return image; 
 	};
 };
