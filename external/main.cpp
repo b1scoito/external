@@ -3,6 +3,7 @@
 #include "bhop.hpp"
 #include "glow.hpp"
 #include "triggerbot.hpp"
+#include "skinchanger.hpp"
 
 INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
@@ -20,6 +21,9 @@ INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	// Run triggerbot
 	triggerbot->run(var::keybinds::hold_triggerbot_key);
+
+	// Run skin changer
+	skinchanger->run();
 
 	while (!GetAsyncKeyState(VK_DELETE))
 		timer::sleep(50);

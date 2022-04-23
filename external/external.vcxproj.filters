@@ -49,6 +49,9 @@
     <Filter Include="utils\lazyimporter">
       <UniqueIdentifier>{ac5f3c1b-9dc1-4f31-985f-2d9915123ab2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cheats\skinchanger">
+      <UniqueIdentifier>{42426098-aa60-4cc1-b6c2-6e9534836829}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -105,6 +108,9 @@
     <ClInclude Include="vector.hpp">
       <Filter>sdk\datatypes</Filter>
     </ClInclude>
+    <ClInclude Include="skinchanger.hpp">
+      <Filter>cheats\skinchanger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="triggerbot.cpp">
       <Filter>cheats\triggerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="skinchanger.cpp">
+      <Filter>cheats\skinchanger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
