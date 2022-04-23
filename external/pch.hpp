@@ -5,6 +5,7 @@
 
 // defs
 #define JM_XORSTR_DISABLE_AVX_INTRINSICS
+#define NOMINMAX
 
 // global incs
 #include <iostream>

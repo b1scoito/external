@@ -15,7 +15,7 @@ void c_triggerbot::run(keybind& keybd)
 			}
 
 			// Only update each tick
-			const auto global_vars = world->get_globalvars();
+			const auto global_vars = g_world->get_globalvars();
 
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance

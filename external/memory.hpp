@@ -79,4 +79,4 @@ public:
 	}
 };
 
-inline std::unique_ptr<c_memory> memory = std::make_unique<c_memory>();
+inline std::unique_ptr<c_memory> g_memory = std::make_unique<c_memory>();
