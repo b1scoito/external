@@ -44,63 +44,6 @@ bool c_basesdk::run()
 	return true;
 }
 
-const std::uintptr_t c_basesdk::get_local_player()
-{
-	auto local_player = g_memory->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
-	if (!local_player)
-	{
-		while (!local_player)
-		{
-			local_player = g_memory->read<std::uintptr_t>(get_client_image().base + sdk::offsets::dwLocalPlayer);
-			timer::sleep(100);
-		}
-	}
-
-	return local_player;
-}
-
-const std::int32_t c_basesdk::get_max_player_count()
-{
-	const auto client_state = g_memory->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
-	const auto max_player_count = g_memory->read<std::int32_t>(client_state + sdk::offsets::dwClientState_MaxPlayer);
-
-	return max_player_count;
-}
-
-const bool c_basesdk::in_game()
-{
-	const auto client_state = g_memory->read<std::uintptr_t>(get_engine_image().base + sdk::offsets::dwClientState);
-	const auto state = (g_memory->read<int>(client_state + sdk::offsets::dwClientState_State) == SIGNONSTATE_FULL);
-
-	return state;
-}
-
-const bool c_basesdk::in_menu() const
-{
-	CURSORINFO ci { sizeof(CURSORINFO) };
-	if (!GetCursorInfo(&ci))
-		return false;
-
-	const auto handle = ci.hCursor;
-	if ((handle > (HCURSOR)50000) && (handle < (HCURSOR)100000))
-		return true;
-
-	return false;
-}
-
-const std::int32_t c_basesdk::get_game_type() const
-{
-	const auto game_rules_proxy = g_memory->read<std::uintptr_t>(sdk::offsets::dwGameRulesProxy);
-	const auto game_type = g_memory->read<std::int32_t>(game_rules_proxy + sdk::netvars::m_SurvivalGameRuleDecisionTypes);
-
-	return game_type;
-}
-
-const std::uintptr_t c_basesdk::get_glow_object_manager() const
-{
-	return g_memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager);
-}
-
 const bool c_basesdk::check_for_outdated_offsets() const
 {
 	wchar_t filename[MAX_PATH] = {};

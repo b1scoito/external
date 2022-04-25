@@ -6,7 +6,8 @@
 #include "structs.hpp"
 
 // Classes
-#include "world.hpp"
+#include "engine.hpp"
+#include "client.hpp"
 #include "entity.hpp"
 
 class c_bhop

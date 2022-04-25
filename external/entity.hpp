@@ -6,39 +6,31 @@ class c_entity
 private:
 	std::uintptr_t base_address = {};
 
-public: // Read
+public:
 	c_entity(const std::int32_t entity_index = {})
 	{
 		if (!entity_index)
-			base_address = sdk::base->get_local_player();
+			this->base_address = g_client->get_local_player();
 		else
-			base_address = g_memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (entity_index * 0x10));
+			this->base_address = g_memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (entity_index * 0x10));
 	}
 
-	constexpr auto& get_entity() const { return base_address; }
+public: // Read
+	constexpr auto& get_entity() const 
+	{ 
+		return base_address; 
+	}
 
 	const auto get_health() const {
 		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_iHealth);
-	}
-
-	const auto is_dormant() const {
-		return g_memory->read<bool>(base_address + sdk::offsets::m_bDormant);
 	}
 
 	const auto get_team() const {
 		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_iTeamNum);
 	} 
 
-	const auto move_type() const {
-		return g_memory->read<std::uint8_t>(base_address + sdk::netvars::m_MoveType);
-	}
-
 	const auto get_flags() const {
-		return g_memory->read<std::uint8_t>(base_address + sdk::netvars::m_fFlags);
-	}
-
-	const auto life_state() const {
-		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_lifeState);
+		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_fFlags);
 	}
 
 	const auto glow_index() const {
@@ -49,8 +41,20 @@ public: // Read
 		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_iCrosshairId);
 	}
 
+	const auto is_dormant() const {
+		return g_memory->read<bool>(base_address + sdk::offsets::m_bDormant);
+	}
+
 	const auto has_immunity() const {
 		return g_memory->read<bool>(base_address + sdk::netvars::m_bGunGameImmunity);
+	}
+
+	const auto move_type() const {
+		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_MoveType);
+	}
+
+	const auto life_state() const {
+		return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_lifeState);
 	}
 
 	const auto get_velocity() const {
@@ -73,16 +77,6 @@ public: // Read
 	}
 
 	const auto is_localplayer() const {
-		return base_address == sdk::base->get_local_player();
-	}
-
-
-public: // Write
-	const auto force_jump(const std::int32_t state) const {
-		return g_memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceJump, state);
-	}
-
-	const auto force_attack(const std::int32_t state) const {
-		return g_memory->write<std::int32_t>(sdk::base->get_client_image().base + sdk::offsets::dwForceAttack, state);
+		return base_address == g_client->get_local_player();
 	}
 };

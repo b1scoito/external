@@ -15,7 +15,7 @@ void c_triggerbot::run(keybind& keybd)
 			}
 
 			// Only update each tick
-			const auto global_vars = g_world->get_globalvars();
+			const auto global_vars = g_engine->get_globalvars();
 
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance
@@ -29,11 +29,11 @@ void c_triggerbot::run(keybind& keybd)
 				continue;
 
 			// Check if in menu
-			if (sdk::base->in_menu())
+			if (g_client->in_menu())
 				continue;
 
 			// Check if in a game
-			if (!sdk::base->in_game())
+			if (!g_engine->in_game())
 				continue;
 
 			// Localplayer
@@ -51,15 +51,17 @@ void c_triggerbot::run(keybind& keybd)
 			if (entity.has_immunity())
 				continue;
 
-			const auto attack = [&]() {
-				localplayer.force_attack(5); // +attack
-				timer::sleep(5);
-				localplayer.force_attack(4); // -attack
+			const auto shoot = [&]() -> void {
+
+				if (g_client->get_force_attack() == 4)
+					g_client->force_attack(5); // +attack
+				else
+					g_client->force_attack(4); // -attack
 			};
 
 			// thanks bruno for the help
 			if (crosshair_id > 0 && crosshair_id <= 64)
-				attack();
+				shoot();
 
 			// Update last frame and last tick
 			last_frame = global_vars.iFrameCount;

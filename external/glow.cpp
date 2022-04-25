@@ -15,7 +15,7 @@ void c_glow::run(keybind& keybd)
 			}
 
 			// Only update each tick
-			const auto global_vars = g_world->get_globalvars();
+			const auto global_vars = g_engine->get_globalvars();
 
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance
@@ -29,17 +29,17 @@ void c_glow::run(keybind& keybd)
 				continue;
 
 			// Check if in menu
-			if (sdk::base->in_menu())
+			if (g_client->in_menu())
 				continue;
 
 			// Check if in a game
-			if (!sdk::base->in_game())
+			if (!g_engine->in_game())
 				continue;
 			
 			// Local player
 			const c_entity localplayer = {};
 
-			for (std::int32_t i = 0; i < sdk::base->get_max_player_count(); i++)
+			for (std::int32_t i = 0; i < g_engine->get_max_player_count(); i++)
 			{
 				const c_entity entity(i);
 
@@ -58,7 +58,7 @@ void c_glow::run(keybind& keybd)
 				if (localplayer.get_team() == entity.get_team())
 					continue;
 				
-				const auto entity_glow_offset = sdk::base->get_glow_object_manager() + (entity.glow_index() * 0x38);
+				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);
 				auto glow = g_memory->read<sdk::structs::glow_object_t>(entity_glow_offset);
 	
 				// Health glow

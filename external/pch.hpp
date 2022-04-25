@@ -14,6 +14,8 @@
 #include <thread>
 #include <vector>
 #include <cstddef>
+#include <functional>
+#include <future>
 
 #include <Windows.h>
 

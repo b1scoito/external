@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
+    <ClInclude Include="engine.hpp" />
     <ClInclude Include="entity.hpp" />
     <ClInclude Include="glow.hpp" />
     <ClInclude Include="keybind.hpp" />
@@ -131,7 +132,7 @@
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
     <ClInclude Include="vector.hpp" />
-    <ClInclude Include="world.hpp" />
+    <ClInclude Include="client.hpp" />
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
   <ItemGroup>
