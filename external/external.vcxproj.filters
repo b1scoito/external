@@ -96,7 +96,7 @@
     <ClInclude Include="entity.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
-    <ClInclude Include="world.hpp">
+    <ClInclude Include="client.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
     <ClInclude Include="triggerbot.hpp">
@@ -104,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="vector.hpp">
       <Filter>sdk\datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.hpp">
+      <Filter>sdk\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

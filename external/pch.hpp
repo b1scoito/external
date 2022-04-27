@@ -5,6 +5,7 @@
 
 // defs
 #define JM_XORSTR_DISABLE_AVX_INTRINSICS
+#define NOMINMAX
 
 // global incs
 #include <iostream>
@@ -13,6 +14,8 @@
 #include <thread>
 #include <vector>
 #include <cstddef>
+#include <functional>
+#include <future>
 
 #include <Windows.h>
 

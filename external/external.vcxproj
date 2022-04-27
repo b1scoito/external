@@ -78,12 +78,13 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ws2_32.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -104,19 +105,21 @@
       <Optimization>MaxSpeed</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=3 -mllvm -bcf -mllvm -bcf_loop=1 -mllvm -bcf_prob=23 -mllvm -fla -mllvm -split -mllvm -split_num=2 %(AdditionalOptions)</AdditionalOptions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ws2_32.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
+    <ClInclude Include="engine.hpp" />
     <ClInclude Include="entity.hpp" />
     <ClInclude Include="glow.hpp" />
     <ClInclude Include="keybind.hpp" />
@@ -131,7 +134,7 @@
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
     <ClInclude Include="vector.hpp" />
-    <ClInclude Include="world.hpp" />
+    <ClInclude Include="client.hpp" />
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
   <ItemGroup>
