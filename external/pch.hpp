@@ -9,6 +9,7 @@
 
 // global incs
 #include <iostream>
+#include <random>
 #include <string_view>
 #include <algorithm>
 #include <thread>

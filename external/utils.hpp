@@ -56,3 +56,15 @@ namespace string {
         return res;
     }
 }
+
+namespace random {
+    template <typename T>
+    T range(T start, T end)
+    {
+        std::random_device rd = {};
+        std::mt19937_64 rng(rd());
+        std::uniform_real_distribution<T> uni(start, end);
+
+        return (T)uni(rng);
+    }
+}
