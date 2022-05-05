@@ -4,7 +4,7 @@ namespace var
 {
 	namespace game {
 		inline std::wstring str_process = xorstr(L"csgo.exe");
-		inline std::string current_game_version = xorstr("1453");
+		inline std::string current_game_version = xorstr("1454");
 	}
 
 	namespace keybinds {
