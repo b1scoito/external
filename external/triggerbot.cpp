@@ -52,10 +52,9 @@ void c_triggerbot::run(keybind& keybd)
 				continue;
 
 			const auto shoot = [&]() -> void {
+				g_client->force_attack(5); // +attack
 
-				if (g_client->get_force_attack() == 4)
-					g_client->force_attack(5); // +attack
-				else
+				if (g_client->get_force_attack() == 5)
 					g_client->force_attack(4); // -attack
 			};
 
