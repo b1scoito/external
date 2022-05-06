@@ -10,7 +10,7 @@
 
 ## compiling
 You need [obfuscator-llvm](https://github.com/heroims/obfuscator) for [clang-13](https://github.com/heroims/obfuscator/tree/llvm-13.x) to successfully compile this project in Release.
-Once installed, change the `LLVMInstallDir` property in the file `Directory.build.props` to the folder of the compiled libraries and binaries.
+Once installed, create a file called `Directory.build.props` on the project folder with the contents from [here](https://docs.microsoft.com/en-us/cpp/build/clang-support-msbuild?view=msvc-170#custom_llvm_location) and change the property `LLVMInstallDir` to the path of the compiled llvm-obfuscator with the libraries and binaries.
 
 ## keybinds
 
