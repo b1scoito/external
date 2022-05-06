@@ -16,8 +16,7 @@ public:
 	}
 
 public: // Read
-	constexpr auto &get_entity() const
-	{
+	constexpr auto &get_entity() const {
 		return base_address;
 	}
 
