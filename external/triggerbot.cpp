@@ -52,10 +52,10 @@ void c_triggerbot::run( keybind &keybd )
 				continue;
 
 			const auto shoot = [&]() -> void {
-				g_client->force_attack( 5 ); // +attack
+				g_client->force_attack( 6 ); // +attack
 
-				if ( g_client->get_force_attack() == 5 )
-					g_client->force_attack( 4 ); // -attack
+				//if ( g_client->get_force_attack() == 5 )
+				//	g_client->force_attack( 4 ); // -attack
 			};
 
 			if ( crosshair_id > 0 && crosshair_id <= 64 )
