@@ -14,9 +14,7 @@ void c_bhop::run()
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance
 			if ( !update ) // Why does this have to make sense?
-				timer::sleep( 1.f );
-			else
-				timer::sleep( 1.f );
+				continue;
 
 			// Check if active window is CS:GO
 			if ( const auto hwnd = FindWindow( xorstr( L"Valve001" ), nullptr ); !(hwnd == GetForegroundWindow()) )
