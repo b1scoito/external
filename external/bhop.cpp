@@ -11,7 +11,7 @@ void c_bhop::run()
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 
-			const auto update = ( global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame );
+			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance
 			if ( !update ) // Why does this have to make sense?
 				timer::sleep( 1.f );
@@ -19,11 +19,11 @@ void c_bhop::run()
 				timer::sleep( 1.f );
 
 			// Check if active window is CS:GO
-			if ( const auto hwnd = FindWindow( xorstr( L"Valve001" ), nullptr ); !( hwnd == GetForegroundWindow() ) )
+			if ( const auto hwnd = FindWindow( xorstr( L"Valve001" ), nullptr ); !(hwnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if space is pressed down
-			if ( !( GetAsyncKeyState( VK_SPACE ) & 0x8000 ) )
+			if ( !(GetAsyncKeyState( VK_SPACE ) & 0x8000) )
 				continue;
 
 			// Check if in menu
@@ -45,7 +45,7 @@ void c_bhop::run()
 				continue;
 
 			// Check if onground and jump, otherwise set -jump
-			if ( ( localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND ) )
+			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
 				g_client->force_jump( 5 ); // +jump
 			else
 			{
