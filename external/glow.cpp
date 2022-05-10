@@ -17,7 +17,7 @@ void c_glow::run( keybind &keybd )
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 
-			const auto update = ( global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame );
+			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance
 			if ( !update ) // Why does this have to make sense?
 				timer::sleep( 1.f );
@@ -25,7 +25,7 @@ void c_glow::run( keybind &keybd )
 				timer::sleep( 1.f );
 
 			// Check if active window is CS:GO
-			if ( const auto hwnd = FindWindow( xorstr( L"Valve001" ), nullptr ); !( hwnd == GetForegroundWindow() ) )
+			if ( const auto hwnd = FindWindow( xorstr( L"Valve001" ), nullptr ); !(hwnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if in menu
@@ -58,16 +58,16 @@ void c_glow::run( keybind &keybd )
 				if ( localplayer.get_team() == entity.get_team() )
 					continue;
 
-				const auto entity_glow_offset = g_client->get_glow_object_manager() + ( entity.glow_index() * 0x38 );
+				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);
 				auto glow = g_memory->read<sdk::structs::glow_object_t>( entity_glow_offset );
 
 				// Health glow
 				const auto entity_health = entity.get_health();
 				glow.set(
-					1.f - ( entity_health / 100.f ),	// R
-					entity_health / 100.f,			// G
-					0.f / 255.f,					// B
-					0.8f							// A
+					1.f - (entity_health / 100.f),	// R
+					entity_health / 100.f,				// G
+					0.f / 255.f,						// B
+					0.8f								// A
 				);
 
 				g_memory->write<sdk::structs::glow_object_t>( entity_glow_offset, glow ); // Set glow

@@ -25,7 +25,7 @@ public: // Read
 			return false;
 
 		const auto handle = ci.hCursor;
-		if ( ( handle > (HCURSOR)50000 ) && ( handle < (HCURSOR)100000 ) )
+		if ( (handle > (HCURSOR) 50000) && (handle < (HCURSOR) 100000) )
 			return true;
 
 		return false;

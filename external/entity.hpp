@@ -12,12 +12,11 @@ public:
 		if ( !entity_index )
 			this->base_address = g_client->get_local_player();
 		else
-			this->base_address = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ( entity_index * 0x10 ) );
+			this->base_address = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (entity_index * 0x10) );
 	}
 
 public: // Read
-	constexpr auto &get_entity() const
-	{
+	constexpr auto &get_entity() const {
 		return base_address;
 	}
 
