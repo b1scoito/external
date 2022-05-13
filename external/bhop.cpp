@@ -5,7 +5,8 @@ void c_bhop::run()
 {
 	log_debug( xorstr( "initializing bhop thread." ) );
 
-	std::thread( [&] {
+	std::thread( [&]
+	{
 		while ( var::b_is_running )
 		{
 			// Only update each tick
@@ -47,7 +48,8 @@ void c_bhop::run()
 				g_client->force_jump( 5 ); // +jump
 			else
 			{
-				if ( g_client->get_force_jump() == 5 ) {
+				if ( g_client->get_force_jump() == 5 )
+				{
 					g_client->force_jump( 4 ); // -jump
 				}
 			}
@@ -56,5 +58,5 @@ void c_bhop::run()
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-		} ).detach();
+	} ).detach();
 }

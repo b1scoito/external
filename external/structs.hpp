@@ -18,7 +18,7 @@ namespace sdk
 			float	flInterpolationAmount;		// 0x24
 			int		nFrameSimulationTicks;		// 0x28
 			int		iNetworkProtocol;			// 0x2C
-			void *pSaveData;					// 0x30
+			void* pSaveData;					// 0x30
 			bool	bClient;					// 0x34
 			bool	bRemoteClient;				// 0x35
 			int		iTimestampNetworkingBase;	// 0x36

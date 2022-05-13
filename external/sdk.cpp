@@ -9,7 +9,8 @@ bool c_basesdk::run()
 	{
 		proc = process::get_by_name( var::game::str_process );
 		timer::sleep( 250 );
-	} while ( !proc.is_running() );
+	}
+	while ( !proc.is_running() );
 
 
 	log_debug( xorstr( "Attaching to process" ) );
@@ -28,7 +29,8 @@ bool c_basesdk::run()
 	{
 		g_memory->get_module( xorstr( L"engine.dll" ), engine );
 		timer::sleep( 250 );
-	} while ( get_engine_image().base <= 0x0 );
+	}
+	while ( get_engine_image().base <= 0x0 );
 
 	log_debug( xorstr( "engine.dll -> 0x%x" ), get_engine_image().base );
 
@@ -37,7 +39,8 @@ bool c_basesdk::run()
 	{
 		g_memory->get_module( xorstr( L"client.dll" ), client );
 		timer::sleep( 250 );
-	} while ( get_client_image().base <= 0x0 );
+	}
+	while ( get_client_image().base <= 0x0 );
 
 	log_debug( xorstr( "client.dll -> 0x%x" ), get_client_image().base );
 
@@ -54,7 +57,7 @@ const bool c_basesdk::check_for_outdated_offsets() const
 	const auto path = name.substr( 0, name.find_last_of( L"/\\" ) ) + L"\\csgo\\steam.inf";
 
 	std::ifstream in( path );
-	std::string line;
+	std::string line = {};
 	if ( in.good() )
 		std::getline( in, line );
 

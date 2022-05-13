@@ -20,7 +20,7 @@ public:
 	c_glow() = default;
 	~c_glow() = default;
 
-	void run( keybind &keybd );
+	void run( keybind& keybd );
 };
 
 inline auto glow = std::make_unique<c_glow>();

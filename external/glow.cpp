@@ -1,11 +1,12 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
-void c_glow::run( keybind &keybd )
+void c_glow::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing glow thread." ) );
 
-	std::thread( [&] {
+	std::thread( [&]
+	{
 		while ( var::b_is_running )
 		{
 			if ( !keybd.get() )
@@ -75,5 +76,5 @@ void c_glow::run( keybind &keybd )
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-		} ).detach();
+	} ).detach();
 }
