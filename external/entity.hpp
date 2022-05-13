@@ -16,51 +16,63 @@ public:
 	}
 
 public: // Read
-	constexpr auto &get_entity() const {
+	constexpr auto& get_entity() const
+	{
 		return base_address;
 	}
 
-	const auto get_health() const {
+	const auto get_health() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_iHealth );
 	}
 
-	const auto get_team() const {
+	const auto get_team() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_iTeamNum );
 	}
 
-	const auto get_flags() const {
+	const auto get_flags() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_fFlags );
 	}
 
-	const auto glow_index() const {
+	const auto glow_index() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_iGlowIndex );
 	}
 
-	const auto crosshair_id() const {
+	const auto crosshair_id() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_iCrosshairId );
 	}
 
-	const auto is_dormant() const {
+	const auto is_dormant() const
+	{
 		return g_memory->read<bool>( base_address + sdk::offsets::m_bDormant );
 	}
 
-	const auto has_immunity() const {
+	const auto has_immunity() const
+	{
 		return g_memory->read<bool>( base_address + sdk::netvars::m_bGunGameImmunity );
 	}
 
-	const auto move_type() const {
+	const auto move_type() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_MoveType );
 	}
 
-	const auto life_state() const {
+	const auto life_state() const
+	{
 		return g_memory->read<std::int32_t>( base_address + sdk::netvars::m_lifeState );
 	}
 
-	const auto get_velocity() const {
+	const auto get_velocity() const
+	{
 		return g_memory->read<Vector>( base_address + sdk::netvars::m_vecVelocity );
 	}
 
-	const auto bone_matrix( const int &bone ) const {
+	const auto bone_matrix( const int& bone ) const
+	{
 		const auto matrix = g_memory->read<std::ptrdiff_t>( base_address + sdk::netvars::m_dwBoneMatrix );
 
 		Vector vec_matrix = {};
@@ -71,11 +83,13 @@ public: // Read
 		return vec_matrix;
 	}
 
-	const auto is_alive() const {
+	const auto is_alive() const
+	{
 		return this->life_state() == sdk::structs::life_state::LIFE_ALIVE;
 	}
 
-	const auto is_localplayer() const {
+	const auto is_localplayer() const
+	{
 		return base_address == g_client->get_local_player();
 	}
 };

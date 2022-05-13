@@ -17,7 +17,8 @@ private:
 	std::pair<std::uintptr_t, std::uintptr_t> engine = {};
 	std::pair<std::uintptr_t, std::uintptr_t> client = {};
 
-	struct image_t {
+	struct image_t
+	{
 		std::uintptr_t base;
 		std::uintptr_t size;
 	} image = {};
@@ -29,12 +30,14 @@ public:
 	bool run();
 	const bool check_for_outdated_offsets() const;
 
-	constexpr auto &get_engine_image() {
+	constexpr auto& get_engine_image()
+	{
 		image = { engine.first, engine.second };
 		return image;
 	};
 
-	constexpr auto &get_client_image() {
+	constexpr auto& get_client_image()
+	{
 		image = { client.first, client.second };
 		return image;
 	};

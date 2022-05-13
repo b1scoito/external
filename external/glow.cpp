@@ -1,11 +1,12 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
-void c_glow::run( keybind &keybd )
+void c_glow::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing glow thread." ) );
 
-	std::thread( [&] {
+	std::thread( [&]
+	{
 		while ( var::b_is_running )
 		{
 			if ( !keybd.get() )
@@ -16,14 +17,15 @@ void c_glow::run( keybind &keybd )
 
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
-
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			// Sleep for performance
 			if ( !update ) // Why does this have to make sense?
-				timer::sleep( 1 );
+				continue;
+				
+			timer::sleep( 1 );
 
 			// Check if active window is CS:GO
-			if ( const auto hwnd = FindWindow( xorstr( L"Valve001" ), nullptr ); !(hwnd == GetForegroundWindow()) )
+			if ( !(var::game::wnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if in menu
@@ -75,5 +77,5 @@ void c_glow::run( keybind &keybd )
 			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
 		}
-		} ).detach();
+	} ).detach();
 }

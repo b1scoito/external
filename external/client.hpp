@@ -25,7 +25,7 @@ public: // Read
 			return false;
 
 		const auto handle = ci.hCursor;
-		if ( (handle > (HCURSOR) 50000) && (handle < (HCURSOR) 100000) )
+		if ( (handle > (HCURSOR)50000) && (handle < (HCURSOR)100000) )
 			return true;
 
 		return false;
@@ -44,20 +44,24 @@ public: // Read
 		return g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwGlowObjectManager );
 	}
 
-	const auto get_force_jump() const {
+	const auto get_force_jump() const
+	{
 		return g_memory->read<std::int32_t>( sdk::base->get_client_image().base + sdk::offsets::dwForceJump );
 	}
 
-	const auto get_force_attack() const {
+	const auto get_force_attack() const
+	{
 		return g_memory->read<std::int32_t>( sdk::base->get_client_image().base + sdk::offsets::dwForceAttack );
 	}
 
 public: // Write
-	const auto force_jump( const std::int32_t state ) const {
+	const auto force_jump( const std::int32_t state ) const
+	{
 		return g_memory->write<std::int32_t>( sdk::base->get_client_image().base + sdk::offsets::dwForceJump, state );
 	}
 
-	const auto force_attack( const std::int32_t state ) const {
+	const auto force_attack( const std::int32_t state ) const
+	{
 		return g_memory->write<std::int32_t>( sdk::base->get_client_image().base + sdk::offsets::dwForceAttack, state );
 	}
 };
