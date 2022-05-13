@@ -15,6 +15,7 @@ bool c_basesdk::run()
 
 	log_debug( xorstr( "Attaching to process" ) );
 	g_memory->attach();
+	var::game::wnd = FindWindow( xorstr( L"Valve001" ), nullptr );
 
 	if ( !sdk::base->check_for_outdated_offsets() )
 	{
@@ -43,6 +44,16 @@ bool c_basesdk::run()
 	while ( get_client_image().base <= 0x0 );
 
 	log_debug( xorstr( "client.dll -> 0x%x" ), get_client_image().base );
+
+	std::thread( [&]
+	{
+		log_debug( xorstr( "initializing CS:GO callback thread." ) );
+
+		while ( proc.is_running() )
+			timer::sleep( 100 );
+
+		std::exit( EXIT_SUCCESS );
+	} ).detach();
 
 	return true;
 }
