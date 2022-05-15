@@ -9,6 +9,8 @@ void c_glow::run( keybind& keybd )
 	{
 		while ( var::b_is_running )
 		{
+			timer::sleep( 1 );
+
 			if ( !keybd.get() )
 			{
 				timer::sleep( 1 );
@@ -18,11 +20,8 @@ void c_glow::run( keybind& keybd )
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
-			// Sleep for performance
-			if ( !update ) // Why does this have to make sense?
+			if ( !update )
 				continue;
-				
-			timer::sleep( 1 );
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -74,8 +73,8 @@ void c_glow::run( keybind& keybd )
 			}
 
 			// Update last frame and last tick
-			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
+			last_frame = global_vars.iFrameCount;
 		}
 	} ).detach();
 }
