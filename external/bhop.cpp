@@ -9,14 +9,13 @@ void c_bhop::run()
 	{
 		while ( var::b_is_running )
 		{
+			timer::sleep( 1 );
+
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
-			// Sleep for performance
-			if ( !update ) // Why does this have to make sense?
+			if ( !update )
 				continue;
-				
-			timer::sleep( 1 );
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -46,18 +45,14 @@ void c_bhop::run()
 
 			// Check if onground and jump, otherwise set -jump
 			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
-			{
 				g_client->force_jump( 5 ); // +jump
-			}
 			else
-			{
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
-			}
 
 			// Update last frame and last tick
-			last_frame = global_vars.iFrameCount;
 			last_tick = global_vars.iTickCount;
+			last_frame = global_vars.iFrameCount;
 		}
 	} ).detach();
 }
