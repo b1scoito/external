@@ -3,8 +3,8 @@
 
 bool c_basesdk::run()
 {
+	// Wait for CS:GO to open
 	log_debug( xorstr( "Waiting for CS:GO to open..." ) );
-
 	do
 	{
 		proc = process::get_by_name( var::game::str_process );
@@ -12,11 +12,11 @@ bool c_basesdk::run()
 	}
 	while ( !proc.is_running() );
 
-
+	// Attach memory to process
 	log_debug( xorstr( "Attaching to process" ) );
 	g_memory->attach();
-	var::game::wnd = FindWindow( xorstr( L"Valve001" ), nullptr );
 
+	// Check for outdated offsets
 	if ( !sdk::base->check_for_outdated_offsets() )
 	{
 		log_debug( "Cheat is outdated! exiting." );
@@ -25,6 +25,16 @@ bool c_basesdk::run()
 		return false;
 	}
 
+	// Close cheat when CS:GO closes thread
+	std::thread( [&]
+	{
+		while ( proc.is_running() )
+			timer::sleep( 100 );
+
+		std::exit( EXIT_SUCCESS );
+	} ).detach();
+
+	// Wait for engine.dll to load
 	log_debug( xorstr( "Waiting for engine.dll to load..." ) );
 	do
 	{
@@ -35,6 +45,7 @@ bool c_basesdk::run()
 
 	log_debug( xorstr( "engine.dll -> 0x%x" ), get_engine_image().base );
 
+	// Wait for client.dll to load
 	log_debug( xorstr( "Waiting for client.dll to load..." ) );
 	do
 	{
@@ -45,15 +56,14 @@ bool c_basesdk::run()
 
 	log_debug( xorstr( "client.dll -> 0x%x" ), get_client_image().base );
 
-	std::thread( [&]
+	// Get the window
+	log_debug( "Waiting for window class handle..." );
+	do
 	{
-		log_debug( xorstr( "initializing CS:GO callback thread." ) );
-
-		while ( proc.is_running() )
-			timer::sleep( 100 );
-
-		std::exit( EXIT_SUCCESS );
-	} ).detach();
+		var::game::wnd = FindWindow( xorstr( L"Valve001" ), nullptr );
+		timer::sleep( 100 );
+	}
+	while ( !var::game::wnd );
 
 	return true;
 }
