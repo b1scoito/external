@@ -45,14 +45,10 @@ void c_bhop::run()
 
 			// Check if onground and jump, otherwise set -jump
 			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
-			{
 				g_client->force_jump( 5 ); // +jump
-			}
 			else
-			{
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
-			}
 
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;

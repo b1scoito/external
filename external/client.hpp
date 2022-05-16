@@ -20,7 +20,7 @@ public: // Read
 
 	const auto in_menu() const
 	{
-		CURSORINFO ci{ sizeof( CURSORINFO ) };
+		CURSORINFO ci { sizeof( CURSORINFO ) };
 		if ( !GetCursorInfo( &ci ) )
 			return false;
 

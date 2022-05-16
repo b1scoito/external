@@ -64,9 +64,9 @@ void c_glow::run( keybind& keybd )
 				const auto entity_health = entity.get_health();
 				glow.set(
 					1.f - (entity_health / 100.f),	// R
-					entity_health / 100.f,				// G
-					0.f / 255.f,						// B
-					0.8f								// A
+					entity_health / 100.f,			// G
+					0.f / 255.f,					// B
+					0.8f							// A
 				);
 
 				g_memory->write<sdk::structs::glow_object_t>( entity_glow_offset, glow ); // Set glow
