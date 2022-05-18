@@ -104,7 +104,7 @@
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <Optimization>MaxSpeed</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=3 -mllvm -bcf -mllvm -bcf_loop=1 -mllvm -bcf_prob=23 -mllvm -fla -mllvm -split -mllvm -split_num=2 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=2 -mllvm -bcf -mllvm -bcf_loop=1 -mllvm -bcf_prob=35 -mllvm -fla -mllvm -split -mllvm -split_num=2 %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

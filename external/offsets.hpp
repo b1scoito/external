@@ -1,11 +1,11 @@
 #pragma once
 #include <cstdint>
 
-// 2022-05-16 02:36:49.466566600 UTC
+// 2022-05-18 23:22:20.729700500 UTC
 
 namespace sdk
 {
-	constexpr ::std::int64_t timestamp = 1652668609;
+	constexpr ::std::int64_t timestamp = 1652916140;
 	namespace netvars
 	{
 		constexpr ::std::ptrdiff_t cs_gamerules_data = 0x0;
@@ -149,7 +149,7 @@ namespace sdk
 		constexpr ::std::ptrdiff_t dwZoomSensitivityRatioPtr = 0xDC31B0;
 		constexpr ::std::ptrdiff_t dwbSendPackets = 0xD96A2;
 		constexpr ::std::ptrdiff_t dwppDirect3DDevice9 = 0xA5050;
-		constexpr ::std::ptrdiff_t find_hud_element = 0x33B25200;
+		constexpr ::std::ptrdiff_t find_hud_element = 0x32E75200;
 		constexpr ::std::ptrdiff_t force_update_spectator_glow = 0x3BB99A;
 		constexpr ::std::ptrdiff_t interface_engine_cvar = 0x3E9EC;
 		constexpr ::std::ptrdiff_t is_c4_owner = 0x3C8A10;
@@ -162,4 +162,4 @@ namespace sdk
 		constexpr ::std::ptrdiff_t set_abs_angles = 0x1E5570;
 		constexpr ::std::ptrdiff_t set_abs_origin = 0x1E53B0;
 	} // namespace offsets
-} // namespace sdk
+} // namespace hazedumper
