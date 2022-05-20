@@ -20,7 +20,7 @@ void c_glow::run( keybind& keybd )
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			if ( !update )
 			{
-				timer::sleep( 0.1f );
+				timer::sleep( 1 );
 				continue;
 			}
 
