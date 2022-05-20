@@ -9,7 +9,7 @@ void c_glow::run( keybind& keybd )
 	{
 		while ( var::b_is_running )
 		{
-			timer::sleep( 1 );
+			timer::sleep( 0.5f );
 
 			if ( !keybd.get() )
 			{
