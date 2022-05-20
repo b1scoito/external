@@ -9,13 +9,18 @@ void c_bhop::run()
 	{
 		while ( var::b_is_running )
 		{
-			timer::sleep( 1 );
-
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			if ( !update )
+			{
+				timer::sleep( 0.1f );
 				continue;
+			}
+
+			timer::sleep( global_vars.flAbsFrameTime - function_elapsed );
+
+			auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -50,9 +55,14 @@ void c_bhop::run()
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
 
+			auto end = std::chrono::high_resolution_clock::now();
+
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;
 			last_frame = global_vars.iFrameCount;
+
+			std::chrono::duration<float, std::milli> elapsed = end - start;
+			function_elapsed = elapsed.count();
 		}
 	} ).detach();
 }
