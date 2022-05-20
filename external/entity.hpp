@@ -10,7 +10,7 @@ public:
 	c_entity( const std::int32_t entity_index = {} )
 	{
 		if ( !entity_index )
-			this->base_address = g_client->get_local_player();
+			this->base_address = g_client->get_local_player_address();
 		else
 			this->base_address = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (entity_index * 0x10) );
 	}
@@ -90,6 +90,6 @@ public: // Read
 
 	const auto is_localplayer() const
 	{
-		return base_address == g_client->get_local_player();
+		return base_address == g_client->get_local_player_address();
 	}
 };
