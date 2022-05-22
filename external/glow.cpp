@@ -24,10 +24,10 @@ void c_glow::run( keybind& keybd )
 				continue;
 			}
 
-			float sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
+			const auto sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
 			timer::sleep( sleep_time );
 
-			auto start = std::chrono::high_resolution_clock::now();
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -80,7 +80,7 @@ void c_glow::run( keybind& keybd )
 				mutex.unlock();
 			}
 
-			auto end = std::chrono::high_resolution_clock::now();
+			const auto end = std::chrono::high_resolution_clock::now();
 
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;

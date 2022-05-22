@@ -18,10 +18,10 @@ void c_bhop::run()
 				continue;
 			}
 
-			float sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
+			const auto sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
 			timer::sleep( sleep_time );
 
-			auto start = std::chrono::high_resolution_clock::now();
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -49,14 +49,16 @@ void c_bhop::run()
 				move_type == sdk::structs::move_type::MOVETYPE_OBSERVER )
 				continue;
 
+			mutex.lock();
 			// Check if onground and jump, otherwise set -jump
 			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
 				g_client->force_jump( 5 ); // +jump
 			else
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
+			mutex.unlock();
 
-			auto end = std::chrono::high_resolution_clock::now();
+			const auto end = std::chrono::high_resolution_clock::now();
 
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;

@@ -26,10 +26,10 @@ void c_triggerbot::run( keybind& keybd )
 				continue;
 			}
 
-			float sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
+			const auto sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
 			timer::sleep( sleep_time );
 
-			auto start = std::chrono::high_resolution_clock::now();
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -61,7 +61,7 @@ void c_triggerbot::run( keybind& keybd )
 			if ( crosshair_id > 0 && crosshair_id <= 64 )
 				g_client->force_attack( 6 ); // +attack
 
-			auto end = std::chrono::high_resolution_clock::now();
+			const auto end = std::chrono::high_resolution_clock::now();
 
 			std::chrono::duration<float, std::milli> elapsed = end - start;
 			function_elapsed = elapsed.count();
