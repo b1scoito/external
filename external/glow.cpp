@@ -20,11 +20,12 @@ void c_glow::run( keybind& keybd )
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			if ( !update )
 			{
-				timer::sleep( 1 );
+				timer::sleep( global_vars.flIntervalPerTick );
 				continue;
 			}
 
-			timer::sleep( global_vars.flAbsFrameTime - function_elapsed );
+			float sleep_time = (function_elapsed - global_vars.flAbsFrameTime);
+			timer::sleep( sleep_time );
 
 			auto start = std::chrono::high_resolution_clock::now();
 
