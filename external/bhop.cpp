@@ -19,7 +19,7 @@ void c_bhop::run()
 			}
 
 			const auto frametime = global_vars.flAbsFrameTime;
-			const auto delay = (function_elapsed - (frametime < 1 / (1.f / global_vars.flIntervalPerTick) ? (frametime * 0.5f) : frametime));
+			const auto delay = (function_elapsed - (frametime < global_vars.flIntervalPerTick ? (frametime * 0.5f) : frametime));
 			const auto sleep = std::min( delay, (global_vars.flIntervalPerTick * 1000) );
 
 			timer::sleep( sleep );

@@ -163,4 +163,4 @@ namespace sdk
 		static constexpr std::uintptr_t set_abs_angles = 0x1E5570;
 		static constexpr std::uintptr_t set_abs_origin = 0x1E53B0;
 	} // namespace offsets
-} // namespace hazedumper
+} // namespace sdk
