@@ -9,8 +9,6 @@ void c_glow::run( keybind& keybd )
 	{
 		while ( var::b_is_running )
 		{
-			timer::sleep( 1 );
-
 			if ( !keybd.get() )
 			{
 				timer::sleep( 1 );
@@ -21,7 +19,18 @@ void c_glow::run( keybind& keybd )
 			const auto global_vars = g_engine->get_globalvars();
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			if ( !update )
+			{
+				timer::sleep( global_vars.flIntervalPerTick );
 				continue;
+			}
+
+			const auto frametime = global_vars.flAbsFrameTime;
+			const auto delay = (function_elapsed - (frametime < global_vars.flIntervalPerTick ? (frametime * 0.5f) : frametime));
+			const auto sleep = std::min( delay, (global_vars.flIntervalPerTick * 1000) );
+
+			timer::sleep( sleep );
+
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -69,12 +78,19 @@ void c_glow::run( keybind& keybd )
 					0.8f							// A
 				);
 
+				mutex.lock();
 				g_memory->write<sdk::structs::glow_object_t>( entity_glow_offset, glow ); // Set glow
+				mutex.unlock();
 			}
+
+			const auto end = std::chrono::high_resolution_clock::now();
 
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;
 			last_frame = global_vars.iFrameCount;
+
+			std::chrono::duration<float, std::milli> elapsed = end - start;
+			function_elapsed = elapsed.count();
 		}
 	} ).detach();
 }

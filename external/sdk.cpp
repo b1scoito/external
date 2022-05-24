@@ -19,7 +19,7 @@ bool c_basesdk::run()
 	// Check for outdated offsets
 	if ( !sdk::base->check_for_outdated_offsets() )
 	{
-		log_debug( "Cheat is outdated! exiting." );
+		log_debug( xorstr( "Cheat is outdated! exiting." ) );
 		timer::sleep( 3000 );
 
 		return false;
@@ -57,7 +57,7 @@ bool c_basesdk::run()
 	log_debug( xorstr( "client.dll -> 0x%x" ), get_client_image().base );
 
 	// Get the window
-	log_debug( "Waiting for window class handle..." );
+	log_debug( xorstr( "Waiting for window class handle..." ) );
 	do
 	{
 		var::game::wnd = FindWindow( xorstr( L"Valve001" ), nullptr );
@@ -75,7 +75,7 @@ const bool c_basesdk::check_for_outdated_offsets() const
 		return false;
 
 	const std::wstring name = filename;
-	const auto path = name.substr( 0, name.find_last_of( L"/\\" ) ) + L"\\csgo\\steam.inf";
+	const auto path = name.substr( 0, name.find_last_of( xorstr( L"/\\" ) ) ) + xorstr( L"\\csgo\\steam.inf" );
 
 	std::ifstream in( path );
 	std::string line = {};

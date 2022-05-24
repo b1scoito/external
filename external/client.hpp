@@ -3,17 +3,10 @@
 class c_client
 {
 public: // Read
-	const auto get_local_player() const
+	const auto get_local_player_address() const
 	{
-		auto local_player = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwLocalPlayer );
-		if ( !local_player )
-		{
-			while ( !local_player )
-			{
-				local_player = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwLocalPlayer );
-				timer::sleep( 100 );
-			}
-		}
+		const auto local_player_index = g_memory->read<std::int32_t>( g_engine->get_client_state() + sdk::offsets::dwClientState_GetLocalPlayer );
+		const auto local_player = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + 0x10 * local_player_index);
 
 		return local_player;
 	}

@@ -16,6 +16,9 @@ private:
 	int last_tick = {};
 	int last_frame = {};
 
+	float function_elapsed = {};
+	std::mutex mutex = {};
+
 public:
 	c_glow() = default;
 	~c_glow() = default;

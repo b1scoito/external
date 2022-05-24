@@ -9,13 +9,22 @@ void c_bhop::run()
 	{
 		while ( var::b_is_running )
 		{
-			timer::sleep( 1 );
-
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);
 			if ( !update )
+			{
+				timer::sleep( global_vars.flIntervalPerTick );
 				continue;
+			}
+
+			const auto frametime = global_vars.flAbsFrameTime;
+			const auto delay = (function_elapsed - (frametime < global_vars.flIntervalPerTick ? (frametime * 0.5f) : frametime));
+			const auto sleep = std::min( delay, (global_vars.flIntervalPerTick * 1000) );
+
+			timer::sleep( sleep );
+
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
@@ -43,16 +52,23 @@ void c_bhop::run()
 				move_type == sdk::structs::move_type::MOVETYPE_OBSERVER )
 				continue;
 
+			mutex.lock();
 			// Check if onground and jump, otherwise set -jump
 			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
 				g_client->force_jump( 5 ); // +jump
 			else
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
+			mutex.unlock();
+
+			const auto end = std::chrono::high_resolution_clock::now();
 
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;
 			last_frame = global_vars.iFrameCount;
+
+			std::chrono::duration<float, std::milli> elapsed = end - start;
+			function_elapsed = elapsed.count();
 		}
 	} ).detach();
 }
