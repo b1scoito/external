@@ -29,7 +29,7 @@ bool c_basesdk::run()
 	std::thread( [&]
 	{
 		while ( proc.is_running() )
-			timer::sleep( 100 );
+			timer::sleep( 1000 );
 
 		std::exit( EXIT_SUCCESS );
 	} ).detach();
