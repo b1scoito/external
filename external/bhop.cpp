@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "bhop.hpp"
 
+#include "engine.hpp"
+#include "client.hpp"
+#include "entity.hpp"
+
 void c_bhop::run()
 {
 	log_debug( xorstr( "initializing bhop thread." ) );
@@ -42,18 +46,15 @@ void c_bhop::run()
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Localplayer
-			const c_entity localplayer = g_client->get_local_player_address();
-
 			// Check if in ladder, noclip or observer
-			const auto move_type = localplayer.move_type();
+			const auto move_type = g_local.move_type();
 			if ( move_type == sdk::structs::move_type::MOVETYPE_LADDER ||
 				move_type == sdk::structs::move_type::MOVETYPE_NOCLIP ||
 				move_type == sdk::structs::move_type::MOVETYPE_OBSERVER )
 				continue;
 
 			// Check if onground and jump, otherwise set -jump
-			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
+			if ( (g_local.get_flags() & sdk::structs::flags::FL_ONGROUND) )
 				g_client->force_jump( 5 ); // +jump
 			else
 				if ( g_client->get_force_jump() == 5 )

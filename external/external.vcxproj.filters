@@ -132,5 +132,17 @@
     <ClCompile Include="triggerbot.cpp">
       <Filter>cheats\triggerbot</Filter>
     </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="convar.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
+#include "engine.hpp"
+#include "client.hpp"
+#include "entity.hpp"
+
 void c_glow::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing glow thread." ) );
@@ -44,12 +48,9 @@ void c_glow::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Local player
-			const c_entity local = g_client->get_local_player_address();
-
 			for ( std::int32_t i = 0; i < g_engine->get_max_player_count(); i++ )
 			{
-				const c_entity entity ( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10) ));
+				const c_entity entity( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10) ) );
 
 				if ( !entity.get_entity() )
 					continue;

@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "triggerbot.hpp"
 
+#include "engine.hpp"
+#include "client.hpp"
+#include "entity.hpp"
+
 void c_triggerbot::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing triggerbot thread." ) );
@@ -46,10 +50,7 @@ void c_triggerbot::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Localplayer
-			const c_entity local = g_client->get_local_player_address();
-
-			const auto crosshair_id = local.crosshair_id();
+			const auto crosshair_id = g_local.crosshair_id();
 			const c_entity entity( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ((crosshair_id - 1) * 0x10) ) );
 
 			if ( !entity.get_entity() )
