@@ -40,17 +40,17 @@ const std::int32_t c_convar_manager::get_int() const
 	return g_memory->read<std::int32_t>( this->cvar_address + 0x30 );
 }
 
-const void c_convar_manager::set_value( std::string value ) const
+const void c_convar_manager::set( std::string value ) const
 {
 	g_memory->write( g_memory->read<std::uintptr_t>( this->cvar_address + 0x24 ), value.data(), 255 );
 }
 
-const void c_convar_manager::set_value( float value ) const
+const void c_convar_manager::set( float value ) const
 {
 	g_memory->write<float>( this->cvar_address + 0x2C, value );
 }
 
-const void c_convar_manager::set_value( std::int32_t value ) const
+const void c_convar_manager::set( std::int32_t value ) const
 {
 	g_memory->write<std::int32_t>( this->cvar_address + 0x30, value );
 }

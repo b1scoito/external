@@ -26,9 +26,9 @@ public: // Read
 	const float get_float() const;
 	const std::int32_t get_int() const;
 public: // Write
-	const void set_value( std::string value ) const;
-	const void set_value( float value ) const;
-	const void set_value( std::int32_t value ) const;
+	const void set( std::string value ) const;
+	const void set( float value ) const;
+	const void set( std::int32_t value ) const;
 };
 
 

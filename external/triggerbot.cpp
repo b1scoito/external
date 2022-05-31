@@ -63,7 +63,10 @@ void c_triggerbot::run( keybind& keybd )
 				continue;
 
 			if ( crosshair_id > 0 && crosshair_id <= 64 )
+			{
+				timer::sleep( 15 );
 				g_client->force_attack( 6 ); // +attack
+			}
 
 			const auto end = std::chrono::high_resolution_clock::now();
 

@@ -28,24 +28,24 @@ namespace sdk
 		class convar_t
 		{
 		public:
-			char pad_0x0000[0x4];				// 0x0000
-			std::uintptr_t m_pNext;				// 0x0004
-			int m_bRegistered;					// 0x0008 change to bool
-			std::uintptr_t m_pszName;			// 0x000C
-			std::uintptr_t m_pszDescription;	// 0x0010
-			int m_nFlags;						// 0x0014
-			char pad_0x0018[0x4];				// 0x0018
-			std::uintptr_t m_pParent;			// 0x001C
-			std::uintptr_t m_pszDefaultValue;	// 0x0020
-			std::uintptr_t m_pszValue;			// 0x0024
-			int m_nSize;						// 0x0028
-			float m_flValue;					// 0x002C
-			int m_nValue;						// 0x0030
-			int m_bHasMin;						// 0x0034 change to bool
-			float m_fMinVal;					// 0x0038
-			int m_bHasMax;						// 0x003C change to bool
-			float m_fMaxVal;					// 0x0040
-		}; // Size: 0x0044
+			char pad_0x0000[0x4];				// 0x00
+			std::uintptr_t m_pNext;				// 0x04
+			int m_bRegistered;					// 0x08 change to bool
+			std::uintptr_t m_pszName;			// 0x0C
+			std::uintptr_t m_pszDescription;	// 0x10
+			int m_nFlags;						// 0x14
+			char pad_0x0018[0x4];				// 0x18
+			std::uintptr_t m_pParent;			// 0x1C
+			std::uintptr_t m_pszDefaultValue;	// 0x20
+			std::uintptr_t m_pszValue;			// 0x24
+			int m_nSize;						// 0x28
+			float m_flValue;					// 0x2C
+			int m_nValue;						// 0x30
+			int m_bHasMin;						// 0x34 change to bool
+			float m_fMinVal;					// 0x38
+			int m_bHasMax;						// 0x3C change to bool
+			float m_fMaxVal;					// 0x40
+		}; // Size: 0x44
 
 		enum entity_glow_render_style : int
 		{

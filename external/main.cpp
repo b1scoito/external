@@ -20,6 +20,28 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	if ( !sdk::base->run() )
 		return EXIT_FAILURE;
 
+	std::thread( [&]
+	{
+		while ( var::b_is_running )
+		{
+			timer::sleep( 100 );
+
+			// Cache
+			if ( !g_engine->in_game() )
+			{
+				g_local = c_entity();
+				g_convar_list.clear();
+				continue;
+			}
+
+			if ( !g_local.get_entity() )
+				g_local = c_entity( g_client->get_local_player_address() );
+
+			if ( g_convar_list.empty() )
+				g_convar->populate_list();
+		}
+	} ).detach();
+
 	// Run bhop
 	bhop->run();
 
@@ -29,25 +51,9 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	// Run triggerbot
 	triggerbot->run( var::keybinds::hold_triggerbot_key );
 
+
 	while ( !GetAsyncKeyState( VK_DELETE ) )
-	{
-		timer::sleep( 100 );
-
-		// Cache
-		if ( !g_engine->in_game() )
-		{
-			g_local = c_entity();
-			g_convar_list.clear();
-
-			continue;
-		}
-
-		if ( !g_local.get_entity() )
-			g_local = c_entity( g_client->get_local_player_address() );
-
-		if ( g_convar_list.empty() )
-			g_convar->populate_list();
-	}
+		timer::sleep( 50 );
 
 	var::b_is_running = false;
 
