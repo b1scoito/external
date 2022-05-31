@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
+    <ClInclude Include="convar.hpp" />
     <ClInclude Include="engine.hpp" />
     <ClInclude Include="entity.hpp" />
     <ClInclude Include="glow.hpp" />

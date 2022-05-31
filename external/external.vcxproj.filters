@@ -108,6 +108,9 @@
     <ClInclude Include="engine.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
+    <ClInclude Include="convar.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

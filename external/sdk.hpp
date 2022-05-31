@@ -16,6 +16,7 @@ private:
 
 	std::pair<std::uintptr_t, std::uintptr_t> engine = {};
 	std::pair<std::uintptr_t, std::uintptr_t> client = {};
+	std::pair<std::uintptr_t, std::uintptr_t> vstdlib = {};
 
 	struct image_t
 	{
@@ -41,6 +42,13 @@ public:
 		image = { client.first, client.second };
 		return image;
 	};
+
+	constexpr auto& get_vstdlib_image()
+	{
+		image = { vstdlib.first, vstdlib.second };
+		return image;
+	};
+
 };
 
 namespace sdk
