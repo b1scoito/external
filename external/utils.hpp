@@ -42,6 +42,12 @@ namespace timer
 
 namespace string
 {
+    inline std::string to_lower( std::string str )
+    {
+        std::transform( str.begin(), str.end(), str.begin(), static_cast<int(*)(int)>(::tolower) );
+        return str;
+    }
+
     inline std::vector<std::string> split( std::string s, std::string delimiter )
     {
         size_t pos_start = 0, pos_end, delim_len = delimiter.length();

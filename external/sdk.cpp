@@ -29,7 +29,7 @@ bool c_basesdk::run()
 	std::thread( [&]
 	{
 		while ( proc.is_running() )
-			timer::sleep( 100 );
+			timer::sleep( 1000 );
 
 		std::exit( EXIT_SUCCESS );
 	} ).detach();
@@ -55,6 +55,17 @@ bool c_basesdk::run()
 	while ( get_client_image().base <= 0x0 );
 
 	log_debug( xorstr( "client.dll -> 0x%x" ), get_client_image().base );
+
+	// Wait for client.dll to load
+	log_debug( xorstr( "Waiting for vstdlib.dll to load..." ) );
+	do
+	{
+		g_memory->get_module( xorstr( L"vstdlib.dll" ), vstdlib );
+		timer::sleep( 250 );
+	}
+	while ( get_vstdlib_image().base <= 0x0 );
+
+	log_debug( xorstr( "vstdlib.dll -> 0x%x" ), get_vstdlib_image().base );
 
 	// Get the window
 	log_debug( xorstr( "Waiting for window class handle..." ) );

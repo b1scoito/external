@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
+#include "engine.hpp"
+#include "client.hpp"
+#include "entity.hpp"
+
 void c_glow::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing glow thread." ) );
@@ -26,7 +30,7 @@ void c_glow::run( keybind& keybd )
 
 			const auto frametime = global_vars.flAbsFrameTime;
 			const auto delay = (function_elapsed - (frametime < global_vars.flIntervalPerTick ? (frametime * 0.5f) : frametime));
-			const auto sleep = std::min( delay, (global_vars.flIntervalPerTick * 1000) );
+			const auto sleep = std::min( delay, (frametime * 1000) );
 
 			timer::sleep( sleep );
 
@@ -44,12 +48,9 @@ void c_glow::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Local player
-			const c_entity localplayer = {};
-
 			for ( std::int32_t i = 0; i < g_engine->get_max_player_count(); i++ )
 			{
-				const c_entity entity( i );
+				const c_entity entity( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10) ) );
 
 				if ( !entity.get_entity() )
 					continue;
@@ -63,7 +64,7 @@ void c_glow::run( keybind& keybd )
 				if ( entity.is_dormant() )
 					continue;
 
-				if ( localplayer.get_team() == entity.get_team() )
+				if ( !entity.is_enemy() )
 					continue;
 
 				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);

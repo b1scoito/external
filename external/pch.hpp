@@ -17,6 +17,7 @@
 #include <cstddef>
 #include <functional>
 #include <future>
+#include <map>
 
 #include <Windows.h>
 
@@ -24,7 +25,10 @@
 #include "xorstr.hpp"
 #include "lazy_importer.hpp"
 #include "console.hpp"
+#include "structs.hpp"
 #include "vector.hpp"
+#include "memory.hpp"
 #include "keybind.hpp"
 #include "var.hpp"
 #include "utils.hpp"
+#include "sdk.hpp"

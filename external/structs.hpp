@@ -25,6 +25,28 @@ namespace sdk
 			int		iTimestampRandomizeWindow;	// 0x3A
 		}; // Size: 0x3E
 
+		class convar_t
+		{
+		public:
+			char pad_0x0000[0x4];				// 0x00
+			std::uintptr_t m_pNext;				// 0x04
+			int m_bRegistered;					// 0x08 change to bool
+			std::uintptr_t m_pszName;			// 0x0C
+			std::uintptr_t m_pszDescription;	// 0x10
+			int m_nFlags;						// 0x14
+			char pad_0x0018[0x4];				// 0x18
+			std::uintptr_t m_pParent;			// 0x1C
+			std::uintptr_t m_pszDefaultValue;	// 0x20
+			std::uintptr_t m_pszValue;			// 0x24
+			int m_nSize;						// 0x28
+			float m_flValue;					// 0x2C
+			int m_nValue;						// 0x30
+			int m_bHasMin;						// 0x34 change to bool
+			float m_fMinVal;					// 0x38
+			int m_bHasMax;						// 0x3C change to bool
+			float m_fMaxVal;					// 0x40
+		}; // Size: 0x44
+
 		enum entity_glow_render_style : int
 		{
 			GLOWRENDERSTYLE_DEFAULT = 0,

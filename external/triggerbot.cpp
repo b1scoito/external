@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "triggerbot.hpp"
 
+#include "engine.hpp"
+#include "client.hpp"
+#include "entity.hpp"
+
 void c_triggerbot::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing triggerbot thread." ) );
@@ -28,7 +32,7 @@ void c_triggerbot::run( keybind& keybd )
 
 			const auto frametime = global_vars.flAbsFrameTime;
 			const auto delay = (function_elapsed - (frametime < global_vars.flIntervalPerTick ? (frametime * 0.5f) : frametime));
-			const auto sleep = std::min( delay, (global_vars.flIntervalPerTick * 1000) );
+			const auto sleep = std::min( delay, (frametime * 1000) );
 
 			timer::sleep( sleep );
 
@@ -46,23 +50,23 @@ void c_triggerbot::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Localplayer
-			const c_entity localplayer = {};
-
-			const auto crosshair_id = localplayer.crosshair_id();
-			const c_entity entity( crosshair_id - 1 );
+			const auto crosshair_id = g_local.crosshair_id();
+			const c_entity entity( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ((crosshair_id - 1) * 0x10) ) );
 
 			if ( !entity.get_entity() )
 				continue;
 
-			if ( (entity.get_team() > sdk::structs::team_id::TEAM_SPECTATOR) && (localplayer.get_team() == entity.get_team()) )
+			if ( !entity.is_enemy() )
 				continue;
 
 			if ( entity.has_immunity() )
 				continue;
 
 			if ( crosshair_id > 0 && crosshair_id <= 64 )
+			{
+				timer::sleep( 15 );
 				g_client->force_attack( 6 ); // +attack
+			}
 
 			const auto end = std::chrono::high_resolution_clock::now();
 

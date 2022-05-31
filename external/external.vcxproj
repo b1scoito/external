@@ -56,13 +56,12 @@
     <IntDir>.\out\rel\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
-    <VcpkgEnabled>false</VcpkgEnabled>
+    <VcpkgEnabled>true</VcpkgEnabled>
     <VcpkgAutoLink>true</VcpkgAutoLink>
     <VcpkgManifestInstall>true</VcpkgManifestInstall>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <VcpkgUseStatic>
-    </VcpkgUseStatic>
+    <VcpkgUseStatic>true</VcpkgUseStatic>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <VcpkgUseStatic>
@@ -120,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
+    <ClInclude Include="convar.hpp" />
     <ClInclude Include="engine.hpp" />
     <ClInclude Include="entity.hpp" />
     <ClInclude Include="glow.hpp" />
@@ -140,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bhop.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="convar.cpp" />
+    <ClCompile Include="engine.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="glow.cpp" />
     <ClCompile Include="sdk.cpp" />
     <ClCompile Include="main.cpp" />

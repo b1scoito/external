@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "bhop.hpp"
 
+#include "engine.hpp"
+#include "client.hpp"
+#include "entity.hpp"
+
 void c_bhop::run()
 {
 	log_debug( xorstr( "initializing bhop thread." ) );
@@ -20,7 +24,7 @@ void c_bhop::run()
 
 			const auto frametime = global_vars.flAbsFrameTime;
 			const auto delay = (function_elapsed - (frametime < global_vars.flIntervalPerTick ? (frametime * 0.5f) : frametime));
-			const auto sleep = std::min( delay, (global_vars.flIntervalPerTick * 1000) );
+			const auto sleep = std::min( delay, (frametime * 1000) );
 
 			timer::sleep( sleep );
 
@@ -42,24 +46,19 @@ void c_bhop::run()
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Localplayer
-			const c_entity localplayer = {};
-
 			// Check if in ladder, noclip or observer
-			const auto move_type = localplayer.move_type();
+			const auto move_type = g_local.move_type();
 			if ( move_type == sdk::structs::move_type::MOVETYPE_LADDER ||
 				move_type == sdk::structs::move_type::MOVETYPE_NOCLIP ||
 				move_type == sdk::structs::move_type::MOVETYPE_OBSERVER )
 				continue;
 
-			mutex.lock();
 			// Check if onground and jump, otherwise set -jump
-			if ( (localplayer.get_flags() & sdk::structs::flags::FL_ONGROUND) )
+			if ( (g_local.get_flags() & sdk::structs::flags::FL_ONGROUND) )
 				g_client->force_jump( 5 ); // +jump
 			else
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
-			mutex.unlock();
 
 			const auto end = std::chrono::high_resolution_clock::now();
 

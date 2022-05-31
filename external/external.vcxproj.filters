@@ -108,6 +108,9 @@
     <ClInclude Include="engine.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
+    <ClInclude Include="convar.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -128,6 +131,18 @@
     </ClCompile>
     <ClCompile Include="triggerbot.cpp">
       <Filter>cheats\triggerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="convar.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>sdk\classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
