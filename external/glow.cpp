@@ -45,11 +45,11 @@ void c_glow::run( keybind& keybd )
 				continue;
 
 			// Local player
-			const c_entity localplayer = {};
+			const c_entity local = g_client->get_local_player_address();
 
 			for ( std::int32_t i = 0; i < g_engine->get_max_player_count(); i++ )
 			{
-				const c_entity entity( i );
+				const c_entity entity ( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10) ));
 
 				if ( !entity.get_entity() )
 					continue;
@@ -63,7 +63,7 @@ void c_glow::run( keybind& keybd )
 				if ( entity.is_dormant() )
 					continue;
 
-				if ( localplayer.get_team() == entity.get_team() )
+				if ( !entity.is_enemy() )
 					continue;
 
 				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);

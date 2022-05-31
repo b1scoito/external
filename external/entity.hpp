@@ -1,5 +1,6 @@
 #pragma once
 #include "vector.hpp"
+#include "convar.hpp"
 
 class c_entity
 {
@@ -7,12 +8,10 @@ private:
 	std::uintptr_t base_address = {};
 
 public:
-	c_entity( const std::int32_t entity_index = {} )
+	c_entity() = default;
+	c_entity( const std::uintptr_t base_addr )
 	{
-		if ( !entity_index )
-			this->base_address = g_client->get_local_player_address();
-		else
-			this->base_address = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (entity_index * 0x10) );
+		this->base_address = base_addr;
 	}
 
 public: // Read
@@ -92,4 +91,21 @@ public: // Read
 	{
 		return base_address == g_client->get_local_player_address();
 	}
+
+	// From: https://github.com/rollraw/qo0-base/blob/f6ded6392dbb9e433c279fdb6fc3843398b9e1c7/base/sdk/entity.cpp#L212
+	const auto is_enemy() const
+	{
+		const auto local = c_entity( g_client->get_local_player_address() );
+
+		auto mp_teammates_are_enemies = g_convar->find( "mp_teammates_are_enemies" );
+		if ( !mp_teammates_are_enemies.get_pointer() )
+			return false;
+			
+		auto value = mp_teammates_are_enemies.get_int();
+		value ^= mp_teammates_are_enemies.get_pointer();
+
+		return value ? true : this->get_team() != local.get_team();
+	}
 };
+
+inline auto g_local = c_entity();

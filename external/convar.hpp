@@ -1,6 +1,7 @@
 #pragma once
 
-const class c_convar_manager
+// From: https://www.unknowncheats.me/forum/counterstrike-global-offensive/181308-external-convarfinder.html
+class c_convar_manager
 {
 private:
 	std::uintptr_t cvar_address = {};
@@ -43,7 +44,7 @@ public:
 		return {};
 	}
 
-	const float get_float() const 
+	const float get_float() const
 	{
 		return g_memory->read<float>( this->cvar_address + 0x2C );
 	}
@@ -70,10 +71,12 @@ public: // Write
 	}
 };
 
+inline std::map<std::string, std::uintptr_t> g_convar_list = {};
+
 class c_convar : private c_convar_manager
 {
 public: // Read
-	c_convar_manager find( std::string_view convar_name )
+	void populate_list()
 	{
 		const auto convar_hash_table = g_memory->read<std::uintptr_t>( sdk::base->get_vstdlib_image().base + sdk::offsets::interface_engine_cvar );
 		const auto convar_list = g_memory->read<std::int32_t>( convar_hash_table + 0x34 );
@@ -85,18 +88,22 @@ public: // Read
 			auto read_convar_name = std::make_unique<char[]>( 255 );
 
 			const auto convar_address = g_memory->read<std::uintptr_t>( hash_map_entry + 0x4 );
-			const auto convar_address_name = g_memory->read<std::uintptr_t>(convar_address + 0xC);
+			const auto convar_address_name = g_memory->read<std::uintptr_t>( convar_address + 0xC );
 
 			if ( g_memory->read( convar_address_name, read_convar_name.get(), 255 ) )
-			{
-				if ( string::to_lower( read_convar_name.get() ) == convar_name )
-					return c_convar_manager(convar_address);
-			}
+				g_convar_list[read_convar_name.get()] = convar_address;
 
 			hash_map_entry = g_memory->read<std::int32_t>( hash_map_entry + 0x4 );
 		}
+	}
 
-		return c_convar_manager();
+	c_convar_manager find( std::string_view convar_name )
+	{
+		auto it = g_convar_list.find( convar_name.data() );
+		if ( it == g_convar_list.end() )
+			return {};
+
+		return c_convar_manager(it->second);
 	}
 };
 

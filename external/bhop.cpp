@@ -43,7 +43,7 @@ void c_bhop::run()
 				continue;
 
 			// Localplayer
-			const c_entity localplayer = {};
+			const c_entity localplayer = g_client->get_local_player_address();
 
 			// Check if in ladder, noclip or observer
 			const auto move_type = localplayer.move_type();

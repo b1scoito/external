@@ -17,6 +17,7 @@
 #include <cstddef>
 #include <functional>
 #include <future>
+#include <map>
 
 #include <Windows.h>
 

@@ -47,15 +47,15 @@ void c_triggerbot::run( keybind& keybd )
 				continue;
 
 			// Localplayer
-			const c_entity localplayer = {};
+			const c_entity local = g_client->get_local_player_address();
 
-			const auto crosshair_id = localplayer.crosshair_id();
-			const c_entity entity( crosshair_id - 1 );
+			const auto crosshair_id = local.crosshair_id();
+			const c_entity entity( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ((crosshair_id - 1) * 0x10) ) );
 
 			if ( !entity.get_entity() )
 				continue;
 
-			if ( (entity.get_team() > sdk::structs::team_id::TEAM_SPECTATOR) && (localplayer.get_team() == entity.get_team()) )
+			if ( !entity.is_enemy() )
 				continue;
 
 			if ( entity.has_immunity() )
