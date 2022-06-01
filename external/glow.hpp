@@ -7,7 +7,6 @@ private:
 	int last_frame = {};
 
 	float function_elapsed = {};
-	std::mutex mutex = {};
 
 public:
 	c_glow() = default;

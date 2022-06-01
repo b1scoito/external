@@ -34,6 +34,17 @@ bool c_basesdk::run()
 		std::exit( EXIT_SUCCESS );
 	} ).detach();
 
+	// Wait for vstdlib.dll to load
+	log_debug( xorstr( "Waiting for vstdlib.dll to load..." ) );
+	do
+	{
+		g_memory->get_module( xorstr( L"vstdlib.dll" ), vstdlib );
+		timer::sleep( 250 );
+	}
+	while ( get_vstdlib_image().base <= 0x0 );
+
+	log_debug( xorstr( "vstdlib.dll -> 0x%x" ), get_vstdlib_image().base );
+
 	// Wait for engine.dll to load
 	log_debug( xorstr( "Waiting for engine.dll to load..." ) );
 	do
@@ -55,17 +66,6 @@ bool c_basesdk::run()
 	while ( get_client_image().base <= 0x0 );
 
 	log_debug( xorstr( "client.dll -> 0x%x" ), get_client_image().base );
-
-	// Wait for client.dll to load
-	log_debug( xorstr( "Waiting for vstdlib.dll to load..." ) );
-	do
-	{
-		g_memory->get_module( xorstr( L"vstdlib.dll" ), vstdlib );
-		timer::sleep( 250 );
-	}
-	while ( get_vstdlib_image().base <= 0x0 );
-
-	log_debug( xorstr( "vstdlib.dll -> 0x%x" ), get_vstdlib_image().base );
 
 	// Get the window
 	log_debug( xorstr( "Waiting for window class handle..." ) );

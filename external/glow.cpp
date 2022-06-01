@@ -82,9 +82,7 @@ void c_glow::run( keybind& keybd )
 					0.8f							// A
 				);
 
-				mutex.lock();
 				g_memory->write<sdk::structs::glow_object_t>( entity_glow_offset, glow ); // Set glow
-				mutex.unlock();
 			}
 
 			const auto end = std::chrono::high_resolution_clock::now();

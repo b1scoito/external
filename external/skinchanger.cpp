@@ -60,7 +60,7 @@ void c_skinchanger::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			const auto model_index = this->find_model_index_by_name( "models/weapons/v_knife_m9_bay.mdl" );;
+			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_m9_bay.mdl" );;
 
 			for ( size_t i = 0; i < 8; i++ )
 			{
