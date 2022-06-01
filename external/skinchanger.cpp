@@ -71,7 +71,7 @@ void c_skinchanger::run( keybind& keybd )
 					continue;
 
 				const auto weapon_index = g_memory->read<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex );
-				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T || weapon_index == 508 )
+				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T || weapon_index == sdk::structs::WEAPON_KNIFE_M9_BAYONET )
 				{
 					g_memory->write<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex, sdk::structs::WEAPON_KNIFE_M9_BAYONET );
 					g_memory->write<std::int32_t>( current_weapon + sdk::netvars::m_nModelIndex, model_index );
