@@ -84,12 +84,14 @@ namespace sdk
 		static constexpr std::uintptr_t m_iShotsFired = 0x103E0;
 		static constexpr std::uintptr_t m_iState = 0x3268;
 		static constexpr std::uintptr_t m_iTeamNum = 0xF4;
+		static constexpr std::uintptr_t m_iViewModelIndex = 0x3250;
 		static constexpr std::uintptr_t m_lifeState = 0x25F;
 		static constexpr std::uintptr_t m_nBombSite = 0x2994;
 		static constexpr std::uintptr_t m_nFallbackPaintKit = 0x31D8;
 		static constexpr std::uintptr_t m_nFallbackSeed = 0x31DC;
 		static constexpr std::uintptr_t m_nFallbackStatTrak = 0x31E4;
 		static constexpr std::uintptr_t m_nForceBone = 0x268C;
+		static constexpr std::uintptr_t m_nModelIndex = 0x258;
 		static constexpr std::uintptr_t m_nTickBase = 0x3440;
 		static constexpr std::uintptr_t m_nViewModelIndex = 0x29D0;
 		static constexpr std::uintptr_t m_rgflCoordinateFrame = 0x444;

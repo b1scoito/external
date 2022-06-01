@@ -55,6 +55,15 @@ const Vector c_entity::get_velocity() const
 	return g_memory->read<Vector>( base_address + sdk::netvars::m_vecVelocity );
 }
 
+const std::int32_t c_entity::get_class_id() const
+{
+	const auto IClientNetworkable = g_memory->read<std::uintptr_t>( base_address + 0x8 );	// IClientNetworkable vtable
+	const auto GetClientClass = g_memory->read<std::uintptr_t>( IClientNetworkable + 2 * 0x4 ); // 3rd function in the vtable (GetClientClass)
+	const auto GetClientClass_ptr = g_memory->read<std::uintptr_t>( GetClientClass + 0x1 ); // pointer to the ClientClass struct out of the mov eax
+	
+	return g_memory->read<std::int32_t>( GetClientClass_ptr + 0x14 ); // ClassID
+}
+
 const Vector c_entity::bone_matrix( const int& bone ) const
 {
 	const auto matrix = g_memory->read<std::uintptr_t>( base_address + sdk::netvars::m_dwBoneMatrix );
@@ -80,7 +89,7 @@ const bool c_entity::is_localplayer() const
 // From: https://github.com/rollraw/qo0-base/blob/f6ded6392dbb9e433c279fdb6fc3843398b9e1c7/base/sdk/entity.cpp#L212
 const bool c_entity::is_enemy() const
 {
-	auto mp_teammates_are_enemies = g_convar->find( "mp_teammates_are_enemies" );
+	auto mp_teammates_are_enemies = g_convar->find( xorstr( "mp_teammates_are_enemies" ) );
 	if ( !mp_teammates_are_enemies.get_pointer() )
 		return false;
 

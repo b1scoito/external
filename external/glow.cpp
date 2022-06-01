@@ -55,6 +55,9 @@ void c_glow::run( keybind& keybd )
 				if ( !entity.get_entity() )
 					continue;
 
+				if ( entity.get_class_id() != (int)sdk::structs::EClassIndex::CCSPlayer )
+					continue;
+
 				if ( entity.is_localplayer() )
 					continue;
 

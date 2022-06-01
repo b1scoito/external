@@ -16,4 +16,4 @@ public:
 	void run( keybind& keybd );
 };
 
-inline auto glow = std::make_unique<c_glow>();
+inline auto g_glow = std::make_unique<c_glow>();

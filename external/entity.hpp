@@ -28,6 +28,7 @@ public: // Read
 	const std::int32_t move_type() const;
 	const std::int32_t life_state() const;
 	const Vector get_velocity() const;
+	const std::int32_t get_class_id() const;
 	const Vector bone_matrix( const int& bone ) const;
 	const bool is_alive() const;
 	const bool is_localplayer() const;
