@@ -66,7 +66,7 @@ void c_triggerbot::run( keybind& keybd )
 			{
 				auto delay = random::range( 15.f, 35.f );
 				if ( g_local.is_scoped() ) // If scoped, wait more
-					delay = random::range( 50.f, 100.f );
+					delay = random::range( 45.f, 75.f );
 
 				timer::sleep( delay );
 				g_client->force_attack( 6 ); // +attack
