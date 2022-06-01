@@ -64,7 +64,7 @@ void c_triggerbot::run( keybind& keybd )
 
 			if ( crosshair_id > 0 && crosshair_id <= 64 )
 			{
-				timer::sleep( 15 );
+				timer::sleep( random::range( 15.f, 35.f ) );
 				g_client->force_attack( 6 ); // +attack
 			}
 
