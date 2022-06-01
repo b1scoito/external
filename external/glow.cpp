@@ -48,14 +48,14 @@ void c_glow::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			for ( std::int32_t i = 0; i < g_engine->get_max_player_count(); i++ )
+			for ( std::int32_t i = 1; i < g_engine->get_max_player_count(); i++ )
 			{
 				const c_entity entity( g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10) ) );
 
 				if ( !entity.get_entity() )
 					continue;
 
-				if ( entity.get_class_id() != (int)sdk::structs::EClassIndex::CCSPlayer )
+				if ( entity.get_class_id() != (int)sdk::structs::class_index::CCSPlayer )
 					continue;
 
 				if ( entity.is_localplayer() )

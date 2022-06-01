@@ -265,7 +265,7 @@ namespace sdk
 			GAMETYPE_FREEFORALL
 		};
 
-		enum class EClassIndex : int
+		enum class class_index : int
 		{
 			CAI_BaseNPC = 0,
 			CAK47,
