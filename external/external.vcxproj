@@ -56,7 +56,7 @@
     <IntDir>.\out\rel\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
-    <VcpkgEnabled>true</VcpkgEnabled>
+    <VcpkgEnabled>false</VcpkgEnabled>
     <VcpkgAutoLink>true</VcpkgAutoLink>
     <VcpkgManifestInstall>true</VcpkgManifestInstall>
   </PropertyGroup>

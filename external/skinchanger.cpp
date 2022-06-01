@@ -33,6 +33,7 @@ std::int32_t c_skinchanger::find_model_index_by_name( std::string_view model_nam
 	return it->second;
 }
 
+// From: https://github.com/0xf1a/xSkins
 void c_skinchanger::run()
 {
 	log_debug( xorstr( "initializing skin changer thread." ) );
@@ -40,9 +41,7 @@ void c_skinchanger::run()
 	std::thread( [&]
 	{
 		while ( var::b_is_running )
-		{			
-			const auto start = std::chrono::high_resolution_clock::now();
-
+		{
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
 				continue;
@@ -68,7 +67,7 @@ void c_skinchanger::run()
 				const auto weapon_index = g_memory->read<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex );
 				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T || weapon_index == 508 )
 				{
-					g_memory->write<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex, 508 );
+					g_memory->write<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex, sdk::structs::WEAPON_KNIFE_M9_BAYONET );
 					g_memory->write<std::uint32_t>( current_weapon + sdk::netvars::m_nModelIndex, model_index );
 					g_memory->write<std::uint32_t>( current_weapon + sdk::netvars::m_iViewModelIndex, model_index );
 					g_memory->write<std::int32_t>( current_weapon + sdk::netvars::m_iEntityQuality, 3 );
@@ -81,7 +80,7 @@ void c_skinchanger::run()
 				continue;
 
 			const auto weapon_index = g_memory->read<std::int16_t>( active_weapon + sdk::netvars::m_iItemDefinitionIndex );
-			if ( weapon_index != 508 )
+			if ( weapon_index != sdk::structs::WEAPON_KNIFE_M9_BAYONET )
 				continue;
 
 			auto view_model = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hViewModel ) & 0xFFF;
