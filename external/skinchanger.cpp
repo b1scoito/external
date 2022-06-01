@@ -34,7 +34,7 @@ std::int32_t c_skinchanger::find_model_index_by_name( std::string_view model_nam
 }
 
 // From: https://github.com/0xf1a/xSkins
-void c_skinchanger::run()
+void c_skinchanger::run( keybind& keybd )
 {
 	log_debug( xorstr( "initializing skin changer thread." ) );
 
@@ -42,6 +42,12 @@ void c_skinchanger::run()
 	{
 		while ( var::b_is_running )
 		{
+			if ( !keybd.get() )
+			{
+				timer::sleep( 1 );
+				continue;
+			}
+
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
 				continue;

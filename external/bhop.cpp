@@ -35,7 +35,7 @@ void c_bhop::run()
 				continue;
 
 			// Check if space is pressed down
-			if ( !(GetAsyncKeyState( VK_SPACE ) & 0x8000) )
+ 			if ( !(GetAsyncKeyState( VK_SPACE ) & 0x8000) )
 				continue;
 
 			// Check if in menu
@@ -55,7 +55,7 @@ void c_bhop::run()
 
 			// Check if onground and jump, otherwise set -jump
 			if ( (g_local.get_flags() & sdk::structs::flags::FL_ONGROUND) )
-				g_client->force_jump( 5 ); // +jump
+   				g_client->force_jump( 5 ); // +jump
 			else
 				if ( g_client->get_force_jump() == 5 )
 					g_client->force_jump( 4 ); // -jump
