@@ -35,6 +35,11 @@ const bool c_entity::is_dormant() const
 	return g_memory->read<bool>( base_address + sdk::offsets::m_bDormant );
 }
 
+const bool c_entity::is_scoped() const
+{
+	return g_memory->read<bool>( base_address + sdk::netvars::m_bIsScoped );
+}
+
 const bool c_entity::has_immunity() const
 {
 	return g_memory->read<bool>( base_address + sdk::netvars::m_bGunGameImmunity );
