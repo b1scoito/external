@@ -65,7 +65,7 @@ const std::int32_t c_entity::get_class_id() const
 	const auto IClientNetworkable = g_memory->read<std::uintptr_t>( base_address + 0x8 );	// IClientNetworkable vtable
 	const auto GetClientClass = g_memory->read<std::uintptr_t>( IClientNetworkable + 2 * 0x4 ); // 3rd function in the vtable (GetClientClass)
 	const auto GetClientClass_ptr = g_memory->read<std::uintptr_t>( GetClientClass + 0x1 ); // pointer to the ClientClass struct out of the mov eax
-	
+
 	return g_memory->read<std::int32_t>( GetClientClass_ptr + 0x14 ); // ClassID
 }
 
@@ -98,8 +98,8 @@ const bool c_entity::is_enemy() const
 	if ( !mp_teammates_are_enemies.get_pointer() )
 		return false;
 
-	auto value = mp_teammates_are_enemies.get_int();
-	value ^= mp_teammates_are_enemies.get_pointer();
+	auto teammates_are_enemies = mp_teammates_are_enemies.get_int();
+	teammates_are_enemies ^= mp_teammates_are_enemies.get_pointer();
 
-	return value ? true : this->get_team() != g_local.get_team();
+	return teammates_are_enemies ? true : this->get_team() != g_local.get_team();
 }
