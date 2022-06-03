@@ -15,4 +15,4 @@ public:
 	void run( keybind& keybd );
 };
 
-inline auto triggerbot = std::make_unique<c_triggerbot>();
+inline auto g_triggerbot = std::make_unique<c_triggerbot>();

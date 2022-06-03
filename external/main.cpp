@@ -3,6 +3,7 @@
 #include "bhop.hpp"
 #include "glow.hpp"
 #include "triggerbot.hpp"
+#include "skinchanger.hpp"
 
 #include "engine.hpp"
 #include "client.hpp"
@@ -31,6 +32,7 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 			{
 				g_local = c_entity();
 				g_convar_list.clear();
+				g_model_index_list.clear();
 				continue;
 			}
 
@@ -39,18 +41,23 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 			if ( g_convar_list.empty() )
 				g_convar->populate_list();
+
+			if ( g_model_index_list.empty() )
+				g_skinchanger->populate_model_index_list();
 		}
 	} ).detach();
 
 	// Run bhop
-	bhop->run();
+	g_bhop->run();
 
 	// Run glow
-	glow->run( var::keybinds::toggle_glow_key );
+	g_glow->run( var::keybinds::toggle_glow_key );
 
 	// Run triggerbot
-	triggerbot->run( var::keybinds::hold_triggerbot_key );
+	g_triggerbot->run( var::keybinds::hold_triggerbot_key );
 
+	// Run skin changer
+	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
 
 	while ( !GetAsyncKeyState( VK_DELETE ) )
 		timer::sleep( 50 );

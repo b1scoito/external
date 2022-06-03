@@ -7,9 +7,6 @@
     <Filter Include="utils\memory">
       <UniqueIdentifier>{07cfaa2e-d81f-401a-aa6e-05388cbbae73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="precompiled">
-      <UniqueIdentifier>{a8478ac4-0a80-4b7e-8532-bb54415432f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils\var">
       <UniqueIdentifier>{c1a449d7-78cd-42da-89e3-0c60551fd7ea}</UniqueIdentifier>
     </Filter>
@@ -49,10 +46,16 @@
     <Filter Include="utils\console">
       <UniqueIdentifier>{5e1921a1-a3d7-4c3a-b54d-70b6704edcd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\precompiled">
+      <UniqueIdentifier>{a8478ac4-0a80-4b7e-8532-bb54415432f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cheats\skinchanger">
+      <UniqueIdentifier>{8d496cb2-0f8c-4f26-8549-90f9133eece7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
-      <Filter>precompiled</Filter>
+      <Filter>utils\precompiled</Filter>
     </ClInclude>
     <ClInclude Include="console.hpp">
       <Filter>utils\console</Filter>
@@ -111,10 +114,13 @@
     <ClInclude Include="convar.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
+    <ClInclude Include="skinchanger.hpp">
+      <Filter>cheats\skinchanger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
-      <Filter>precompiled</Filter>
+      <Filter>utils\precompiled</Filter>
     </ClCompile>
     <ClCompile Include="memory.cpp">
       <Filter>utils\memory</Filter>
@@ -143,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="skinchanger.cpp">
+      <Filter>cheats\skinchanger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

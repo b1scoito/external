@@ -56,7 +56,7 @@
     <IntDir>.\out\rel\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
-    <VcpkgEnabled>true</VcpkgEnabled>
+    <VcpkgEnabled>false</VcpkgEnabled>
     <VcpkgAutoLink>true</VcpkgAutoLink>
     <VcpkgManifestInstall>true</VcpkgManifestInstall>
   </PropertyGroup>
@@ -130,6 +130,7 @@
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="process.hpp" />
     <ClInclude Include="sdk.hpp" />
+    <ClInclude Include="skinchanger.hpp" />
     <ClInclude Include="structs.hpp" />
     <ClInclude Include="triggerbot.hpp" />
     <ClInclude Include="utils.hpp" />
@@ -154,6 +155,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.hpp</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="skinchanger.cpp" />
     <ClCompile Include="triggerbot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

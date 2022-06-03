@@ -15,4 +15,4 @@ public:
 	void run();
 };
 
-inline auto bhop = std::make_unique<c_bhop>();
+inline auto g_bhop = std::make_unique<c_bhop>();
