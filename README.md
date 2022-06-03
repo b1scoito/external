@@ -18,4 +18,4 @@ Once installed, follow [this guide](https://docs.microsoft.com/en-us/cpp/build/c
 - `Mouse 5` - Hold for triggerbot
 - `Home` - Toggle for glow
 - `Del` - Unload
-- `End` - Toggle skin changer (currently hard-coded vanilla M9 Bayonet, high cpu usage)
+- `End` - Toggle skin changer (currently hard-coded vanilla M9 Bayonet, high cpu usage, unstable, may cause the cheat or the game to crash.)
