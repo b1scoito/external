@@ -59,7 +59,7 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	// Run skin changer
 	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
 
-	while ( !GetAsyncKeyState( VK_DELETE ) )
+	while ( !LI_FN(GetAsyncKeyState).cached()( VK_DELETE ) )
 		timer::sleep( 50 );
 
 	var::b_is_running = false;
