@@ -8,7 +8,7 @@
 void c_skinchanger::populate_model_index_list()
 {
 	const auto client_state = g_engine->get_client_state();
-	const auto network_string_table = g_memory->read<std::uintptr_t>( client_state + 0x52A4 );
+	const auto network_string_table = g_memory->read<std::uintptr_t>( client_state + 0x52A4 ); // m_dwModelPrecache
 	const auto network_string_dictionary = g_memory->read<std::uintptr_t>( network_string_table + 0x40 );
 	const auto network_string_dictionary_item_first = g_memory->read<std::uintptr_t>( network_string_dictionary + 0xC );
 
@@ -64,38 +64,38 @@ void c_skinchanger::run( keybind& keybd )
 
 			for ( size_t i = 0; i < 8; i++ )
 			{
-				auto current_weapon = g_memory->read<std::uintptr_t>( (g_local.get_entity() + sdk::netvars::m_hMyWeapons) + i * 0x4 ) & 0xFFF;
-				current_weapon = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (current_weapon - 1) * 0x10 );
+				const auto current_weapon = g_memory->read<std::uintptr_t>( (g_local.get_entity() + sdk::netvars::m_hMyWeapons) + i * 0x4 ) & 0xFFF;
+				const auto current_weapon_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (current_weapon - 1) * 0x10 );
 
-				if ( !current_weapon )
+				if ( !current_weapon_entity )
 					continue;
 
-				const auto weapon_index = g_memory->read<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex );
-				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T 
+				const auto weapon_index = g_memory->read<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex );
+				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T
 					|| weapon_index == sdk::structs::WEAPON_KNIFE_M9_BAYONET )
 				{
-					g_memory->write<std::int16_t>( current_weapon + sdk::netvars::m_iItemDefinitionIndex, sdk::structs::WEAPON_KNIFE_M9_BAYONET );
-					g_memory->write<std::int32_t>( current_weapon + sdk::netvars::m_nModelIndex, model_index );
-					g_memory->write<std::int32_t>( current_weapon + sdk::netvars::m_iViewModelIndex, model_index );
-					g_memory->write<std::int32_t>( current_weapon + sdk::netvars::m_iEntityQuality, 3 );
+					g_memory->write<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex, sdk::structs::WEAPON_KNIFE_M9_BAYONET );
+					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_nModelIndex, model_index );
+					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iViewModelIndex, model_index );
+					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iEntityQuality, 3 );
 				}
 			}
 
-			auto active_weapon = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hActiveWeapon ) & 0xFFF;
-			active_weapon = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (active_weapon - 1) * 0x10 );
-			if ( !active_weapon )
+			const auto active_weapon = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hActiveWeapon ) & 0xFFF;
+			const auto active_weapon_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (active_weapon - 1) * 0x10 );
+			if ( !active_weapon_entity )
 				continue;
 
-			const auto weapon_index = g_memory->read<std::int16_t>( active_weapon + sdk::netvars::m_iItemDefinitionIndex );
+			const auto weapon_index = g_memory->read<std::int16_t>( active_weapon_entity + sdk::netvars::m_iItemDefinitionIndex );
 			if ( weapon_index != sdk::structs::WEAPON_KNIFE_M9_BAYONET )
 				continue;
 
-			auto view_model = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hViewModel ) & 0xFFF;
-			view_model = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (view_model - 1) * 0x10 );
-			if ( !view_model )
+			const auto view_model = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hViewModel ) & 0xFFF;
+			const auto view_model_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (view_model - 1) * 0x10 );
+			if ( !view_model_entity )
 				continue;
 
-			g_memory->write<std::int32_t>( view_model + sdk::netvars::m_nModelIndex, model_index );
+			g_memory->write<std::int32_t>( view_model_entity + sdk::netvars::m_nModelIndex, model_index );
 		}
 	} ).detach();
 }
