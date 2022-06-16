@@ -35,11 +35,11 @@ public:
 			b_state = true;
 			break;
 		case keybind_state_t::hold:
-			b_state = GetAsyncKeyState(i_key) & 0x8000;
+			b_state = LI_FN(GetAsyncKeyState).cached()(i_key) & 0x8000;
 			break;
 
 		case keybind_state_t::toggle:
-			auto h_state = GetAsyncKeyState(i_key);
+			auto h_state = LI_FN(GetAsyncKeyState).cached()(i_key);
 			if (h_state & 0x8000)
 				b_is_down = true;
 
