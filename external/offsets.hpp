@@ -1,11 +1,11 @@
 #pragma once
 #include <cstdint>
 
-// 2022-06-16 05:05:03.621315 UTC
+// 2022-06-24 09:08:49.704054100 UTC
 
 namespace sdk
 {
-	constexpr std::int64_t timestamp = 1655355903;
+	static constexpr std::int64_t timestamp = 1656061729;
 	namespace netvars
 	{
 		static constexpr std::uintptr_t cs_gamerules_data = 0x0;
@@ -112,8 +112,8 @@ namespace sdk
 		static constexpr std::uintptr_t clientstate_delta_ticks = 0x174;
 		static constexpr std::uintptr_t clientstate_last_outgoing_command = 0x4D2C;
 		static constexpr std::uintptr_t clientstate_net_channel = 0x9C;
-		static constexpr std::uintptr_t convar_name_hash_table = 0x2F0F8;
-		static constexpr std::uintptr_t dwClientState = 0x58BFDC;
+		static constexpr std::uintptr_t convar_name_hash_table = 0x2F190;
+		static constexpr std::uintptr_t dwClientState = 0x58CFDC;
 		static constexpr std::uintptr_t dwClientState_GetLocalPlayer = 0x180;
 		static constexpr std::uintptr_t dwClientState_IsHLTV = 0x4D48;
 		static constexpr std::uintptr_t dwClientState_Map = 0x28C;
@@ -122,47 +122,47 @@ namespace sdk
 		static constexpr std::uintptr_t dwClientState_PlayerInfo = 0x52C0;
 		static constexpr std::uintptr_t dwClientState_State = 0x108;
 		static constexpr std::uintptr_t dwClientState_ViewAngles = 0x4D90;
-		static constexpr std::uintptr_t dwEntityList = 0x4DD7AEC;
-		static constexpr std::uintptr_t dwForceAttack = 0x3207FE8;
-		static constexpr std::uintptr_t dwForceAttack2 = 0x3207FF4;
-		static constexpr std::uintptr_t dwForceBackward = 0x3208030;
-		static constexpr std::uintptr_t dwForceForward = 0x3208024;
-		static constexpr std::uintptr_t dwForceJump = 0x5281A34;
-		static constexpr std::uintptr_t dwForceLeft = 0x3207FA0;
-		static constexpr std::uintptr_t dwForceRight = 0x3207FAC;
-		static constexpr std::uintptr_t dwGameDir = 0x62A900;
-		static constexpr std::uintptr_t dwGameRulesProxy = 0x52F525C;
-		static constexpr std::uintptr_t dwGetAllClasses = 0xDE5DAC;
-		static constexpr std::uintptr_t dwGlobalVars = 0x58BCE0;
-		static constexpr std::uintptr_t dwGlowObjectManager = 0x53206F8;
-		static constexpr std::uintptr_t dwInput = 0x52290C0;
-		static constexpr std::uintptr_t dwInterfaceLinkList = 0x96C044;
-		static constexpr std::uintptr_t dwLocalPlayer = 0xDBB5CC;
-		static constexpr std::uintptr_t dwMouseEnable = 0xDC12D8;
-		static constexpr std::uintptr_t dwMouseEnablePtr = 0xDC12A8;
-		static constexpr std::uintptr_t dwPlayerResource = 0x3206350;
-		static constexpr std::uintptr_t dwRadarBase = 0x520C864;
-		static constexpr std::uintptr_t dwSensitivity = 0xDC1174;
-		static constexpr std::uintptr_t dwSensitivityPtr = 0xDC1148;
-		static constexpr std::uintptr_t dwSetClanTag = 0x8A320;
-		static constexpr std::uintptr_t dwViewMatrix = 0x4DC9404;
-		static constexpr std::uintptr_t dwWeaponTable = 0x5229B84;
+		static constexpr std::uintptr_t dwEntityList = 0x4DDB92C;
+		static constexpr std::uintptr_t dwForceAttack = 0x320BE10;
+		static constexpr std::uintptr_t dwForceAttack2 = 0x320BE1C;
+		static constexpr std::uintptr_t dwForceBackward = 0x320BE64;
+		static constexpr std::uintptr_t dwForceForward = 0x320BE58;
+		static constexpr std::uintptr_t dwForceJump = 0x52858A8;
+		static constexpr std::uintptr_t dwForceLeft = 0x320BE70;
+		static constexpr std::uintptr_t dwForceRight = 0x320BE7C;
+		static constexpr std::uintptr_t dwGameDir = 0x62B900;
+		static constexpr std::uintptr_t dwGameRulesProxy = 0x52F90CC;
+		static constexpr std::uintptr_t dwGetAllClasses = 0xDE9CAC;
+		static constexpr std::uintptr_t dwGlobalVars = 0x58CCE0;
+		static constexpr std::uintptr_t dwGlowObjectManager = 0x5324588;
+		static constexpr std::uintptr_t dwInput = 0x522CF00;
+		static constexpr std::uintptr_t dwInterfaceLinkList = 0x96E944;
+		static constexpr std::uintptr_t dwLocalPlayer = 0xDBF4CC;
+		static constexpr std::uintptr_t dwMouseEnable = 0xDC51D8;
+		static constexpr std::uintptr_t dwMouseEnablePtr = 0xDC51A8;
+		static constexpr std::uintptr_t dwPlayerResource = 0x320A190;
+		static constexpr std::uintptr_t dwRadarBase = 0x52106A4;
+		static constexpr std::uintptr_t dwSensitivity = 0xDC5074;
+		static constexpr std::uintptr_t dwSensitivityPtr = 0xDC5048;
+		static constexpr std::uintptr_t dwSetClanTag = 0x8A410;
+		static constexpr std::uintptr_t dwViewMatrix = 0x4DCD244;
+		static constexpr std::uintptr_t dwWeaponTable = 0x522D9C4;
 		static constexpr std::uintptr_t dwWeaponTableIndex = 0x326C;
-		static constexpr std::uintptr_t dwYawPtr = 0xDC0F38;
-		static constexpr std::uintptr_t dwZoomSensitivityRatioPtr = 0xDC7720;
-		static constexpr std::uintptr_t dwbSendPackets = 0xD82C2;
-		static constexpr std::uintptr_t dwppDirect3DDevice9 = 0xA5050;
-		static constexpr std::uintptr_t find_hud_element = 0x2CFC55B0;
-		static constexpr std::uintptr_t force_update_spectator_glow = 0x3BD3FA;
-		static constexpr std::uintptr_t interface_engine_cvar = 0x3E9EC;
-		static constexpr std::uintptr_t is_c4_owner = 0x3CA470;
+		static constexpr std::uintptr_t dwYawPtr = 0xDC4E38;
+		static constexpr std::uintptr_t dwZoomSensitivityRatioPtr = 0xDCB620;
+		static constexpr std::uintptr_t dwbSendPackets = 0xD8422;
+		static constexpr std::uintptr_t dwppDirect3DDevice9 = 0xA6050;
+		static constexpr std::uintptr_t find_hud_element = 0x318559D0;
+		static constexpr std::uintptr_t force_update_spectator_glow = 0x3BDCEA;
+		static constexpr std::uintptr_t interface_engine_cvar = 0x3EA3C;
+		static constexpr std::uintptr_t is_c4_owner = 0x3CAD70;
 		static constexpr std::uintptr_t m_bDormant = 0xED;
 		static constexpr std::uintptr_t m_flSpawnTime = 0x103C0;
 		static constexpr std::uintptr_t m_pStudioHdr = 0x2950;
-		static constexpr std::uintptr_t m_pitchClassPtr = 0x520CB00;
-		static constexpr std::uintptr_t m_yawClassPtr = 0xDC0F38;
-		static constexpr std::uintptr_t model_ambient_min = 0x58F054;
-		static constexpr std::uintptr_t set_abs_angles = 0x1E5990;
-		static constexpr std::uintptr_t set_abs_origin = 0x1E57D0;
+		static constexpr std::uintptr_t m_pitchClassPtr = 0x5210940;
+		static constexpr std::uintptr_t m_yawClassPtr = 0xDC4E38;
+		static constexpr std::uintptr_t model_ambient_min = 0x590054;
+		static constexpr std::uintptr_t set_abs_angles = 0x1E59F0;
+		static constexpr std::uintptr_t set_abs_origin = 0x1E5830;
 	} // namespace offsets
 } // namespace sdk
