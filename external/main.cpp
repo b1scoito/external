@@ -53,7 +53,7 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	// Run glow
 	g_glow->run( var::keybinds::toggle_glow_key );
 
-	// Run triggerbot
+	// Run trigger bot
 	g_triggerbot->run( var::keybinds::hold_triggerbot_key );
 
 	// Run skin changer

@@ -1,11 +1,11 @@
 #pragma once
 #include <cstdint>
 
-// 2022-06-24 09:08:49.704054100 UTC
+// 2022-06-28 00:57:43.987511800 UTC
 
 namespace sdk
 {
-	static constexpr std::int64_t timestamp = 1656061729;
+	static constexpr std::int64_t timestamp = 1656377863;
 	namespace netvars
 	{
 		static constexpr std::uintptr_t cs_gamerules_data = 0x0;
@@ -152,7 +152,7 @@ namespace sdk
 		static constexpr std::uintptr_t dwZoomSensitivityRatioPtr = 0xDCB620;
 		static constexpr std::uintptr_t dwbSendPackets = 0xD8422;
 		static constexpr std::uintptr_t dwppDirect3DDevice9 = 0xA6050;
-		static constexpr std::uintptr_t find_hud_element = 0x318559D0;
+		static constexpr std::uintptr_t find_hud_element = 0x346659D0;
 		static constexpr std::uintptr_t force_update_spectator_glow = 0x3BDCEA;
 		static constexpr std::uintptr_t interface_engine_cvar = 0x3EA3C;
 		static constexpr std::uintptr_t is_c4_owner = 0x3CAD70;
