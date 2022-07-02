@@ -1,11 +1,12 @@
 #pragma once
+
 #include <cstdint>
 
-// 2022-06-28 00:57:43.987511800 UTC
+// 2022-07-02 04:49:39.929956600 UTC
 
 namespace sdk
 {
-	static constexpr std::int64_t timestamp = 1656377863;
+	static constexpr std::int64_t timestamp = 1656737379;
 	namespace netvars
 	{
 		static constexpr std::uintptr_t cs_gamerules_data = 0x0;
@@ -78,6 +79,7 @@ namespace sdk
 		static constexpr std::uintptr_t m_iGlowIndex = 0x10488;
 		static constexpr std::uintptr_t m_iHealth = 0x100;
 		static constexpr std::uintptr_t m_iItemDefinitionIndex = 0x2FBA;
+		static constexpr std::uintptr_t m_iDefinitionIndex = 0x2FBA;
 		static constexpr std::uintptr_t m_iItemIDHigh = 0x2FD0;
 		static constexpr std::uintptr_t m_iMostRecentModelBoneCounter = 0x2690;
 		static constexpr std::uintptr_t m_iObserverMode = 0x3388;
@@ -152,11 +154,12 @@ namespace sdk
 		static constexpr std::uintptr_t dwZoomSensitivityRatioPtr = 0xDCB620;
 		static constexpr std::uintptr_t dwbSendPackets = 0xD8422;
 		static constexpr std::uintptr_t dwppDirect3DDevice9 = 0xA6050;
-		static constexpr std::uintptr_t find_hud_element = 0x346659D0;
+		static constexpr std::uintptr_t find_hud_element = 0x31E359D0;
 		static constexpr std::uintptr_t force_update_spectator_glow = 0x3BDCEA;
 		static constexpr std::uintptr_t interface_engine_cvar = 0x3EA3C;
 		static constexpr std::uintptr_t is_c4_owner = 0x3CAD70;
 		static constexpr std::uintptr_t m_bDormant = 0xED;
+		static constexpr std::uintptr_t m_bIsLocalPlayer = 0x3628;
 		static constexpr std::uintptr_t m_flSpawnTime = 0x103C0;
 		static constexpr std::uintptr_t m_pStudioHdr = 0x2950;
 		static constexpr std::uintptr_t m_pitchClassPtr = 0x5210940;
