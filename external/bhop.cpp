@@ -46,7 +46,7 @@ void c_bhop::run()
 			if ( !g_engine->in_game() )
 				continue;
 
-			// Check if in ladder, noclip or observer
+			// Check if in ladder, no clip or observer
 			const auto move_type = g_local.move_type();
 			if ( move_type == sdk::structs::move_type::MOVETYPE_LADDER ||
 				move_type == sdk::structs::move_type::MOVETYPE_NOCLIP ||
