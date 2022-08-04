@@ -17,7 +17,7 @@ bool c_basesdk::run()
 	g_memory->attach();
 
 	// Check for outdated offsets
-	if ( !sdk::base->check_for_outdated_offsets() )
+	if ( !sdk::base->check_for_version_mismatch() )
 	{
 		log_debug( xorstr( "Cheat is outdated! exiting." ) );
 		timer::sleep( 3000 );
@@ -79,7 +79,7 @@ bool c_basesdk::run()
 	return true;
 }
 
-const bool c_basesdk::check_for_outdated_offsets() const
+const bool c_basesdk::check_for_version_mismatch() const
 {
 	wchar_t filename[MAX_PATH] = {};
 	if ( !GetModuleFileNameEx( g_memory->get_handle(), NULL, filename, MAX_PATH ) )
@@ -95,7 +95,7 @@ const bool c_basesdk::check_for_outdated_offsets() const
 
 	const auto csgo_version = string::split( line, "=" )[1];
 
-	if ( var::game::current_game_version != csgo_version )
+	if ( sdk::current_game_version != csgo_version )
 		return false;
 
 	return true;
