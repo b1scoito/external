@@ -81,6 +81,16 @@ const Vector c_entity::bone_matrix( const int& bone ) const
 	return vec_matrix;
 }
 
+const Vector c_entity::local_eye_position() const 
+{
+	return (g_memory->read<Vector>(base_address + sdk::netvars::m_vecOrigin) + g_memory->read<Vector>(base_address + sdk::netvars::m_vecViewOffset));
+}
+
+const Vector c_entity::local_aim_punch() const
+{
+	return g_memory->read<Vector>(base_address + sdk::netvars::m_aimPunchAngle) * 2;
+}
+
 const bool c_entity::is_alive() const
 {
 	return (this->life_state() == sdk::structs::life_state::LIFE_ALIVE);

@@ -4,6 +4,7 @@
 #include "glow.hpp"
 #include "triggerbot.hpp"
 #include "skinchanger.hpp"
+#include "aimbot.hpp"
 
 #include "engine.hpp"
 #include "client.hpp"
@@ -58,6 +59,9 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 	// Run skin changer
 	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
+
+	// Run aimbot
+	g_aimbot->run( var::keybinds::hold_mouse_one_key);
 
 	while ( !LI_FN(GetAsyncKeyState).cached()( VK_DELETE ) )
 		timer::sleep( 50 );

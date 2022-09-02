@@ -20,3 +20,8 @@ const std::int32_t c_engine::get_max_player_count() const
 {
 	return g_memory->read<std::int32_t>( this->get_client_state() + sdk::offsets::dwClientState_MaxPlayer );
 }
+
+const Vector c_engine::local_view_angles() const
+{
+	return g_memory->read<Vector>(this->get_client_state() + sdk::offsets::dwClientState_ViewAngles);
+}

@@ -5,6 +5,8 @@
 #include <cmath>
 // used: numeric_limits
 #include <limits>
+// used:: number
+#include <numbers>
 
 class Vector2D
 {
@@ -186,6 +188,14 @@ public:
 		return (std::fpclassify(this->x) == FP_ZERO &&
 			std::fpclassify(this->y) == FP_ZERO &&
 			std::fpclassify(this->z) == FP_ZERO);
+	}
+
+	[[nodiscard]] constexpr const Vector& ToAngle() const
+	{
+		return Vector{ std::atan2(-z, std::hypot(x, y)) * (180.f / std::numbers::pi_v<float>),
+			std::atan2(y, x) * (180.f / std::numbers::pi_v<float>),
+			0.0f
+		};
 	}
 
 	[[nodiscard]] Vector2D ToVector2D() const

@@ -31,7 +31,10 @@ public: // Read
 	const Vector get_velocity() const;
 	const std::int32_t get_class_id() const;
 	const Vector bone_matrix( const int& bone ) const;
+	const Vector local_eye_position() const;
+	const Vector local_view_angles() const;
 	const bool is_alive() const;
+	const Vector local_aim_punch() const;
 	const bool is_localplayer() const;
 	// From: https://github.com/rollraw/qo0-base/blob/f6ded6392dbb9e433c279fdb6fc3843398b9e1c7/base/sdk/entity.cpp#L212
 	const bool is_enemy() const;

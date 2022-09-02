@@ -52,6 +52,9 @@
     <Filter Include="cheats\skinchanger">
       <UniqueIdentifier>{8d496cb2-0f8c-4f26-8549-90f9133eece7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cheats\aimbot">
+      <UniqueIdentifier>{d6d82f66-cc70-4863-8875-e89a2df01529}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -117,6 +120,9 @@
     <ClInclude Include="skinchanger.hpp">
       <Filter>cheats\skinchanger</Filter>
     </ClInclude>
+    <ClInclude Include="aimbot.hpp">
+      <Filter>cheats\aimbot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -152,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="skinchanger.cpp">
       <Filter>cheats\skinchanger</Filter>
+    </ClCompile>
+    <ClCompile Include="aimbot.cpp">
+      <Filter>cheats\aimbot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
