@@ -190,9 +190,11 @@ public:
 			std::fpclassify(this->z) == FP_ZERO);
 	}
 
-	[[nodiscard]] constexpr const Vector& ToAngle() const
+	// From: https://github.com/eccentricPACHARA/csgoexternalaimbot/blob/main/vector.h#L36
+	[[nodiscard]] Vector ToAngle() const
 	{
-		return Vector{ std::atan2(-z, std::hypot(x, y)) * (180.f / std::numbers::pi_v<float>),
+		return Vector{ 
+			std::atan2(-z, std::hypot(x, y)) * (180.f / std::numbers::pi_v<float>),
 			std::atan2(y, x) * (180.f / std::numbers::pi_v<float>),
 			0.0f
 		};

@@ -74,29 +74,25 @@ void c_aimbot::run(keybind& keybd)
 					if (!entity.is_enemy())
 						continue;
 
-					// Target bone
-					const auto bone_matrix = entity.bone_matrix(sdk::structs::BONE_HEAD);
-					log_debug("entity.bone_matrix(): x: %.3f, y: %.3f, z: %.3f", bone_matrix.x, bone_matrix.y, bone_matrix.z);
-					log_debug("entity.local_eye_position(): x: %.3f, y: %.3f, z: %.3f", entity.local_eye_position().x, entity.local_eye_position().y, entity.local_eye_position().z);
-					log_debug("entity.local_view_angles(): x: %.3f, y: %.3f, z: %.3f", g_engine->local_view_angles().x, g_engine->local_view_angles().y, g_engine->local_view_angles().z);
-					log_debug("entity.local_aim_punch(): x: %.3f, y: %.3f, z: %.3f", entity.local_aim_punch().x, entity.local_aim_punch().y, entity.local_aim_punch().z);
-
 					// Target angle of the enemy
-					const auto angle = calculate_angle(entity.local_eye_position(), 
-						bone_matrix, g_engine->local_view_angles() + entity.local_aim_punch());
+					const auto angle = calculate_angle(g_local.eye_position(), 
+						entity.bone_matrix(sdk::structs::BONE_HEAD), (g_engine->get_view_angles() + (g_local.aim_punch() * 2)));
 
-					log_debug("Best angle: %.3f", best_angle.Length());
 					const auto fov = std::hypot(angle.x, angle.y);
 
-					if (fov < best_fov) {
+					//log_debug("fov: %.3f angle: x: %.3f, y: %.3f, z: %.3f", fov, angle.x, angle.y, angle.z);
+
+					if (fov < this->best_fov) {
 						this->best_fov = fov;
 						this->best_angle = angle;
 					}
 
-					if (!best_angle.IsZero()) {
-						g_memory->write<Vector>(g_engine->get_client_state() + sdk::offsets::dwClientState_ViewAngles, (g_engine->local_view_angles() + best_angle) / 8.f);
-					}
+					//log_debug("best fov: %.3f best angle: x: %.3f, y: %.3f, z: %.3f", this->best_fov, this->best_angle.x, this->best_angle.y, this->best_angle.z);
 				}
+
+				if (!best_angle.IsZero())
+					g_engine->set_view_angles((g_engine->get_view_angles() + this->best_angle) / this->smoothing);
+
 
 
 				const auto end = std::chrono::high_resolution_clock::now();

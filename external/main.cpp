@@ -37,8 +37,11 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 				continue;
 			}
 
-			if ( !g_local.get_entity() )
-				g_local = c_entity( g_client->get_local_player_address() );
+			if (!g_local.get_entity())
+			{
+				const auto [addr, index] = g_client->get_local_player();
+				g_local = c_entity( addr, index );
+			}
 
 			if ( g_convar_list.empty() )
 				g_convar->populate_list();
@@ -61,7 +64,7 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
 
 	// Run aimbot
-	g_aimbot->run( var::keybinds::hold_mouse_one_key);
+	g_aimbot->run( var::keybinds::hold_aimbot_key);
 
 	while ( !LI_FN(GetAsyncKeyState).cached()( VK_DELETE ) )
 		timer::sleep( 50 );

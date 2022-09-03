@@ -6,8 +6,9 @@ private:
 	int last_tick = {};
 	int last_frame = {};
 
-	float best_fov = 2.f;
-	Vector best_angle = Vector();
+	float best_fov = 8.f;
+	float smoothing = 16.f;
+	Vector best_angle = Vector{};
 
 	float function_elapsed = {};
 

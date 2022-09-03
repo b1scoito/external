@@ -40,6 +40,11 @@ const bool c_entity::is_scoped() const
 	return g_memory->read<bool>( base_address + sdk::netvars::m_bIsScoped );
 }
 
+const std::int32_t c_entity::is_spotted() const
+{
+	return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_bSpottedByMask);
+}
+
 const bool c_entity::has_immunity() const
 {
 	return g_memory->read<bool>( base_address + sdk::netvars::m_bGunGameImmunity );
@@ -81,14 +86,14 @@ const Vector c_entity::bone_matrix( const int& bone ) const
 	return vec_matrix;
 }
 
-const Vector c_entity::local_eye_position() const 
+const Vector c_entity::eye_position() const 
 {
-	return (g_memory->read<Vector>(base_address + sdk::netvars::m_vecOrigin) + g_memory->read<Vector>(base_address + sdk::netvars::m_vecViewOffset));
+	return g_memory->read<Vector>(base_address + sdk::netvars::m_vecOrigin) + g_memory->read<Vector>(base_address + sdk::netvars::m_vecViewOffset);
 }
 
-const Vector c_entity::local_aim_punch() const
+const Vector c_entity::aim_punch() const
 {
-	return g_memory->read<Vector>(base_address + sdk::netvars::m_aimPunchAngle) * 2;
+	return g_memory->read<Vector>(base_address + sdk::netvars::m_aimPunchAngle);
 }
 
 const bool c_entity::is_alive() const
