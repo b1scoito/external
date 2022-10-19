@@ -7,6 +7,8 @@ public: // Read
 	const sdk::structs::globalvars_t get_globalvars() const;
 	const std::int32_t in_game() const;
 	const std::int32_t get_max_player_count() const;
+	const Vector get_view_angles() const;
+	const bool set_view_angles(const Vector view_angles) const;
 };
 
 inline auto g_engine = std::make_unique<c_engine>();

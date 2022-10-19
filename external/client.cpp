@@ -4,12 +4,12 @@
 #include "engine.hpp"
 #include "sdk.hpp"
 
-const std::uintptr_t c_client::get_local_player_address() const
+const std::tuple<std::uintptr_t, std::int32_t> c_client::get_local_player() const
 {
 	const auto local_player_index = g_memory->read<std::int32_t>( g_engine->get_client_state() + sdk::offsets::dwClientState_GetLocalPlayer );
-	const auto local_player = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + 0x10 * local_player_index );
+	const auto local_player_address = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + 0x10 * local_player_index );
 
-	return local_player;
+	return { local_player_address, local_player_index };
 }
 
 const bool c_client::in_menu() const

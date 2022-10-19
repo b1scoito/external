@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="aimbot.hpp" />
     <ClInclude Include="bhop.hpp" />
     <ClInclude Include="console.hpp" />
     <ClInclude Include="convar.hpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aimbot.cpp" />
     <ClCompile Include="bhop.cpp" />
     <ClCompile Include="client.cpp" />
     <ClCompile Include="convar.cpp" />

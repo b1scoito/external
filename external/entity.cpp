@@ -40,6 +40,11 @@ const bool c_entity::is_scoped() const
 	return g_memory->read<bool>( base_address + sdk::netvars::m_bIsScoped );
 }
 
+const std::int32_t c_entity::is_spotted() const
+{
+	return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_bSpottedByMask);
+}
+
 const bool c_entity::has_immunity() const
 {
 	return g_memory->read<bool>( base_address + sdk::netvars::m_bGunGameImmunity );
@@ -73,12 +78,24 @@ const Vector c_entity::bone_matrix( const int& bone ) const
 {
 	const auto matrix = g_memory->read<std::uintptr_t>( base_address + sdk::netvars::m_dwBoneMatrix );
 
-	Vector vec_matrix = {};
-	vec_matrix.x = g_memory->read<float>( matrix + 0x30 * bone + 0xC );
-	vec_matrix.y = g_memory->read<float>( matrix + 0x30 * bone + 0x1C );
-	vec_matrix.z = g_memory->read<float>( matrix + 0x30 * bone + 0x2C );
+	Vector vec_matrix = { 
+		g_memory->read<float>(matrix + 0x30 * bone + 0xC),
+		g_memory->read<float>(matrix + 0x30 * bone + 0x1C), 
+		g_memory->read<float>(matrix + 0x30 * bone + 0x2C)
+	};
 
 	return vec_matrix;
+}
+
+const Vector c_entity::eye_position() const 
+{
+	const auto vec_eye_pos = g_memory->read<Vector>(base_address + sdk::netvars::m_vecOrigin) + g_memory->read<Vector>(base_address + sdk::netvars::m_vecViewOffset);
+	return vec_eye_pos;
+}
+
+const Vector c_entity::aim_punch() const
+{
+	return g_memory->read<Vector>(base_address + sdk::netvars::m_aimPunchAngle);
 }
 
 const bool c_entity::is_alive() const

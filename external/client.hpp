@@ -3,7 +3,7 @@
 class c_client
 {
 public: // Read
-	const uintptr_t get_local_player_address() const;
+	const std::tuple<std::uintptr_t, std::int32_t> get_local_player() const;
 	const bool in_menu() const;
 	const std::int32_t get_game_type() const;
 	const std::uintptr_t get_glow_object_manager() const;
