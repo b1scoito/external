@@ -191,13 +191,13 @@ public:
 	}
 
 	// From: https://github.com/eccentricPACHARA/csgoexternalaimbot/blob/main/vector.h#L36
-	[[nodiscard]] Vector ToAngle() const
+	[[nodiscard]] constexpr const Vector ToAngle() const noexcept
 	{
-		return Vector(
-			std::atan2(-this->z, std::hypot(this->x, this->y)) * (180.f / std::numbers::pi_v<float>),
-			std::atan2(this->y, this->x) * (180.f / std::numbers::pi_v<float>),
+		return Vector {
+			std::atan2(-z, std::hypot(x, y)) * (180.f / std::numbers::pi_v<float>),
+			std::atan2(y, x) * (180.f / std::numbers::pi_v<float>),
 			0.0f
-		);
+		};
 	}
 
 	[[nodiscard]] Vector2D ToVector2D() const

@@ -64,7 +64,7 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
 
 	// Run aimbot
-	g_aimbot->run( var::keybinds::hold_aimbot_key);
+	g_aimbot->run( var::keybinds::hold_aimbot_key );
 
 	while ( !LI_FN(GetAsyncKeyState).cached()( VK_DELETE ) )
 		timer::sleep( 50 );
