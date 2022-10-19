@@ -8,15 +8,16 @@
 #define NOMINMAX
 
 // global incs
-#include <iostream>
-#include <random>
 #include <string_view>
+#include <functional>
 #include <algorithm>
+#include <iostream>
+#include <cstddef>
+#include <random>
 #include <thread>
 #include <vector>
-#include <cstddef>
-#include <functional>
 #include <future>
+#include <string>
 #include <map>
 
 #include <Windows.h>
