@@ -15,6 +15,7 @@ Once installed, follow [this guide](https://docs.microsoft.com/en-us/cpp/build/c
 
 ## Keybinds
 
+- `Mouse 1` - Aimbot
 - `Mouse 5` - Hold for triggerbot
 - `Home` - Toggle for glow
 - `Del` - Unload
