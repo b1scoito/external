@@ -6,8 +6,15 @@ private:
 	int last_tick = {};
 	int last_frame = {};
 
+	std::vector<sdk::structs::bone_index> bones = { 
+		sdk::structs::BONE_NECK, 
+		sdk::structs::BONE_SPINE_0, 
+		sdk::structs::BONE_SPINE_1 
+	};
+
 	float best_fov = {};
-	float smoothing = 100.f;
+	float smoothing = 360.f;
+
 	Vector best_angle = Vector{};
 
 	float function_elapsed = {};

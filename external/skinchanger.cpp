@@ -40,6 +40,7 @@ void c_skinchanger::run( keybind& keybd )
 
 	std::thread( [&]
 	{
+
 		while ( var::b_is_running )
 		{
 			if ( !keybd.get() )
@@ -60,7 +61,8 @@ void c_skinchanger::run( keybind& keybd )
 			if ( !g_engine->in_game() )
 				continue;
 
-			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_m9_bay.mdl" );;
+			const auto target_knife = sdk::structs::WEAPON_KNIFE_BAYONET;
+			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_bayonet.mdl" );;
 
 			for ( size_t i = 0; i < 8; i++ )
 			{
@@ -72,9 +74,9 @@ void c_skinchanger::run( keybind& keybd )
 
 				const auto weapon_index = g_memory->read<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex );
 				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T
-					|| weapon_index == sdk::structs::WEAPON_KNIFE_M9_BAYONET )
+					|| weapon_index == target_knife)
 				{
-					g_memory->write<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex, sdk::structs::WEAPON_KNIFE_M9_BAYONET );
+					g_memory->write<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex, target_knife);
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_nModelIndex, model_index );
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iViewModelIndex, model_index );
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iEntityQuality, 3 );
@@ -87,7 +89,7 @@ void c_skinchanger::run( keybind& keybd )
 				continue;
 
 			const auto weapon_index = g_memory->read<std::int16_t>( active_weapon_entity + sdk::netvars::m_iItemDefinitionIndex );
-			if ( weapon_index != sdk::structs::WEAPON_KNIFE_M9_BAYONET )
+			if ( weapon_index != target_knife )
 				continue;
 
 			const auto view_model = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hViewModel ) & 0xFFF;
