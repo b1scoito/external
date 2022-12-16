@@ -11,6 +11,8 @@
 #include "entity.hpp"
 #include "convar.hpp"
 
+#include <assert.h>
+
 INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd )
 {
 	std::atexit( []
@@ -49,7 +51,7 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 			if ( g_model_index_list.empty() )
 				g_skinchanger->populate_model_index_list();
 		}
-	} ).detach();
+	}).detach();
 
 	// Run bhop
 	g_bhop->run();

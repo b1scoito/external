@@ -57,8 +57,11 @@ void c_bhop::run()
 			if ( (g_local.get_flags() & sdk::structs::flags::FL_ONGROUND) )
 				g_client->force_jump( 5 ); // +jump
 			else
-				if ( g_client->get_force_jump() == 5 )
+				if (g_client->get_force_jump() == 5)
+				{
+					log_debug("hop");
 					g_client->force_jump( 4 ); // -jump
+				}
 
 			const auto end = std::chrono::high_resolution_clock::now();
 
