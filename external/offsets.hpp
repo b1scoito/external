@@ -2,11 +2,11 @@
 
 #include <cstdint>
 
-// 2022-12-15 17:47:05.063949500 UTC
+// 2022-12-17 02:01:15.156766200 UTC
 
 namespace sdk {
-	constexpr ::std::int64_t timestamp = 1671126425;
-	inline std::string current_game_version = xorstr("1538");
+	constexpr ::std::int64_t timestamp = 1671242475;
+	inline std::string current_game_version = xorstr("1539");
 
 	namespace netvars {
 		static constexpr std::uintptr_t cs_gamerules_data = 0x0;
@@ -146,9 +146,9 @@ namespace sdk {
 		static constexpr std::uintptr_t dwViewMatrix = 0x4DF0D44;
 		static constexpr std::uintptr_t dwWeaponTable = 0x525E5C4;
 		static constexpr std::uintptr_t dwWeaponTableIndex = 0x326C;
-		static constexpr std::uintptr_t dwbSendPackets = 0xDD012;
+		static constexpr std::uintptr_t dwbSendPackets = 0xDD072;
 		static constexpr std::uintptr_t dwppDirect3DDevice9 = 0xA62C0;
-		static constexpr std::uintptr_t find_hud_element = 0x3157FBD0;
+		static constexpr std::uintptr_t find_hud_element = 0x3120FBD0;
 		static constexpr std::uintptr_t force_update_spectator_glow = 0x3D91CA;
 		static constexpr std::uintptr_t interface_engine_cvar = 0x3FA9C;
 		static constexpr std::uintptr_t is_c4_owner = 0x3E69E0;
