@@ -58,10 +58,7 @@ void c_bhop::run()
 				g_client->force_jump( 5 ); // +jump
 			else
 				if (g_client->get_force_jump() == 5)
-				{
-					log_debug("hop");
 					g_client->force_jump( 4 ); // -jump
-				}
 
 			const auto end = std::chrono::high_resolution_clock::now();
 
