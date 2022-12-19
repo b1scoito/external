@@ -7,10 +7,10 @@
 
 void c_bhop::run()
 {
-	log_debug( xorstr( "initializing bhop thread." ) );
+	log_debug(xorstr("initializing bhop thread."));
 
-	std::thread( [&]
-	{
+	std::thread([&]
+				{
 		while ( var::b_is_running )
 		{
 			// Only update each tick
@@ -68,6 +68,6 @@ void c_bhop::run()
 
 			std::chrono::duration<float, std::milli> elapsed = end - start;
 			function_elapsed = elapsed.count();
-		}
-	} ).detach();
+		} })
+		.detach();
 }

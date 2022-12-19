@@ -11,21 +11,17 @@
 #include "entity.hpp"
 #include "convar.hpp"
 
-#include <assert.h>
-
-INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd )
+INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
-	std::atexit( []
-	{
-		var::b_is_running = false;
-	} );
+	std::atexit([]
+				{ var::b_is_running = false; });
 
 	// Run SDK
-	if ( !sdk::base->run() )
+	if (!sdk::base->run())
 		return EXIT_FAILURE;
 
-	std::thread( [&]
-	{
+	std::thread([&]
+				{
 		while ( var::b_is_running )
 		{
 			timer::sleep( 100 );
@@ -50,26 +46,26 @@ INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 			if ( g_model_index_list.empty() )
 				g_skinchanger->populate_model_index_list();
-		}
-	}).detach();
+		} })
+		.detach();
 
 	// Run bhop
 	g_bhop->run();
 
 	// Run glow
-	g_glow->run( var::keybinds::toggle_glow_key );
+	g_glow->run(var::keybinds::toggle_glow_key);
 
 	// Run trigger bot
-	g_triggerbot->run( var::keybinds::hold_triggerbot_key );
+	g_triggerbot->run(var::keybinds::hold_triggerbot_key);
 
 	// Run skin changer
-	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
+	g_skinchanger->run(var::keybinds::toggle_skinchanger_key);
 
 	// Run aimbot
-	g_aimbot->run( var::keybinds::hold_aimbot_key );
+	g_aimbot->run(var::keybinds::hold_aimbot_key);
 
-	while ( !LI_FN(GetAsyncKeyState).cached()( VK_DELETE ) )
-		timer::sleep( 50 );
+	while (!LI_FN(GetAsyncKeyState).cached()(VK_DELETE))
+		timer::sleep(50);
 
 	var::b_is_running = false;
 

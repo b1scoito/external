@@ -5,12 +5,12 @@
 #include "client.hpp"
 #include "entity.hpp"
 
-void c_glow::run( keybind& keybd )
+void c_glow::run(keybind &keybd)
 {
-	log_debug( xorstr( "initializing glow thread." ) );
+	log_debug(xorstr("initializing glow thread."));
 
-	std::thread( [&]
-	{
+	std::thread([&]
+				{
 		while ( var::b_is_running )
 		{
 			if ( !keybd.get() )
@@ -93,6 +93,6 @@ void c_glow::run( keybind& keybd )
 
 			std::chrono::duration<float, std::milli> elapsed = end - start;
 			function_elapsed = elapsed.count();
-		}
-	} ).detach();
+		} })
+		.detach();
 }

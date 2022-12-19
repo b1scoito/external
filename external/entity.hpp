@@ -15,12 +15,12 @@ public:
 	}
 
 public: // Read
-	constexpr auto& get_entity() const
+	constexpr auto &get_entity() const
 	{
 		return this->base_address;
 	}
 
-	constexpr auto& get_entity_index() const
+	constexpr auto &get_entity_index() const
 	{
 		return this->index;
 	}
@@ -38,7 +38,7 @@ public: // Read
 	const std::int32_t life_state() const;
 	const Vector get_velocity() const;
 	const std::int32_t get_class_id() const;
-	const Vector bone_matrix( const int& bone ) const;
+	const Vector bone_matrix(const int &bone) const;
 	const Vector eye_position() const;
 	const bool is_alive() const;
 	const Vector aim_punch() const;

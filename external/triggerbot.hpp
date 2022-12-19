@@ -12,7 +12,7 @@ public:
 	c_triggerbot() = default;
 	~c_triggerbot() = default;
 
-	void run( keybind& keybd );
+	void run(keybind &keybd);
 };
 
 inline auto g_triggerbot = std::make_unique<c_triggerbot>();

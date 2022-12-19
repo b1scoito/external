@@ -31,24 +31,23 @@ public:
 	bool run();
 	const bool check_for_version_mismatch() const;
 
-	constexpr auto& get_engine_image()
+	constexpr auto &get_engine_image()
 	{
-		image = { engine.first, engine.second };
+		image = {engine.first, engine.second};
 		return image;
 	};
 
-	constexpr auto& get_client_image()
+	constexpr auto &get_client_image()
 	{
-		image = { client.first, client.second };
+		image = {client.first, client.second};
 		return image;
 	};
 
-	constexpr auto& get_vstdlib_image()
+	constexpr auto &get_vstdlib_image()
 	{
-		image = { vstdlib.first, vstdlib.second };
+		image = {vstdlib.first, vstdlib.second};
 		return image;
 	};
-
 };
 
 namespace sdk

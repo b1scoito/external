@@ -5,12 +5,12 @@
 #include "client.hpp"
 #include "entity.hpp"
 
-void c_aimbot::run(keybind& keybd)
+void c_aimbot::run(keybind &keybd)
 {
 	log_debug(xorstr("initializing aimbot thread."));
 
 	std::thread([&]
-		{
+				{
 			while (var::b_is_running)
 			{
 				if (!keybd.get())
@@ -105,6 +105,6 @@ void c_aimbot::run(keybind& keybd)
 
 				std::chrono::duration<float, std::milli> elapsed = end - start;
 				function_elapsed = elapsed.count();
-			}
-		}).detach();
+			} })
+		.detach();
 }

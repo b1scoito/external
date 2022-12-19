@@ -11,8 +11,8 @@ public: // Read
 	const std::int32_t get_force_attack() const;
 
 public: // Write
-	const std::int32_t force_jump( const std::int32_t state ) const;
-	const std::int32_t force_attack( const std::int32_t state ) const;
+	const std::int32_t force_jump(const std::int32_t state) const;
+	const std::int32_t force_attack(const std::int32_t state) const;
 };
 
 inline auto g_client = std::make_unique<c_client>();
