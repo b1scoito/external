@@ -49,6 +49,12 @@ void c_skinchanger::run(keybind &keybd)
 				continue;
 			}
 
+			std::once_flag flag = {};
+			std::call_once(flag, [&] {
+				// force full update
+				g_engine->force_full_update();
+			});
+
 			// Check if active window is CS:GO
 			if ( !(var::game::wnd == GetForegroundWindow()) )
 				continue;
@@ -61,8 +67,8 @@ void c_skinchanger::run(keybind &keybd)
 			if ( !g_engine->in_game() )
 				continue;
 
-			const auto target_knife = sdk::structs::item_definitions::WEAPON_KNIFE_M9_BAYONET;
-			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_m9_bay.mdl" );
+			const auto target_knife = sdk::structs::item_definitions::WEAPON_KNIFE_BUTTERFLY;
+			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_butterfly.mdl" );
 
 			for ( size_t i = 0; i < 8; i++ )
 			{
@@ -82,10 +88,11 @@ void c_skinchanger::run(keybind &keybd)
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iEntityQuality, 3 );
 				}
 
-				if (true) {
-					// skin
+				// Skins
+				if (var::skinchanger::set_skins) 
+				{
 					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_iItemIDHigh, -1);
-					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 413);
+					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 567);
 					g_memory->write<float>(current_weapon_entity + sdk::netvars::m_flFallbackWear, 0.0001f);
 				}
 			}

@@ -16,5 +16,10 @@ namespace var
 		inline auto hold_aimbot_key = keybind(false, keybind_state_t::hold, VK_LBUTTON);
 	}
 
+	namespace skinchanger
+	{
+		inline bool set_skins = true;
+	}
+
 	inline bool b_is_running = true;
 }

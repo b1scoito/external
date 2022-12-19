@@ -52,7 +52,7 @@ void c_aimbot::run(keybind &keybd)
 					return ((enemy_pos - local_pos).ToAngle() - view_angles);
 				};
 
-				best_fov = 10.f;
+				best_fov = 15.f;
 				best_angle = Vector{};
 
 				for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
@@ -76,14 +76,16 @@ void c_aimbot::run(keybind &keybd)
 
 					if (!entity.is_enemy())
 						continue;
+					
+					if (!entity.is_spotted())
+						continue;
 
 					for (const auto& bone : this->bones)
 					{
 						const auto bone_matrix = entity.bone_matrix(bone);
 
 						// Target angle of the enemy
-						const auto angle = calculate_angle(g_local.eye_position(), 
-							bone_matrix, g_engine->get_view_angles() + g_local.aim_punch() * 2);
+						const auto angle = calculate_angle(g_local.eye_position(), bone_matrix, g_engine->get_view_angles());
 
 						const auto fov = std::hypot(angle.x, angle.y);
 

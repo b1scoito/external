@@ -30,3 +30,8 @@ const bool c_engine::set_view_angles(const Vector view_angles) const
 {
 	return g_memory->write<Vector>(this->get_client_state() + sdk::offsets::dwClientState_ViewAngles, view_angles);
 }
+
+const std::int32_t c_engine::force_full_update() const
+{
+	return g_memory->write<std::int32_t>(sdk::base->get_engine_image().base + sdk::offsets::clientstate_delta_ticks, -1);
+}

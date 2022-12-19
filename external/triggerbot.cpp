@@ -5,12 +5,12 @@
 #include "client.hpp"
 #include "entity.hpp"
 
-void c_triggerbot::run( keybind& keybd )
+void c_triggerbot::run(keybind &keybd)
 {
-	log_debug( xorstr( "initializing triggerbot thread." ) );
+	log_debug(xorstr("initializing triggerbot thread."));
 
-	std::thread( [&]
-	{
+	std::thread([&]
+				{
 		while ( var::b_is_running )
 		{
 			timer::sleep( 1 );
@@ -64,10 +64,9 @@ void c_triggerbot::run( keybind& keybd )
 
 			if ( crosshair_id > 0 && crosshair_id <= 64 )
 			{
-				auto delay = random::range( 15.f, 35.f );
-				if ( g_local.is_scoped() ) // If scoped, wait more
-					delay = random::range( 45.f, 75.f );
-
+				// auto delay = random::range( 15.f, 35.f );
+				// if ( g_local.is_scoped() ) // If scoped, wait more
+				// 	delay = random::range( 45.f, 75.f );
 				// timer::sleep( delay );
 				g_client->force_attack( 6 ); // +attack
 			}
@@ -80,6 +79,6 @@ void c_triggerbot::run( keybind& keybd )
 			// Update last frame and last tick
 			last_tick = global_vars.iTickCount;
 			last_frame = global_vars.iFrameCount;
-		}
-	} ).detach();
+		} })
+		.detach();
 }
