@@ -5,17 +5,15 @@
 #include "client.hpp"
 #include "entity.hpp"
 
-void c_glow::run(keybind &keybd)
+void c_glow::run()
 {
-	log_debug(xorstr("initializing glow thread."));
-
 	std::thread([&]
 				{
 		while ( var::b_is_running )
 		{
-			if ( !keybd.get() )
+			if (!var::cheats::glow::enable)
 			{
-				timer::sleep( 1 );
+				timer::sleep(1);
 				continue;
 			}
 
@@ -73,14 +71,24 @@ void c_glow::run(keybind &keybd)
 				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);
 				auto glow = g_memory->read<sdk::structs::glow_object_t>( entity_glow_offset );
 
-				// Health glow
-				const auto entity_health = entity.get_health();
-				glow.set(
-					1.f - (entity_health / 100.f),	// R
-					entity_health / 100.f,			// G
-					0.f / 255.f,					// B
-					0.8f							// A
-				);
+				if (var::cheats::glow::enable_health_glow) {
+					// Health glow
+					const auto entity_health = entity.get_health();
+					glow.set(
+						1.f - (entity_health / 100.f),	// R
+						entity_health / 100.f,			// G
+						0.f / 255.f,					// B
+						var::cheats::glow::alpha_color		// A
+					);
+				}
+				else {
+					glow.set(
+						var::cheats::glow::red_color / 255.f,	// R
+						var::cheats::glow::green_color / 255.f,	// G
+						var::cheats::glow::blue_color / 255.f,	// B
+						var::cheats::glow::alpha_color			// A
+					);
+				}
 
 				g_memory->write<sdk::structs::glow_object_t>( entity_glow_offset, glow ); // Set glow
 			}

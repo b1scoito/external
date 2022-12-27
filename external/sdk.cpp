@@ -4,7 +4,7 @@
 bool c_basesdk::run()
 {
 	// Wait for CS:GO to open
-	log_debug(xorstr("Waiting for CS:GO to open..."));
+	std::cout << xorstr("Waiting for CS:GO to open...\n");
 	do
 	{
 		proc = process::get_by_name(var::game::str_process);
@@ -12,13 +12,13 @@ bool c_basesdk::run()
 	} while (!proc.is_running());
 
 	// Attach memory to process
-	log_debug(xorstr("Attaching to process"));
+	std::cout << xorstr("Attaching to process\n");
 	g_memory->attach();
 
 	// Check for outdated offsets
 	if (!sdk::base->check_for_version_mismatch())
 	{
-		log_debug(xorstr("Cheat is outdated! exiting."));
+		std::cout << xorstr("Cheat is outdated! exiting.\n");
 		timer::sleep(3000);
 
 		return false;
@@ -34,37 +34,37 @@ bool c_basesdk::run()
 		.detach();
 
 	// Wait for vstdlib.dll to load
-	log_debug(xorstr("Waiting for vstdlib.dll to load..."));
+	std::cout << xorstr("Waiting for vstdlib.dll to load...\n");
 	do
 	{
 		g_memory->get_module(xorstr(L"vstdlib.dll"), vstdlib);
 		timer::sleep(250);
 	} while (get_vstdlib_image().base <= 0x0);
 
-	log_debug(xorstr("vstdlib.dll -> 0x%x"), get_vstdlib_image().base);
+	std::cout << xorstr("vstdlib.dll -> ") << std::hex << get_vstdlib_image().base << std::endl;
 
 	// Wait for engine.dll to load
-	log_debug(xorstr("Waiting for engine.dll to load..."));
+	std::cout << xorstr("Waiting for engine.dll to load...\n");
 	do
 	{
 		g_memory->get_module(xorstr(L"engine.dll"), engine);
 		timer::sleep(250);
 	} while (get_engine_image().base <= 0x0);
 
-	log_debug(xorstr("engine.dll -> 0x%x"), get_engine_image().base);
+	std::cout << xorstr("engine.dll -> ") << std::hex << get_engine_image().base << std::endl;
 
 	// Wait for client.dll to load
-	log_debug(xorstr("Waiting for client.dll to load..."));
+	std::cout << xorstr("Waiting for client.dll to load...\n");
 	do
 	{
 		g_memory->get_module(xorstr(L"client.dll"), client);
 		timer::sleep(250);
 	} while (get_client_image().base <= 0x0);
 
-	log_debug(xorstr("client.dll -> 0x%x"), get_client_image().base);
+	std::cout << xorstr("client.dll -> ") << std::hex << get_client_image().base << std::endl;
 
 	// Get the window
-	log_debug(xorstr("Waiting for window class handle..."));
+	std::cout << xorstr("Waiting for window class handle...\n");
 	do
 	{
 		var::game::wnd = FindWindow(xorstr(L"Valve001"), nullptr);

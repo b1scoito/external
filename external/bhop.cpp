@@ -7,12 +7,15 @@
 
 void c_bhop::run()
 {
-	log_debug(xorstr("initializing bhop thread."));
-
 	std::thread([&]
 				{
 		while ( var::b_is_running )
 		{
+			if (!var::cheats::bhop::enable) {
+				timer::sleep(1);
+				continue;
+			}
+
 			// Only update each tick
 			const auto global_vars = g_engine->get_globalvars();
 			const auto update = (global_vars.iTickCount != last_tick || global_vars.iFrameCount != last_frame);

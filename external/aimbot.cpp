@@ -7,12 +7,15 @@
 
 void c_aimbot::run(keybind &keybd)
 {
-	log_debug(xorstr("initializing aimbot thread."));
-
 	std::thread([&]
 				{
 			while (var::b_is_running)
 			{
+				if (!var::cheats::aimbot::enable) {
+					timer::sleep(1);
+					continue;
+				}
+
 				if (!keybd.get())
 				{
 					timer::sleep(1);
@@ -52,7 +55,7 @@ void c_aimbot::run(keybind &keybd)
 					return ((enemy_pos - local_pos).ToAngle() - view_angles);
 				};
 
-				best_fov = 15.f;
+				best_fov = var::cheats::aimbot::fov;
 				best_angle = Vector{};
 
 				for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
@@ -96,7 +99,7 @@ void c_aimbot::run(keybind &keybd)
 					}
 
 					if (!best_angle.IsZero())
-						g_engine->set_view_angles(g_engine->get_view_angles() + best_angle / smoothing);
+						g_engine->set_view_angles(g_engine->get_view_angles() + best_angle / var::cheats::aimbot::smooth);
 				}
 
 				const auto end = std::chrono::high_resolution_clock::now();

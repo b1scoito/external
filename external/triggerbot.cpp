@@ -7,13 +7,14 @@
 
 void c_triggerbot::run(keybind &keybd)
 {
-	log_debug(xorstr("initializing triggerbot thread."));
-
 	std::thread([&]
 				{
 		while ( var::b_is_running )
 		{
-			timer::sleep( 1 );
+			if (!var::cheats::triggerbot::enable) {
+				timer::sleep(1);
+				continue;
+			}
 
 			if ( !keybd.get() )
 			{

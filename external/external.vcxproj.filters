@@ -43,9 +43,6 @@
     <Filter Include="utils\lazyimporter">
       <UniqueIdentifier>{ac5f3c1b-9dc1-4f31-985f-2d9915123ab2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="utils\console">
-      <UniqueIdentifier>{5e1921a1-a3d7-4c3a-b54d-70b6704edcd8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils\precompiled">
       <UniqueIdentifier>{a8478ac4-0a80-4b7e-8532-bb54415432f7}</UniqueIdentifier>
     </Filter>
@@ -59,9 +56,6 @@
   <ItemGroup>
     <ClInclude Include="pch.hpp">
       <Filter>utils\precompiled</Filter>
-    </ClInclude>
-    <ClInclude Include="console.hpp">
-      <Filter>utils\console</Filter>
     </ClInclude>
     <ClInclude Include="memory.hpp">
       <Filter>utils\memory</Filter>

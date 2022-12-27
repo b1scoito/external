@@ -12,7 +12,7 @@ public:
 	c_glow() = default;
 	~c_glow() = default;
 
-	void run(keybind &keybd);
+	void run();
 };
 
 inline auto g_glow = std::make_unique<c_glow>();

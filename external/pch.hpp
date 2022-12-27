@@ -18,6 +18,7 @@
 #include <vector>
 #include <future>
 #include <string>
+#include <array>
 #include <map>
 
 #include <Windows.h>
@@ -25,7 +26,6 @@
 // incs
 #include "xorstr.hpp"
 #include "lazy_importer.hpp"
-#include "console.hpp"
 #include "structs.hpp"
 #include "vector.hpp"
 #include "memory.hpp"

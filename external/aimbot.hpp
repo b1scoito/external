@@ -13,10 +13,8 @@ private:
 		sdk::structs::BONE_SPINE_1,
 		sdk::structs::BONE_SPINE_2,
 		sdk::structs::BONE_SPINE_3};
-
+	
 	float best_fov = {};
-	float smoothing = 1.f;
-
 	Vector best_angle = Vector{};
 
 	float function_elapsed = {};

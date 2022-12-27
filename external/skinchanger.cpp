@@ -34,18 +34,15 @@ std::int32_t c_skinchanger::find_model_index_by_name(std::string_view model_name
 }
 
 // From: https://github.com/0xf1a/xSkins
-void c_skinchanger::run(keybind &keybd)
+void c_skinchanger::run()
 {
-	log_debug(xorstr("initializing skin changer thread."));
-
 	std::thread([&]
 				{
 
 		while ( var::b_is_running )
 		{
-			if ( !keybd.get() )
-			{
-				timer::sleep( 1 );
+			if (!var::cheats::skinchanger::enable) {
+				timer::sleep(1);
 				continue;
 			}
 
@@ -67,8 +64,8 @@ void c_skinchanger::run(keybind &keybd)
 			if ( !g_engine->in_game() )
 				continue;
 
-			const auto target_knife = sdk::structs::item_definitions::WEAPON_KNIFE_BUTTERFLY;
-			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_butterfly.mdl" );
+			const auto target_knife = sdk::structs::item_definitions::WEAPON_KNIFE_M9_BAYONET;
+			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_m9_bay.mdl" );
 
 			for ( size_t i = 0; i < 8; i++ )
 			{
@@ -89,10 +86,10 @@ void c_skinchanger::run(keybind &keybd)
 				}
 
 				// Skins
-				if (var::skinchanger::set_skins) 
+				if (var::cheats::skinchanger::set_skins) 
 				{
 					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_iItemIDHigh, -1);
-					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 567);
+					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 562);
 					g_memory->write<float>(current_weapon_entity + sdk::netvars::m_flFallbackWear, 0.0001f);
 				}
 			}
