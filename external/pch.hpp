@@ -18,10 +18,14 @@
 #include <vector>
 #include <future>
 #include <string>
+#include <format>
 #include <array>
 #include <map>
 
 #include <Windows.h>
+
+// external libs
+#include <valve-bsp-parser/bsp_parser.hpp>
 
 // incs
 #include "xorstr.hpp"
@@ -33,3 +37,4 @@
 #include "var.hpp"
 #include "utils.hpp"
 #include "sdk.hpp"
+#include "config.hpp"

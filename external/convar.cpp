@@ -55,7 +55,7 @@ const void c_convar_manager::set(std::int32_t value) const
 	g_memory->write<std::int32_t>(this->cvar_address + 0x30, value);
 }
 
-void c_convar::populate_list()
+void c_convar::populate_convars()
 {
 	const auto convar_hash_table = g_memory->read<std::uintptr_t>(sdk::base->get_vstdlib_image().base + sdk::offsets::interface_engine_cvar);
 	const auto convar_list = g_memory->read<std::int32_t>(convar_hash_table + 0x34);

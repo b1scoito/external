@@ -12,6 +12,8 @@ public: // Read
 public: // Write
 	const bool set_view_angles(const Vector view_angles) const;
 	const std::int32_t force_full_update() const;
+	const std::string get_map_directory();
+	const std::string get_game_directory();
 };
 
 inline auto g_engine = std::make_unique<c_engine>();

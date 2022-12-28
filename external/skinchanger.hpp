@@ -6,7 +6,7 @@ public:
 	c_skinchanger() = default;
 	~c_skinchanger() = default;
 
-	void populate_model_index_list();
+	void populate_models();
 	std::int32_t find_model_index_by_name(std::string_view model_name);
 
 	void run();

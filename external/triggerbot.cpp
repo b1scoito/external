@@ -11,7 +11,7 @@ void c_triggerbot::run(keybind &keybd)
 				{
 		while ( var::b_is_running )
 		{
-			if (!var::cheats::triggerbot::enable) {
+			if (!config.aimbot.b_trigger_enable) {
 				timer::sleep(1);
 				continue;
 			}
@@ -40,7 +40,7 @@ void c_triggerbot::run(keybind &keybd)
 			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
-			if ( !(var::game::wnd == GetForegroundWindow()) )
+			if ( !(var::cs::h_wnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if in menu
@@ -58,6 +58,9 @@ void c_triggerbot::run(keybind &keybd)
 				continue;
 
 			if ( !entity.is_enemy() )
+				continue;
+
+			if (!entity.is_visible_ray())
 				continue;
 
 			if ( entity.has_immunity() )

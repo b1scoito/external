@@ -35,7 +35,7 @@ public: // Write
 class c_convar : private c_convar_manager
 {
 public: // Read
-	void populate_list();
+	void populate_convars();
 	c_convar_manager find(std::string_view convar_name);
 };
 

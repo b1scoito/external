@@ -7,7 +7,7 @@ bool c_basesdk::run()
 	std::cout << xorstr("Waiting for CS:GO to open...\n");
 	do
 	{
-		proc = process::get_by_name(var::game::str_process);
+		proc = process::get_by_name(var::cs::str_process);
 		timer::sleep(250);
 	} while (!proc.is_running());
 
@@ -67,9 +67,9 @@ bool c_basesdk::run()
 	std::cout << xorstr("Waiting for window class handle...\n");
 	do
 	{
-		var::game::wnd = FindWindow(xorstr(L"Valve001"), nullptr);
+		var::cs::h_wnd = FindWindow(xorstr(L"Valve001"), nullptr);
 		timer::sleep(100);
-	} while (!var::game::wnd);
+	} while (!var::cs::h_wnd);
 
 	return true;
 }

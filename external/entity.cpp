@@ -40,9 +40,16 @@ const bool c_entity::is_scoped() const
 	return g_memory->read<bool>(base_address + sdk::netvars::m_bIsScoped);
 }
 
-const std::int32_t c_entity::is_spotted() const
+const bool c_entity::is_spotted() const
 {
 	return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_bSpottedByMask);
+}
+
+const bool c_entity::is_visible_ray() const
+{
+	return var::bsp::parsed_map ? var::bsp::bp.is_visible(rn::vector3(g_local.eye_position().x, 
+		g_local.eye_position().y, g_local.eye_position().z), rn::vector3(this->eye_position().x,
+			this->eye_position().y, this->eye_position().z)) : false;
 }
 
 const bool c_entity::has_immunity() const

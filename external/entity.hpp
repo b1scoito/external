@@ -32,7 +32,8 @@ public: // Read
 	const std::int32_t crosshair_id() const;
 	const bool is_dormant() const;
 	const bool is_scoped() const;
-	const std::int32_t is_spotted() const;
+	const bool is_spotted() const;
+	const bool is_visible_ray() const;
 	const bool has_immunity() const;
 	const std::int32_t move_type() const;
 	const std::int32_t life_state() const;

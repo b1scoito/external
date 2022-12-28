@@ -11,7 +11,7 @@ void c_aimbot::run(keybind &keybd)
 				{
 			while (var::b_is_running)
 			{
-				if (!var::cheats::aimbot::enable) {
+				if (!config.aimbot.b_aim_enable) {
 					timer::sleep(1);
 					continue;
 				}
@@ -40,7 +40,7 @@ void c_aimbot::run(keybind &keybd)
 				const auto start = std::chrono::high_resolution_clock::now();
 
 				// Check if active window is CS:GO
-				if (!(var::game::wnd == GetForegroundWindow()))
+				if (!(var::cs::h_wnd == GetForegroundWindow()))
 					continue;
 
 				// Check if in menu
@@ -55,7 +55,7 @@ void c_aimbot::run(keybind &keybd)
 					return ((enemy_pos - local_pos).ToAngle() - view_angles);
 				};
 
-				best_fov = var::cheats::aimbot::fov;
+				best_fov = config.aimbot.f_aim_fov;
 				best_angle = Vector{};
 
 				for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
@@ -80,7 +80,7 @@ void c_aimbot::run(keybind &keybd)
 					if (!entity.is_enemy())
 						continue;
 					
-					if (!entity.is_spotted())
+					if (!entity.is_visible_ray())
 						continue;
 
 					for (const auto& bone : this->bones)
@@ -99,7 +99,7 @@ void c_aimbot::run(keybind &keybd)
 					}
 
 					if (!best_angle.IsZero())
-						g_engine->set_view_angles(g_engine->get_view_angles() + best_angle / var::cheats::aimbot::smooth);
+						g_engine->set_view_angles(g_engine->get_view_angles() + best_angle / config.aimbot.f_aim_smooth);
 				}
 
 				const auto end = std::chrono::high_resolution_clock::now();

@@ -11,7 +11,7 @@ void c_bhop::run()
 				{
 		while ( var::b_is_running )
 		{
-			if (!var::cheats::bhop::enable) {
+			if (!config.misc.b_enable_bhop) {
 				timer::sleep(1);
 				continue;
 			}
@@ -34,7 +34,7 @@ void c_bhop::run()
 			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
-			if ( !(var::game::wnd == GetForegroundWindow()) )
+			if ( !(var::cs::h_wnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if space is pressed down

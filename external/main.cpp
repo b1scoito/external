@@ -19,11 +19,13 @@
 
 using namespace ftxui;
 
-Component render_menu() {
-	return Renderer([] {
-		return vbox({
-			text("external v1.0") | border | flex,
-		}) | xflex;
+Component render_menu(sdk::structs::globalvars_t& globals) {
+	return Renderer([&] {
+		return hbox({
+			text("external"),
+			separatorHeavy(),
+			text("glow") | color(Color::RGB((uint8_t)config.visuals.f_glow_r, (uint8_t)config.visuals.f_glow_g, (uint8_t)config.visuals.f_glow_b)),
+		}) | xflex | border;
 	});
 }
 
@@ -66,6 +68,14 @@ int main(int argc, const char *argv[])
 				continue;
 			}
 
+			if (g_engine->in_game())
+			{
+				var::bsp::parsed_map = var::bsp::bp.load_map(g_engine->get_game_directory(), g_engine->get_map_directory());
+				if (!var::bsp::parsed_map)
+					std::cerr << "Failed to load map into BSP parser!\n";
+			}
+
+
 			if (!g_local.get_entity())
 			{
 				const auto [addr, index] = g_client->get_local_player();
@@ -73,12 +83,15 @@ int main(int argc, const char *argv[])
 			}
 
 			if (g_convar_list.empty())
-				g_convar->populate_list();
+				g_convar->populate_convars();
 
 			if (g_model_index_list.empty())
-				g_skinchanger->populate_model_index_list();
+				g_skinchanger->populate_models();
 		} 
 	}).detach();
+
+	// Run config system
+	config.run("external");
 
 	// Run bhop
 	g_bhop->run();
@@ -87,76 +100,144 @@ int main(int argc, const char *argv[])
 	g_glow->run();
 
 	// Run trigger bot
-	g_triggerbot->run(var::keybinds::hold_triggerbot_key);
+	g_triggerbot->run(var::binds::hold_triggerbot_key);
 
 	// Run skin changer
 	g_skinchanger->run();
 
 	// Run aimbot
-	g_aimbot->run(var::keybinds::hold_aimbot_key);
+	g_aimbot->run(var::binds::hold_aimbot_key);
 
 	std::thread([&] {
 		auto screen = ScreenInteractive::Fullscreen();
 
-		auto aimbot = Container::Vertical({
-			Checkbox("Enable", &var::cheats::aimbot::enable),
-			Slider("Smooth: ", &var::cheats::aimbot::smooth, 1.f, 360.f, 1.f),
-			Slider("   FOV: ", &var::cheats::aimbot::fov, 1.f, 180.f, 1.f),
-		});
+		auto global_vars = g_engine->get_globalvars();
+		const auto menu = render_menu(global_vars);
 
-		auto bhop = Container::Vertical({
-			Checkbox("Enable", &var::cheats::bhop::enable),
-		});
+		// Aimbot
+		const auto aimbot_menu = wrap_menu("aimbot", Container::Vertical({
+			Checkbox("enable", &config.aimbot.b_aim_enable),
+			Slider("smooth: ", &config.aimbot.f_aim_smooth, 1.f, 360.f, 1.f),
+			Slider("   fov: ", &config.aimbot.f_aim_fov, 1.f, 180.f, 1.f),
+		}));
 
-		auto glow = Container::Vertical({
-			Checkbox("Enable", &var::cheats::glow::enable),
-			Checkbox("Health Glow", &var::cheats::glow::enable_health_glow),
+		// Bhop
+		const auto bhop_menu = wrap_menu("bhop", Container::Vertical({
+			Checkbox("enable", &config.misc.b_enable_bhop),
+		}));
+
+		// Bhop
+		const auto edgejump_menu = wrap_menu("edge jump", Container::Vertical({
+			Checkbox("enable", &config.misc.b_enable_ej),
+		}));
+
+		// Glow
+		const auto glow_menu = wrap_menu("glow", Container::Vertical({
+			Checkbox("enable", &config.visuals.b_glow_enable),
+			Checkbox("health glow", &config.visuals.b_glow_health),
 			Container::Horizontal({
-				Slider("R: ", &var::cheats::glow::red_color, 1.0f, 255.f, 1.f),
-				Slider("G: ", &var::cheats::glow::green_color, 1.0f, 255.f, 1.f),
-				Slider("B: ", &var::cheats::glow::blue_color, 1.0f, 255.f, 1.f),
-				Slider("A: ", &var::cheats::glow::alpha_color, 0.f, 1.f, 0.1f),
+				Slider(" r: ", &config.visuals.f_glow_r, 1.0f, 255.f, 1.f),
+				Slider(" g: ", &config.visuals.f_glow_g, 1.0f, 255.f, 1.f),
+				Slider(" b: ", &config.visuals.f_glow_b, 1.0f, 255.f, 1.f),
+				Slider(" a: ", &config.visuals.f_glow_a, 0.f, 1.f, 0.1f),
 			}),
-		});
+		}));
 
-		auto skinchanger = Container::Vertical({
-			Checkbox("Enable", &var::cheats::skinchanger::enable),
-			Checkbox("Set Skin", &var::cheats::skinchanger::set_skins),
-		});
+		// Skin changer
+		const auto skinchanger_menu = wrap_menu("skin changer", Container::Vertical({
+			Checkbox("enable", &config.visuals.b_sc_enable),
+			Checkbox("set skin", &config.visuals.b_sc_set_paint_kit),
+			Container::Horizontal({
+				Button("force full update", [&] {
+					g_engine->force_full_update();
+				}, ButtonOption::Animated()) | flex_shrink,
+			}),
+		}));
 
-		auto triggerbot = Container::Vertical({
-			Checkbox("Enable", &var::cheats::triggerbot::enable),
-		});
+		// Trigger bot
+		const auto triggerbot_menu = wrap_menu("trigger", Container::Vertical({
+			Checkbox("enable", &config.aimbot.b_trigger_enable),
+		}));
 
-		const auto menu = render_menu();
-		aimbot = wrap_menu("Aimbot", aimbot);
-		bhop = wrap_menu("Bhop", bhop);
-		glow = wrap_menu("Glow", glow);
-		skinchanger = wrap_menu("Skin changer", skinchanger);
-		triggerbot = wrap_menu("Trigger", triggerbot);
+		// Config
+		const auto config_menu = wrap_menu("config", Container::Vertical({
+			Container::Horizontal({
+				Button("save", [&] {
+					config.add("config");
+					config.save(0);
+				}, ButtonOption::Animated()) | flex_shrink,
 
+				Button("load", [&] {
+					config.load(0);
+				}, ButtonOption::Animated()) | flex_shrink,
+
+			}),
+		}));
+
+		std::vector<std::string> tab_values
+		{
+			"Aimbot ",
+			"Visuals ",
+			"Misc ",
+			"Players ",
+			"Config "
+		};
 
 		// Layout
-		auto layout = Container::Vertical({
-			menu,
-			aimbot,
-			bhop,
-			glow,
-			skinchanger,
-			triggerbot,
+		// Aimbot tab
+		const auto aimbot_tab = Container::Vertical({
+			aimbot_menu,
+			triggerbot_menu,
+		}) | flex;
+
+		// Visuals tab
+		const auto visuals_tab = Container::Vertical({
+			glow_menu,
+			skinchanger_menu,
+		}) | flex;
+
+		// Misc tab
+		const auto misc_tab = Container::Vertical({
+			bhop_menu,
+			edgejump_menu,
+		}) | flex;
+
+		// Players tab
+		const auto players_tab = Container::Vertical({
+
+		}) | flex;
+
+		// Config tab
+		const auto config_tab = Container::Vertical({
+			config_menu,
+		}) | flex;
+
+		int tab_selected = {};
+
+		auto tab_menu = Menu(&tab_values, &tab_selected);
+		auto tab_container = Container::Tab(
+		{
+			aimbot_tab,
+			visuals_tab,
+			misc_tab,
+			players_tab,
+			config_tab
+		}, &tab_selected);
+
+		auto container = Container::Horizontal({
+			tab_menu,
+			tab_container,
 		});
 
-		auto component = Renderer(layout, [&] {
+		const auto component = Renderer(container, [&] {
 			return vbox({
 				menu->Render(),
 				separatorHeavy() | dim,
-				vbox({
-					aimbot->Render(),
-					bhop->Render(),
-					glow->Render(),
-					skinchanger->Render(),
-					triggerbot->Render(),
-				}) | xflex | border
+				hbox({
+					tab_menu->Render(),
+					separator(),
+					tab_container->Render(),
+				}) | flex | border,
 			});
 		});
 

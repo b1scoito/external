@@ -52,6 +52,9 @@
     <Filter Include="cheats\aimbot">
       <UniqueIdentifier>{d6d82f66-cc70-4863-8875-e89a2df01529}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\config">
+      <UniqueIdentifier>{dc99bdfa-8e54-4569-9337-abf1b401d8ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -117,6 +120,12 @@
     <ClInclude Include="aimbot.hpp">
       <Filter>cheats\aimbot</Filter>
     </ClInclude>
+    <ClInclude Include="config.hpp">
+      <Filter>utils\config</Filter>
+    </ClInclude>
+    <ClInclude Include="archivex.hpp">
+      <Filter>utils\config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -155,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="aimbot.cpp">
       <Filter>cheats\aimbot</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>utils\config</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

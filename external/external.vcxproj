@@ -49,15 +49,19 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>.\out\dbg\</OutDir>
     <IntDir>.\out\dbg\obj\</IntDir>
+    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>.\out\rel\</OutDir>
     <IntDir>.\out\rel\obj\</IntDir>
+    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Release-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnabled>true</VcpkgEnabled>
-    <VcpkgAutoLink>true</VcpkgAutoLink>
+    <VcpkgAutoLink>false</VcpkgAutoLink>
     <VcpkgManifestInstall>true</VcpkgManifestInstall>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,11 +86,13 @@
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ftxui-component.lib;ftxui-dom.lib;ftxui-screen.lib;valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
@@ -110,19 +116,24 @@
       <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=2 -mllvm -bcf -mllvm -bcf_loop=1 -mllvm -bcf_prob=45 -mllvm -fla -mllvm -split -mllvm -split_num=2 %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ftxui-component.lib;ftxui-dom.lib;ftxui-screen.lib;valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <ProgramDatabaseFile>$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="aimbot.hpp" />
+    <ClInclude Include="archivex.hpp" />
     <ClInclude Include="bhop.hpp" />
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="convar.hpp" />
     <ClInclude Include="engine.hpp" />
     <ClInclude Include="entity.hpp" />
@@ -147,6 +158,7 @@
     <ClCompile Include="aimbot.cpp" />
     <ClCompile Include="bhop.cpp" />
     <ClCompile Include="client.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="convar.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />

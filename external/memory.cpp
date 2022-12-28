@@ -152,7 +152,7 @@ bool c_memory::attach()
 
 	do
 	{
-		if (var::game::str_process == entry.szExeFile)
+		if (var::cs::str_process == entry.szExeFile)
 		{
 			process_id = entry.th32ProcessID;
 			CloseHandle(handle);

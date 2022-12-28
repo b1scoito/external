@@ -5,7 +5,7 @@
 #include "client.hpp"
 #include "entity.hpp"
 
-void c_skinchanger::populate_model_index_list()
+void c_skinchanger::populate_models()
 {
 	const auto client_state = g_engine->get_client_state();
 	const auto network_string_table = g_memory->read<std::uintptr_t>(client_state + 0x52A4); // m_dwModelPrecache
@@ -41,19 +41,13 @@ void c_skinchanger::run()
 
 		while ( var::b_is_running )
 		{
-			if (!var::cheats::skinchanger::enable) {
+			if (!config.visuals.b_sc_enable) {
 				timer::sleep(1);
 				continue;
 			}
 
-			std::once_flag flag = {};
-			std::call_once(flag, [&] {
-				// force full update
-				g_engine->force_full_update();
-			});
-
 			// Check if active window is CS:GO
-			if ( !(var::game::wnd == GetForegroundWindow()) )
+			if ( !(var::cs::h_wnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if in menu
@@ -86,7 +80,7 @@ void c_skinchanger::run()
 				}
 
 				// Skins
-				if (var::cheats::skinchanger::set_skins) 
+				if (config.visuals.b_sc_set_paint_kit) 
 				{
 					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_iItemIDHigh, -1);
 					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 562);

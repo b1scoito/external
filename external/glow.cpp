@@ -11,7 +11,7 @@ void c_glow::run()
 				{
 		while ( var::b_is_running )
 		{
-			if (!var::cheats::glow::enable)
+			if (!config.visuals.b_glow_enable)
 			{
 				timer::sleep(1);
 				continue;
@@ -35,7 +35,7 @@ void c_glow::run()
 			const auto start = std::chrono::high_resolution_clock::now();
 
 			// Check if active window is CS:GO
-			if ( !(var::game::wnd == GetForegroundWindow()) )
+			if ( !(var::cs::h_wnd == GetForegroundWindow()) )
 				continue;
 
 			// Check if in menu
@@ -71,22 +71,22 @@ void c_glow::run()
 				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);
 				auto glow = g_memory->read<sdk::structs::glow_object_t>( entity_glow_offset );
 
-				if (var::cheats::glow::enable_health_glow) {
+				if (config.visuals.b_glow_health) {
 					// Health glow
 					const auto entity_health = entity.get_health();
 					glow.set(
 						1.f - (entity_health / 100.f),	// R
 						entity_health / 100.f,			// G
 						0.f / 255.f,					// B
-						var::cheats::glow::alpha_color		// A
+						config.visuals.f_glow_a			// A
 					);
 				}
 				else {
 					glow.set(
-						var::cheats::glow::red_color / 255.f,	// R
-						var::cheats::glow::green_color / 255.f,	// G
-						var::cheats::glow::blue_color / 255.f,	// B
-						var::cheats::glow::alpha_color			// A
+						config.visuals.f_glow_r / 255.f,	// R
+						config.visuals.f_glow_g / 255.f,	// G
+						config.visuals.f_glow_b / 255.f,	// B
+						config.visuals.f_glow_a				// A
 					);
 				}
 
