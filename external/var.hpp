@@ -22,6 +22,7 @@ namespace var
 
 	namespace skins
 	{
+		inline std::string str_paint_kit = {};
 		inline std::vector<std::string> models = {};
 	}
 

@@ -118,26 +118,27 @@ int main(int argc, const char *argv[])
 		const auto menu = render_menu(global_vars);
 
 		// Aimbot
-		const auto aimbot_menu = wrap_menu("aimbot", Container::Vertical({
+		const auto aimbot_menu = wrap_menu(" - aimbot - ", Container::Vertical({
 			Checkbox("enable", &config.aimbot.b_aim_enable),
 			Slider("smooth: ", &config.aimbot.f_aim_smooth, 1.f, 360.f, 1.f),
 			Slider("   fov: ", &config.aimbot.f_aim_fov, 1.f, 180.f, 1.f),
 		}));
 
 		// Bhop
-		const auto bhop_menu = wrap_menu("bhop", Container::Vertical({
+		const auto bhop_menu = wrap_menu(" - bhop - ", Container::Vertical({
 			Checkbox("enable", &config.misc.b_enable_bhop),
 		}));
 
 		// Bhop
-		const auto edgejump_menu = wrap_menu("edge jump", Container::Vertical({
+		const auto edgejump_menu = wrap_menu(" - edge jump - ", Container::Vertical({
 			Checkbox("enable", &config.misc.b_enable_ej),
 		}));
 
 		// Glow
-		const auto glow_menu = wrap_menu("glow", Container::Vertical({
+		const auto glow_menu = wrap_menu(" - glow - ", Container::Vertical({
 			Checkbox("enable", &config.visuals.b_glow_enable),
 			Checkbox("health based", &config.visuals.b_glow_health_based),
+			Checkbox("visible only", &config.visuals.b_glow_visible_only),
 			Container::Horizontal({
 				Slider(" r: ", &config.visuals.f_glow_r, 1.0f, 255.f, 1.f),
 				Slider(" g: ", &config.visuals.f_glow_g, 1.0f, 255.f, 1.f),
@@ -153,21 +154,22 @@ int main(int argc, const char *argv[])
 		}
 
 		// Skin changer
-		const auto skinchanger_menu = wrap_menu("skin changer", Container::Vertical({
+		const auto skinchanger_menu = wrap_menu(" - skin changer - ", Container::Vertical({
 			Checkbox("enable", &config.visuals.b_sc_enable),
 			Checkbox("set paint kit", &config.visuals.b_sc_set_paint_kit),
+			Input(&var::skins::str_paint_kit, "paint kit"),
 			Container::Horizontal({
-				Dropdown(&var::skins::models, &config.visuals.i_selected_model_index),
+				Dropdown(&var::skins::models, &config.visuals.i_sc_selected_model_index),
 			}),
 		}));
 
 		// Trigger bot
-		const auto triggerbot_menu = wrap_menu("trigger", Container::Vertical({
+		const auto triggerbot_menu = wrap_menu(" - trigger - ", Container::Vertical({
 			Checkbox("enable", &config.aimbot.b_trigger_enable),
 		}));
 
 		// Config
-		const auto config_menu = wrap_menu("config", Container::Vertical({
+		const auto config_menu = wrap_menu(" - config - ", Container::Vertical({
 			Container::Horizontal({
 				Button("save", [&] {
 					config.add("config");
@@ -183,11 +185,11 @@ int main(int argc, const char *argv[])
 
 		std::vector<std::string> tab_values
 		{
-			"Aimbot ",
-			"Visuals ",
-			"Misc ",
-			"Players ",
-			"Config "
+			"Aimbot  ",
+			"Visuals  ",
+			"Misc  ",
+			"Players  ",
+			"Config  "
 		};
 
 		// Layout
@@ -222,8 +224,7 @@ int main(int argc, const char *argv[])
 		int tab_selected = {};
 
 		auto tab_menu = Menu(&tab_values, &tab_selected);
-		auto tab_container = Container::Tab(
-		{
+		auto tab_container = Container::Tab({
 			aimbot_tab,
 			visuals_tab,
 			misc_tab,

@@ -68,10 +68,13 @@ void c_glow::run()
 				if ( !entity.is_enemy() )
 					continue;
 
+				if (config.visuals.b_glow_visible_only && !entity.is_visible_ray())
+					continue;
+
 				const auto entity_glow_offset = g_client->get_glow_object_manager() + (entity.glow_index() * 0x38);
 				auto glow = g_memory->read<sdk::structs::glow_object_t>( entity_glow_offset );
 
-				if (config.visuals.b_glow_health) {
+				if (config.visuals.b_glow_health_based) {
 					// Health glow
 					const auto entity_health = entity.get_health();
 					glow.set(

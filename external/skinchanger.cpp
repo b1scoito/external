@@ -67,7 +67,7 @@ void c_skinchanger::run()
 
 			for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list)
 			{
-				if (weapon_info.name == var::skins::models[config.visuals.i_selected_model_index])
+				if (weapon_info.name == var::skins::models[config.visuals.i_sc_selected_model_index])
 				{
 					target_knife = weapon_id;
 					model_index = find_model_index_by_name(weapon_info.model);
@@ -93,10 +93,10 @@ void c_skinchanger::run()
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iEntityQuality, 3 );
 					
 					// Skins
-					if (config.visuals.b_sc_set_paint_kit) 
+					if (config.visuals.b_sc_set_paint_kit && !var::skins::str_paint_kit.empty())
 					{
 						g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_iItemIDHigh, -1);
-						g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 562);
+						g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, std::stoi(var::skins::str_paint_kit));
 						g_memory->write<float>(current_weapon_entity + sdk::netvars::m_flFallbackWear, 0.0001f);
 					}
 				}

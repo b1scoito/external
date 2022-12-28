@@ -39,7 +39,8 @@ public:
 	{
 		// Glow
 		bool b_glow_enable = false;
-		bool b_glow_health = false;
+		bool b_glow_health_based = false;
+		bool b_glow_visible_only = false;
 
 		float f_glow_r = 0.0f;
 		float f_glow_g = 0.0f;
@@ -49,7 +50,7 @@ public:
 		// Skin changer
 		bool b_sc_enable = false;
 		bool b_sc_set_paint_kit = false;
-		int i_selected_model_index = 0;
+		int i_sc_selected_model_index = 0;
 	} visuals;
 
 	struct
