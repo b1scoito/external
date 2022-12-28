@@ -9,6 +9,7 @@
 #include "engine.hpp"
 #include "client.hpp"
 #include "entity.hpp"
+#include "weapon.hpp"
 #include "convar.hpp"
 
 #include <ftxui/component/captured_mouse.hpp>
@@ -57,7 +58,7 @@ int main(int argc, const char *argv[])
 	std::thread([&] {
 		while (var::b_is_running)
 		{
-			timer::sleep(100);
+			timer::sleep(1000);
 
 			// Cache
 			if (!g_engine->in_game())
@@ -68,13 +69,15 @@ int main(int argc, const char *argv[])
 				continue;
 			}
 
-			if (g_engine->in_game())
+			std::string map = g_engine->get_map_name();
+			static std::string current_map = "";
+			if (map != current_map)
 			{
-				var::bsp::parsed_map = var::bsp::bp.load_map(g_engine->get_game_directory(), g_engine->get_map_directory());
+				current_map = map;
+				var::bsp::parsed_map = var::bsp::bp.load_map(g_engine->get_game_directory(), g_engine->get_map_name());
 				if (!var::bsp::parsed_map)
 					std::cerr << "Failed to load map into BSP parser!\n";
 			}
-
 
 			if (!g_local.get_entity())
 			{
@@ -134,7 +137,7 @@ int main(int argc, const char *argv[])
 		// Glow
 		const auto glow_menu = wrap_menu("glow", Container::Vertical({
 			Checkbox("enable", &config.visuals.b_glow_enable),
-			Checkbox("health glow", &config.visuals.b_glow_health),
+			Checkbox("health based", &config.visuals.b_glow_health_based),
 			Container::Horizontal({
 				Slider(" r: ", &config.visuals.f_glow_r, 1.0f, 255.f, 1.f),
 				Slider(" g: ", &config.visuals.f_glow_g, 1.0f, 255.f, 1.f),
@@ -143,14 +146,18 @@ int main(int argc, const char *argv[])
 			}),
 		}));
 
+		for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list)
+		{
+			if (c_weapon(weapon_id).is_knife())
+				var::skins::models.push_back(weapon_info.name);
+		}
+
 		// Skin changer
 		const auto skinchanger_menu = wrap_menu("skin changer", Container::Vertical({
 			Checkbox("enable", &config.visuals.b_sc_enable),
-			Checkbox("set skin", &config.visuals.b_sc_set_paint_kit),
+			Checkbox("set paint kit", &config.visuals.b_sc_set_paint_kit),
 			Container::Horizontal({
-				Button("force full update", [&] {
-					g_engine->force_full_update();
-				}, ButtonOption::Animated()) | flex_shrink,
+				Dropdown(&var::skins::models, &config.visuals.i_selected_model_index),
 			}),
 		}));
 

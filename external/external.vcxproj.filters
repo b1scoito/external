@@ -126,6 +126,9 @@
     <ClInclude Include="archivex.hpp">
       <Filter>utils\config</Filter>
     </ClInclude>
+    <ClInclude Include="weapon.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="config.cpp">
       <Filter>utils\config</Filter>
+    </ClCompile>
+    <ClCompile Include="weapon.cpp">
+      <Filter>sdk\classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

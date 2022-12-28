@@ -20,5 +20,10 @@ namespace var
 		inline rn::bsp_parser bp = {};
 	}
 
+	namespace skins
+	{
+		inline std::vector<std::string> models = {};
+	}
+
 	inline bool b_is_running = true;
 }

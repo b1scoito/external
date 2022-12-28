@@ -49,6 +49,7 @@ public:
 		// Skin changer
 		bool b_sc_enable = false;
 		bool b_sc_set_paint_kit = false;
+		int i_selected_model_index = 0;
 	} visuals;
 
 	struct

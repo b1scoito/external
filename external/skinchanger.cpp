@@ -46,50 +46,67 @@ void c_skinchanger::run()
 				continue;
 			}
 
-			// Check if active window is CS:GO
-			if ( !(var::cs::h_wnd == GetForegroundWindow()) )
-				continue;
-
-			// Check if in menu
-			if ( g_client->in_menu() )
-				continue;
-
 			// Check if in a game
 			if ( !g_engine->in_game() )
 				continue;
 
-			const auto target_knife = sdk::structs::item_definitions::WEAPON_KNIFE_M9_BAYONET;
-			const auto model_index = find_model_index_by_name( "models/weapons/v_knife_m9_bay.mdl" );
+			if (!g_local.get_entity())
+				continue;
+
+			if (!g_local.is_alive())
+				continue;
+
+			if (!g_local.get_view_model())
+				continue;
+
+			if (var::skins::models.empty())
+				continue;
+
+			auto target_knife = (int)sdk::structs::item_definitions::WEAPON_KNIFE_M9_BAYONET;
+			auto model_index = find_model_index_by_name("models/weapons/v_knife_m9_bay.mdl");
+
+			for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list)
+			{
+				if (weapon_info.name == var::skins::models[config.visuals.i_selected_model_index])
+				{
+					target_knife = weapon_id;
+					model_index = find_model_index_by_name(weapon_info.model);
+				}
+			}
 
 			for ( size_t i = 0; i < 8; i++ )
 			{
-				const auto current_weapon = g_memory->read<std::uintptr_t>( (g_local.get_entity() + sdk::netvars::m_hMyWeapons) + i * 0x4 ) & 0xFFF;
-				const auto current_weapon_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (current_weapon - 1) * 0x10 );
-
+				const auto current_weapon = g_memory->read<std::uintptr_t>( (g_local.get_entity() + sdk::netvars::m_hMyWeapons) + i * 0x4 );
+				if (!current_weapon)
+					continue;
+				
+				const auto current_weapon_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ((current_weapon & 0xFFF) - 1) * 0x10 );
 				if ( !current_weapon_entity )
 					continue;
 
 				const auto weapon_index = g_memory->read<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex );
-				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T
-					|| weapon_index == target_knife)
+				if ( weapon_index == sdk::structs::WEAPON_KNIFE || weapon_index == sdk::structs::WEAPON_KNIFE_T || weapon_index == target_knife)
 				{
 					g_memory->write<std::int16_t>( current_weapon_entity + sdk::netvars::m_iItemDefinitionIndex, target_knife);
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_nModelIndex, model_index );
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iViewModelIndex, model_index );
 					g_memory->write<std::int32_t>( current_weapon_entity + sdk::netvars::m_iEntityQuality, 3 );
-				}
-
-				// Skins
-				if (config.visuals.b_sc_set_paint_kit) 
-				{
-					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_iItemIDHigh, -1);
-					g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 562);
-					g_memory->write<float>(current_weapon_entity + sdk::netvars::m_flFallbackWear, 0.0001f);
+					
+					// Skins
+					if (config.visuals.b_sc_set_paint_kit) 
+					{
+						g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_iItemIDHigh, -1);
+						g_memory->write<std::int32_t>(current_weapon_entity + sdk::netvars::m_nFallbackPaintKit, 562);
+						g_memory->write<float>(current_weapon_entity + sdk::netvars::m_flFallbackWear, 0.0001f);
+					}
 				}
 			}
 
-			const auto active_weapon = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hActiveWeapon ) & 0xFFF;
-			const auto active_weapon_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (active_weapon - 1) * 0x10 );
+			const auto active_weapon = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hActiveWeapon );
+			if (!active_weapon)
+				continue;
+			
+			const auto active_weapon_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ((active_weapon & 0xFFF) - 1) * 0x10 );
 			if ( !active_weapon_entity )
 				continue;
 
@@ -97,8 +114,7 @@ void c_skinchanger::run()
 			if ( weapon_index != target_knife )
 				continue;
 
-			const auto view_model = g_memory->read<std::uintptr_t>( g_local.get_entity() + sdk::netvars::m_hViewModel ) & 0xFFF;
-			const auto view_model_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (view_model - 1) * 0x10 );
+			const auto view_model_entity = g_memory->read<std::uintptr_t>( sdk::base->get_client_image().base + sdk::offsets::dwEntityList + ((g_local.get_view_model() & 0xFFF) - 1) * 0x10);
 			if ( !view_model_entity )
 				continue;
 

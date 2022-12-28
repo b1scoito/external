@@ -36,7 +36,7 @@ const std::int32_t c_engine::force_full_update() const
 	return g_memory->write<std::int32_t>(this->get_client_state() + sdk::offsets::clientstate_delta_ticks, -1);
 }
 
-const std::string c_engine::get_map_directory()
+const std::string c_engine::get_map_name()
 {
 	auto map_directory = std::make_unique<char[]>(255);
 	if (!g_memory->read(this->get_client_state() + sdk::offsets::dwClientState_MapDirectory, map_directory.get(), 255))

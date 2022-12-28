@@ -152,6 +152,7 @@
     <ClInclude Include="var.hpp" />
     <ClInclude Include="vector.hpp" />
     <ClInclude Include="client.hpp" />
+    <ClInclude Include="weapon.hpp" />
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,7 @@
     </ClCompile>
     <ClCompile Include="skinchanger.cpp" />
     <ClCompile Include="triggerbot.cpp" />
+    <ClCompile Include="weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

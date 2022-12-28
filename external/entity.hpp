@@ -42,6 +42,7 @@ public: // Read
 	const Vector bone_matrix(const int &bone) const;
 	const Vector eye_position() const;
 	const bool is_alive() const;
+	const std::uintptr_t get_view_model() const;
 	const Vector aim_punch() const;
 	const bool is_localplayer() const;
 	// From: https://github.com/rollraw/qo0-base/blob/f6ded6392dbb9e433c279fdb6fc3843398b9e1c7/base/sdk/entity.cpp#L212

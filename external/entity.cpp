@@ -109,6 +109,11 @@ const bool c_entity::is_alive() const
 	return (this->life_state() == sdk::structs::life_state::LIFE_ALIVE);
 }
 
+const std::uintptr_t c_entity::get_view_model() const 
+{
+	return g_memory->read<std::uintptr_t>(g_local.get_entity() + sdk::netvars::m_hViewModel);
+}
+
 const bool c_entity::is_localplayer() const
 {
 	return (base_address == g_local.get_entity());

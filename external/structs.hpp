@@ -692,6 +692,73 @@ namespace sdk
 			SPECIAL_AGENT_DRAGOMIR_FOOTSOLDIERS,
 			SPECIAL_AGENT_B_SQUADRON_OFFICER = 5601
 		};
+
+		struct skinobj_t
+		{
+			skinobj_t(const char* name, const char* model, const char* kill_icon = nullptr)
+				: name(name), model(model), kill_icon(kill_icon) { }
+
+			const char* name = nullptr;
+			const char* model = nullptr;
+			const char* kill_icon = nullptr;
+		};
+
+		const std::unordered_map<int, skinobj_t> item_list = {
+			{ sdk::structs::WEAPON_DEAGLE, { "Desert Eagle", "models/weapons/v_pist_deagle.mdl", "deagle" } },
+			{ sdk::structs::WEAPON_ELITE, { "Dual Berettas", "models/weapons/v_pist_elite.mdl", "elite" } },
+			{ sdk::structs::WEAPON_FIVESEVEN, { "Five-SeveN", "models/weapons/v_pist_fiveseven.mdl", "fiveseven" } },
+			{ sdk::structs::WEAPON_GLOCK, { "Glock-18", "models/weapons/v_pist_glock18.mdl", "glock" } },
+			{ sdk::structs::WEAPON_AK47, { "AK-47", "models/weapons/v_rif_ak47.mdl", "ak47" } },
+			{ sdk::structs::WEAPON_AUG, { "AUG", "models/weapons/v_rif_aug.mdl", "aug" } },
+			{ sdk::structs::WEAPON_AWP, { "AWP", "models/weapons/v_snip_awp.mdl", "awp" } },
+			{ sdk::structs::WEAPON_FAMAS, { "FAMAS", "models/weapons/v_rif_famas.mdl", "famas" } },
+			{ sdk::structs::WEAPON_G3SG1, { "G3SG1", "models/weapons/v_snip_g3sg1.mdl", "g3sg1" } },
+			{ sdk::structs::WEAPON_GALILAR, { "Galil AR", "models/weapons/v_rif_galilar.mdl", "galilar" } },
+			{ sdk::structs::WEAPON_M249, { "M249", "models/weapons/v_mach_m249para.mdl", "m249" } },
+			{ sdk::structs::WEAPON_M4A1, { "M4A4", "models/weapons/v_rif_m4a1.mdl", "m4a1" } },
+			{ sdk::structs::WEAPON_MAC10, { "MAC-10", "models/weapons/v_smg_mac10.mdl", "mac10" } },
+			{ sdk::structs::WEAPON_P90, { "P90", "models/weapons/v_smg_p90.mdl", "p90" } },
+			{ sdk::structs::WEAPON_MP5SD, { "MP5-SD", "models/weapons/v_smg_mp5sd.mdl", "mp5sd" } },
+			{ sdk::structs::WEAPON_UMP45, { "UMP-45", "models/weapons/v_smg_ump45.mdl", "ump45" } },
+			{ sdk::structs::WEAPON_XM1014, { "XM1014", "models/weapons/v_shot_xm1014.mdl", "xm1014" } },
+			{ sdk::structs::WEAPON_BIZON, { "PP-Bizon", "models/weapons/v_smg_bizon.mdl", "bizon" } },
+			{ sdk::structs::WEAPON_MAG7, { "MAG-7", "models/weapons/v_shot_mag7.mdl", "mag7" } },
+			{ sdk::structs::WEAPON_NEGEV, { "Negev", "models/weapons/v_mach_negev.mdl", "negev" } },
+			{ sdk::structs::WEAPON_SAWEDOFF, { "Sawed-Off", "models/weapons/v_shot_sawedoff.mdl", "sawedoff" } },
+			{ sdk::structs::WEAPON_TEC9, { "Tec-9", "models/weapons/v_pist_tec9.mdl", "tec9" } },
+			{ sdk::structs::WEAPON_HKP2000, { "P2000", "models/weapons/v_pist_hkp2000.mdl", "hkp2000" } },
+			{ sdk::structs::WEAPON_MP7, { "MP7", "models/weapons/v_smg_mp7.mdl", "mp7" } },
+			{ sdk::structs::WEAPON_MP9, { "MP9", "models/weapons/v_smg_mp9.mdl", "mp9" } },
+			{ sdk::structs::WEAPON_NOVA, { "Nova", "models/weapons/v_shot_nova.mdl", "nova" } },
+			{ sdk::structs::WEAPON_P250, { "P250", "models/weapons/v_pist_p250.mdl", "p250" } },
+			{ sdk::structs::WEAPON_SCAR20, { "SCAR-20", "models/weapons/v_snip_scar20.mdl", "scar20" } },
+			{ sdk::structs::WEAPON_SG556, { "SG 553", "models/weapons/v_rif_sg556.mdl", "sg556" } },
+			{ sdk::structs::WEAPON_SSG08, { "SSG 08", "models/weapons/v_snip_ssg08.mdl", "ssg08" } },
+			{ sdk::structs::WEAPON_KNIFE, { "Knife (Counter-Terrorists)", "models/weapons/v_knife_default_ct.mdl", "knife_default_ct" } },
+			{ sdk::structs::WEAPON_KNIFE_T, { "Knife (Terrorists)", "models/weapons/v_knife_default_t.mdl", "knife_t" } },
+			{ sdk::structs::WEAPON_M4A1_SILENCER, { "M4A1-S", "models/weapons/v_rif_m4a1_s.mdl", "m4a1_silencer" } },
+			{ sdk::structs::WEAPON_USP_SILENCER, { "USP-S", "models/weapons/v_pist_223.mdl", "usp_silencer" } },
+			{ sdk::structs::WEAPON_CZ75A, { "CZ75 Auto", "models/weapons/v_pist_cz_75.mdl", "cz75a" } },
+			{ sdk::structs::WEAPON_REVOLVER, { "R8 Revolver", "models/weapons/v_pist_revolver.mdl", "revolver" } },
+			{ sdk::structs::WEAPON_KNIFE_BAYONET, { "Bayonet", "models/weapons/v_knife_bayonet.mdl", "bayonet" } },
+			{ sdk::structs::WEAPON_KNIFE_FLIP, { "Flip Knife", "models/weapons/v_knife_flip.mdl", "knife_flip" } },
+			{ sdk::structs::WEAPON_KNIFE_GUT, { "Gut Knife", "models/weapons/v_knife_gut.mdl", "knife_gut" } },
+			{ sdk::structs::WEAPON_KNIFE_KARAMBIT, { "Karambit", "models/weapons/v_knife_karam.mdl", "knife_karambit" } },
+			{ sdk::structs::WEAPON_KNIFE_M9_BAYONET, { "M9 Bayonet", "models/weapons/v_knife_m9_bay.mdl", "knife_m9_bayonet" } },
+			{ sdk::structs::WEAPON_KNIFE_TACTICAL, { "Huntsman Knife", "models/weapons/v_knife_tactical.mdl", "knife_tactical" } },
+			{ sdk::structs::WEAPON_KNIFE_FALCHION, { "Falchion Knife", "models/weapons/v_knife_falchion_advanced.mdl", "knife_falchion" } },
+			{ sdk::structs::WEAPON_KNIFE_SURVIVAL_BOWIE, { "Bowie Knife", "models/weapons/v_knife_survival_bowie.mdl", "knife_survival_bowie" } },
+			{ sdk::structs::WEAPON_KNIFE_BUTTERFLY, { "Butterfly Knife", "models/weapons/v_knife_butterfly.mdl", "knife_butterfly" } },
+			{ sdk::structs::WEAPON_KNIFE_PUSH, { "Shadow Daggers", "models/weapons/v_knife_push.mdl", "knife_push" } },
+			{ sdk::structs::WEAPON_KNIFE_CORD, { "Paracord Knife", "models/weapons/v_knife_cord.mdl", "knife_cord" } },
+			{ sdk::structs::WEAPON_KNIFE_CANIS, { "Survival Knife", "models/weapons/v_knife_canis.mdl", "knife_canis" } },
+			{ sdk::structs::WEAPON_KNIFE_URSUS, { "Ursus Knife", "models/weapons/v_knife_ursus.mdl", "knife_ursus" } },
+			{ sdk::structs::WEAPON_KNIFE_GYPSY_JACKKNIFE, { "Navaja Knife", "models/weapons/v_knife_gypsy_jackknife.mdl", "knife_gypsy_jackknife" } },
+			{ sdk::structs::WEAPON_KNIFE_OUTDOOR, { "Nomad Knife", "models/weapons/v_knife_outdoor.mdl", "knife_outdoor" } },
+			{ sdk::structs::WEAPON_KNIFE_STILETTO, { "Stiletto Knife", "models/weapons/v_knife_stiletto.mdl", "knife_stiletto" } },
+			{ sdk::structs::WEAPON_KNIFE_WIDOWMAKER, { "Talon Knife", "models/weapons/v_knife_widowmaker.mdl", "knife_widowmaker" } },
+			{ sdk::structs::WEAPON_KNIFE_SKELETON, { "Skeleton Knife", "models/weapons/v_knife_skeleton.mdl", "knife_skeleton" } },
+		};
 	}
 }
 
