@@ -28,7 +28,6 @@
 #include <valve-bsp-parser/bsp_parser.hpp>
 
 // incs
-#include "safe_vector.hpp"
 #include "xorstr.hpp"
 #include "lazy_importer.hpp"
 #include "structs.hpp"

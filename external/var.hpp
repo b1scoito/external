@@ -1,5 +1,8 @@
 #pragma once
 
+#include "safe_vector.hpp" // for safe_vector
+#include "entity.hpp" // for c_entity
+
 namespace var
 {
 	namespace cs
@@ -27,8 +30,8 @@ namespace var
 	}
 
 	namespace cache {
-		safe_vector<c_entity> vec = {};
+		inline safe_vector<c_entity> cached_entities = {};
 	}
 
-	inline bool b_is_running = true;
+	inline std::atomic<bool> b_is_running = true;
 }
