@@ -142,12 +142,15 @@
     <ClInclude Include="lazy_importer.hpp" />
     <ClInclude Include="memory.hpp" />
     <ClInclude Include="offsets.hpp" />
+    <ClInclude Include="on_entity.hpp" />
+    <ClInclude Include="on_update.hpp" />
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="process.hpp" />
     <ClInclude Include="sdk.hpp" />
     <ClInclude Include="skinchanger.hpp" />
     <ClInclude Include="structs.hpp" />
     <ClInclude Include="triggerbot.hpp" />
+    <ClInclude Include="tui.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
     <ClInclude Include="vector.hpp" />
@@ -175,6 +178,7 @@
     </ClCompile>
     <ClCompile Include="skinchanger.cpp" />
     <ClCompile Include="triggerbot.cpp" />
+    <ClCompile Include="tui.cpp" />
     <ClCompile Include="weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

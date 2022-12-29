@@ -55,6 +55,12 @@
     <Filter Include="utils\config">
       <UniqueIdentifier>{dc99bdfa-8e54-4569-9337-abf1b401d8ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\tui">
+      <UniqueIdentifier>{2862286a-f8b2-4079-8b9f-21c9396cdd1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cache">
+      <UniqueIdentifier>{d2ffde6c-ba1d-4a93-afd2-f591807eee55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -129,6 +135,15 @@
     <ClInclude Include="weapon.hpp">
       <Filter>sdk\classes</Filter>
     </ClInclude>
+    <ClInclude Include="tui.hpp">
+      <Filter>utils\tui</Filter>
+    </ClInclude>
+    <ClInclude Include="on_update.hpp">
+      <Filter>sdk\cache</Filter>
+    </ClInclude>
+    <ClInclude Include="on_entity.hpp">
+      <Filter>sdk\cache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -173,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="weapon.cpp">
       <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="tui.cpp">
+      <Filter>utils\tui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

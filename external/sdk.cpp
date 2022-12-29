@@ -5,8 +5,7 @@ bool c_basesdk::run()
 {
 	// Wait for CS:GO to open
 	std::cout << xorstr("Waiting for CS:GO to open...\n");
-	do
-	{
+	do {
 		proc = process::get_by_name(var::cs::str_process);
 		timer::sleep(250);
 	} while (!proc.is_running());
@@ -16,8 +15,7 @@ bool c_basesdk::run()
 	g_memory->attach();
 
 	// Check for outdated offsets
-	if (!sdk::base->check_for_version_mismatch())
-	{
+	if (!sdk::base->check_for_version_mismatch()) {
 		std::cout << xorstr("Cheat is outdated! exiting.\n");
 		timer::sleep(3000);
 
@@ -25,18 +23,15 @@ bool c_basesdk::run()
 	}
 
 	// Close cheat when CS:GO closes thread
-	std::thread([&]
-				{
+	std::thread([&] {
 		while ( proc.is_running() )
 			timer::sleep( 1000 );
-
-		std::exit( EXIT_SUCCESS ); })
-		.detach();
+		std::exit( EXIT_SUCCESS ); 
+	}).detach();
 
 	// Wait for vstdlib.dll to load
 	std::cout << xorstr("Waiting for vstdlib.dll to load...\n");
-	do
-	{
+	do {
 		g_memory->get_module(xorstr(L"vstdlib.dll"), vstdlib);
 		timer::sleep(250);
 	} while (get_vstdlib_image().base <= 0x0);
@@ -45,8 +40,7 @@ bool c_basesdk::run()
 
 	// Wait for engine.dll to load
 	std::cout << xorstr("Waiting for engine.dll to load...\n");
-	do
-	{
+	do {
 		g_memory->get_module(xorstr(L"engine.dll"), engine);
 		timer::sleep(250);
 	} while (get_engine_image().base <= 0x0);
@@ -55,8 +49,7 @@ bool c_basesdk::run()
 
 	// Wait for client.dll to load
 	std::cout << xorstr("Waiting for client.dll to load...\n");
-	do
-	{
+	do {
 		g_memory->get_module(xorstr(L"client.dll"), client);
 		timer::sleep(250);
 	} while (get_client_image().base <= 0x0);
@@ -65,8 +58,7 @@ bool c_basesdk::run()
 
 	// Get the window
 	std::cout << xorstr("Waiting for window class handle...\n");
-	do
-	{
+	do {
 		var::cs::h_wnd = FindWindow(xorstr(L"Valve001"), nullptr);
 		timer::sleep(100);
 	} while (!var::cs::h_wnd);

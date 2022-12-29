@@ -25,7 +25,7 @@ public:
 	c_aimbot() = default;
 	~c_aimbot() = default;
 
-	void run(keybind &keybd);
+	void run();
 };
 
 inline auto g_aimbot = std::make_unique<c_aimbot>();
