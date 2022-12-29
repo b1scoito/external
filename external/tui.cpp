@@ -28,15 +28,14 @@ void c_tui::render()
 		Checkbox("health based", &config.visuals.b_glow_health_based),
 		Checkbox("visible only", &config.visuals.b_glow_visible_only),
 		Container::Horizontal({
-			Slider(" r: ", &config.visuals.f_glow_r, 1.0f, 255.f, 1.f),
 			Slider(" g: ", &config.visuals.f_glow_g, 1.0f, 255.f, 1.f),
+			Slider(" r: ", &config.visuals.f_glow_r, 1.0f, 255.f, 1.f),
 			Slider(" b: ", &config.visuals.f_glow_b, 1.0f, 255.f, 1.f),
 			Slider(" a: ", &config.visuals.f_glow_a, 0.f, 1.f, 0.1f),
 		}),
 	}));
 
-	for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list)
-	{
+	for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list) {
 		if (c_weapon(weapon_id).is_knife())
 			var::skins::models.push_back(weapon_info.name);
 	}
@@ -109,7 +108,7 @@ void c_tui::render()
 
 	int tab_selected = {};
 
-	auto tab_menu = Menu(&tab_values, &tab_selected);
+	auto tab_menu = Menu(&tab_values, &tab_selected, MenuOption::VerticalAnimated());
 	auto tab_container = Container::Tab({
 		aimbot_tab,
 		visuals_tab,
@@ -143,7 +142,7 @@ Component c_tui::render_menu() {
 		return hbox({
 			text("external"),
 			separator(),
-			text("glow") | color(Color::RGB((uint8_t)config.visuals.f_glow_r, (uint8_t)config.visuals.f_glow_g, (uint8_t)config.visuals.f_glow_b)),
+			text("my glow color") | color(Color::RGB((uint8_t)config.visuals.f_glow_r, (uint8_t)config.visuals.f_glow_g, (uint8_t)config.visuals.f_glow_b)),
 		}) | border;
 	});
 }

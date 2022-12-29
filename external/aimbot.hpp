@@ -5,16 +5,6 @@ class c_aimbot
 private:
 	int last_tick = {};
 	int last_frame = {};
-
-	std::vector<sdk::structs::bone_index> bones = 
-	{
-		sdk::structs::BONE_HEAD,
-		sdk::structs::BONE_NECK,
-		sdk::structs::BONE_SPINE_0,
-		sdk::structs::BONE_SPINE_1,
-		sdk::structs::BONE_SPINE_2,
-		sdk::structs::BONE_SPINE_3
-	};
 	
 	float best_fov = {};
 	Vector best_angle = Vector{};

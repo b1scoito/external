@@ -47,6 +47,29 @@ namespace sdk
 			float m_fMaxVal;				  // 0x40
 		};									  // Size: 0x44
 
+		struct playerinfo_t
+		{
+			std::uint64_t	ullVersion = 0ULL;
+			union
+			{
+				std::uint64_t ullXuid;
+				struct
+				{
+					std::uint32_t nXuidLow;
+					std::uint32_t nXuidHigh;
+				};
+			};
+			char			szName[128];
+			int				nUserID;
+			char			szSteamID[33];
+			std::uint32_t	nFriendsID;
+			char			szFriendsName[128];
+			bool			bFakePlayer;
+			bool			bIsHLTV;
+			std::uint16_t	uCustomFiles[4];
+			std::uint8_t	dFilesDownloaded;
+		};
+
 		enum entity_glow_render_style : int
 		{
 			GLOWRENDERSTYLE_DEFAULT = 0,

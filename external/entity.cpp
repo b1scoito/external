@@ -5,7 +5,7 @@
 #include "convar.hpp"
 #include "sdk.hpp"
 
-const std::int32_t c_entity::get_health() const
+const std::int32_t c_entity::health() const
 {
 	return g_memory->read<std::int32_t>(base_address + sdk::netvars::m_iHealth);
 }

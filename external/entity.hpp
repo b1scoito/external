@@ -25,7 +25,7 @@ public: // Read
 		return this->index;
 	}
 
-	const std::int32_t get_health() const;
+	const std::int32_t health() const;
 	const std::int32_t get_team() const;
 	const std::int32_t get_flags() const;
 	const std::int32_t glow_index() const;

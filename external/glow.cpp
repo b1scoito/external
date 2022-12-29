@@ -74,7 +74,7 @@ void c_glow::run()
 
 			if (config.visuals.b_glow_health_based) {
 				// Health glow
-				const auto entity_health = entity.get_health();
+				const auto entity_health = entity.health();
 				glow.set(
 					1.f - (entity_health / 100.f),	// R
 					entity_health / 100.f,			// G

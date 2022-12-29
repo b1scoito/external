@@ -1,18 +1,24 @@
 #include "pch.hpp"
 
+// features
 #include "bhop.hpp"
 #include "glow.hpp"
 #include "triggerbot.hpp"
 #include "skinchanger.hpp"
 #include "aimbot.hpp"
 
+// sdk
 #include "engine.hpp"
 #include "client.hpp"
 #include "entity.hpp"
 #include "convar.hpp"
 
+// menu
 #include "tui.hpp"
+
+// cache
 #include "on_update.hpp"
+#include "on_entity.hpp"
 
 int main(int argc, const char *argv[]) {
 	std::atexit([]{ var::b_is_running = false; });
@@ -26,6 +32,7 @@ int main(int argc, const char *argv[]) {
 
 	// Run update threads
 	std::thread(on_update_cache).detach();
+	std::thread(on_entity_cache).detach();
 
 	// Run cheat threads
 	std::thread(&c_bhop::run, g_bhop.get()).detach();
@@ -34,8 +41,11 @@ int main(int argc, const char *argv[]) {
 	std::thread(&c_skinchanger::run, g_skinchanger.get()).detach();
 	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
 
+	while (var::b_is_running)
+		timer::sleep(1000);
+
 	// Wait until stop signal
-	g_tui->render();
+	// g_tui->render();
 
 	var::b_is_running = false;
 

@@ -26,5 +26,9 @@ namespace var
 		inline std::vector<std::string> models = {};
 	}
 
+	namespace cache {
+		safe_vector<c_entity> vec = {};
+	}
+
 	inline bool b_is_running = true;
 }

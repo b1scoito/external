@@ -144,6 +144,9 @@
     <ClInclude Include="on_entity.hpp">
       <Filter>sdk\cache</Filter>
     </ClInclude>
+    <ClInclude Include="safe_vector.hpp">
+      <Filter>sdk\cache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

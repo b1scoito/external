@@ -146,6 +146,7 @@
     <ClInclude Include="on_update.hpp" />
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="process.hpp" />
+    <ClInclude Include="safe_vector.hpp" />
     <ClInclude Include="sdk.hpp" />
     <ClInclude Include="skinchanger.hpp" />
     <ClInclude Include="structs.hpp" />
