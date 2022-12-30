@@ -40,7 +40,9 @@ public: // Read
 	const Vector get_velocity() const;
 	const std::int32_t get_class_id() const;
 	const Vector bone_matrix(const int &bone) const;
-	const Vector eye_position() const;
+	const Vector eye_pos() const;
+	const Vector view_offset() const;
+	const Vector origin() const;
 	const bool is_alive() const;
 	const std::uintptr_t get_view_model() const;
 	const Vector aim_punch() const;

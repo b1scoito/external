@@ -3,8 +3,6 @@
 
 void c_tui::render() 
 {
-	auto screen = ScreenInteractive::Fullscreen();
-
 	// Aimbot
 	const auto aimbot_menu = wrap_menu(" - aimbot - ", Container::Vertical({
 		Checkbox("enable", &config.aimbot.b_aim_enable),
@@ -74,7 +72,8 @@ void c_tui::render()
 		"Visuals  ",
 		"Misc  ",
 		"Players  ",
-		"Config  "
+		"Config  ",
+		"Debug  ",
 	};
 
 	// Layout
@@ -106,6 +105,13 @@ void c_tui::render()
 		config_menu,
 	}) | flex;
 
+	int log_index = {};
+
+	// Players tab
+	const auto debug_tab = Container::Vertical({
+		Menu(&log, &log_index)
+	}) | flex;
+
 	int tab_selected = {};
 
 	auto tab_menu = Menu(&tab_values, &tab_selected, MenuOption::VerticalAnimated());
@@ -114,7 +120,8 @@ void c_tui::render()
 		visuals_tab,
 		misc_tab,
 		players_tab,
-		config_tab
+		config_tab,
+		debug_tab,
 	}, &tab_selected);
 
 	auto container = Container::Horizontal({
@@ -129,12 +136,19 @@ void c_tui::render()
 			hbox({
 				tab_menu->Render(),
 				separator(),
-				frame(tab_container->Render()),
+				tab_container->Render() | frame | vscroll_indicator,
 			}) | flex | border,
 		});
 	});
 
-	screen.Loop(component);
+	_screen.Loop(component);
+}
+
+void c_tui::add_log(std::string line) {
+	_screen.Post([&] {
+		log.push_back(line);
+		_screen.PostEvent(Event::Custom); // Cause a new frame to be drawn.
+	});
 }
 
 Component c_tui::render_menu() {

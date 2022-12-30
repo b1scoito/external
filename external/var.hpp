@@ -14,6 +14,7 @@ namespace var
 	namespace binds
 	{
 		inline auto hold_triggerbot_key = keybind(false, keybind_state_t::hold, VK_XBUTTON2);
+		inline auto hold_edgejump_key = keybind(false, keybind_state_t::hold, VK_XBUTTON1);
 		inline auto hold_aimbot_key = keybind(false, keybind_state_t::hold, VK_LBUTTON);
 	}
 
@@ -33,5 +34,5 @@ namespace var
 		inline safe_vector<c_entity> cached_entities = {};
 	}
 
-	inline bool b_is_running = true;
+	inline std::atomic<bool> b_is_running = true;
 }

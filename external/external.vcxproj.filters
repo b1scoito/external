@@ -61,6 +61,18 @@
     <Filter Include="sdk\cache">
       <UniqueIdentifier>{d2ffde6c-ba1d-4a93-afd2-f591807eee55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sdk\cache\entity">
+      <UniqueIdentifier>{97fb2fa9-adf5-4956-be49-ca44ede461d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cache\world">
+      <UniqueIdentifier>{ee67810e-58b4-457b-8925-fa511e95c64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cheats\edgejump">
+      <UniqueIdentifier>{6a25affa-6345-489b-aeb9-8a3f18de3620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\math">
+      <UniqueIdentifier>{dc797bf0-75c7-426e-a915-ac3f765accd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -138,14 +150,23 @@
     <ClInclude Include="tui.hpp">
       <Filter>utils\tui</Filter>
     </ClInclude>
-    <ClInclude Include="on_update.hpp">
-      <Filter>sdk\cache</Filter>
-    </ClInclude>
-    <ClInclude Include="on_entity.hpp">
-      <Filter>sdk\cache</Filter>
-    </ClInclude>
     <ClInclude Include="safe_vector.hpp">
       <Filter>sdk\cache</Filter>
+    </ClInclude>
+    <ClInclude Include="edgejump.hpp">
+      <Filter>cheats\edgejump</Filter>
+    </ClInclude>
+    <ClInclude Include="on_world.hpp">
+      <Filter>sdk\cache\world</Filter>
+    </ClInclude>
+    <ClInclude Include="on_entity.hpp">
+      <Filter>sdk\cache\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="math.hpp">
+      <Filter>utils\math</Filter>
+    </ClInclude>
+    <ClInclude Include="qangle.hpp">
+      <Filter>sdk\datatypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="tui.cpp">
       <Filter>utils\tui</Filter>
+    </ClCompile>
+    <ClCompile Include="edgejump.cpp">
+      <Filter>cheats\edgejump</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

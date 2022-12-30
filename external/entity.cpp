@@ -47,9 +47,9 @@ const bool c_entity::is_spotted() const
 
 const bool c_entity::is_visible_ray() const
 {
-	return var::bsp::parsed_map ? var::bsp::bp.is_visible(rn::vector3(g_local.eye_position().x, 
-		g_local.eye_position().y, g_local.eye_position().z), rn::vector3(this->eye_position().x,
-			this->eye_position().y, this->eye_position().z)) : false;
+	return var::bsp::parsed_map ? var::bsp::bp.is_visible(rn::vector3(g_local.eye_pos().x, 
+		g_local.eye_pos().y, g_local.eye_pos().z), rn::vector3(this->eye_pos().x,
+			this->eye_pos().y, this->eye_pos().z)) : false;
 }
 
 const bool c_entity::has_immunity() const
@@ -93,10 +93,18 @@ const Vector c_entity::bone_matrix(const int &bone) const
 	return vec_matrix;
 }
 
-const Vector c_entity::eye_position() const
+const Vector c_entity::eye_pos() const
 {
 	const auto vec_eye_pos = g_memory->read<Vector>(base_address + sdk::netvars::m_vecOrigin) + g_memory->read<Vector>(base_address + sdk::netvars::m_vecViewOffset);
 	return vec_eye_pos;
+}
+
+const Vector c_entity::view_offset() const {
+	return g_memory->read<Vector>(base_address + sdk::netvars::m_vecViewOffset);
+}
+
+const Vector c_entity::origin() const {
+	return g_memory->read<Vector>(base_address + sdk::netvars::m_vecOrigin);
 }
 
 const Vector c_entity::aim_punch() const

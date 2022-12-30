@@ -1,5 +1,7 @@
 #pragma once
 
+#include "engine.hpp"
+
 class c_skinchanger
 {
 public:

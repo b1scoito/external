@@ -1,10 +1,6 @@
 #include "pch.hpp"
 #include "bhop.hpp"
 
-#include "engine.hpp"
-#include "client.hpp"
-#include "entity.hpp"
-
 void c_bhop::run()
 {
 	while ( var::b_is_running )

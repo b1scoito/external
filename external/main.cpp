@@ -1,24 +1,19 @@
 #include "pch.hpp"
 
 // features
+#include "aimbot.hpp"
 #include "bhop.hpp"
 #include "glow.hpp"
-#include "triggerbot.hpp"
+#include "edgejump.hpp"
 #include "skinchanger.hpp"
-#include "aimbot.hpp"
-
-// sdk
-#include "engine.hpp"
-#include "client.hpp"
-#include "entity.hpp"
-#include "convar.hpp"
+#include "triggerbot.hpp"
 
 // menu
 #include "tui.hpp"
 
 // cache
-#include "on_update.hpp"
 #include "on_entity.hpp"
+#include "on_world.hpp"
 
 int main(int argc, const char *argv[]) {
 	std::atexit([]{ var::b_is_running = false; });
@@ -31,15 +26,16 @@ int main(int argc, const char *argv[]) {
 	config.run("external");
 
 	// Run update threads
-	std::thread(on_update_cache).detach();
+	std::thread(on_world_cache).detach();
 	std::thread(on_entity_cache).detach();
 
 	// Run cheat threads
+	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
 	std::thread(&c_bhop::run, g_bhop.get()).detach();
 	std::thread(&c_glow::run, g_glow.get()).detach();
-	std::thread(&c_triggerbot::run, g_triggerbot.get()).detach();
+	std::thread(&c_edgejump::run, g_edgejump.get()).detach();
 	std::thread(&c_skinchanger::run, g_skinchanger.get()).detach();
-	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
+	std::thread(&c_triggerbot::run, g_triggerbot.get()).detach();
 
 	// Wait until stop signal
 	g_tui->render();

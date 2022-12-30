@@ -1,8 +1,9 @@
 #pragma once 
 
 #include "pch.hpp"
+#include "convar.hpp"
 
-inline void on_update_cache() {
+inline void on_world_cache() {
 	while (var::b_is_running)
 	{
 		timer::sleep(1000);

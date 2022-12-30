@@ -1,10 +1,6 @@
 #include "pch.hpp"
 #include "aimbot.hpp"
 
-#include "engine.hpp"
-#include "client.hpp"
-#include "entity.hpp"
-
 void c_aimbot::run()
 {
 	while (var::b_is_running)
@@ -84,7 +80,7 @@ void c_aimbot::run()
 			const auto bone_matrix = entity.bone_matrix(sdk::structs::BONE_HEAD);
 
 			// Target angle of the enemy
-			const auto angle = calculate_angle(g_local.eye_position(), bone_matrix, g_engine->get_view_angles());
+			const auto angle = calculate_angle(g_local.eye_pos(), bone_matrix, g_engine->get_view_angles());
 			const auto fov = std::hypot(angle.x, angle.y);
 
 			if (fov < best_fov_local) {

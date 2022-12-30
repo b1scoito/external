@@ -1,10 +1,6 @@
 #include "pch.hpp"
 #include "skinchanger.hpp"
 
-#include "engine.hpp"
-#include "client.hpp"
-#include "entity.hpp"
-
 void c_skinchanger::populate_models()
 {
 	const auto client_state = g_engine->get_client_state();

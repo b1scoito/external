@@ -13,12 +13,16 @@ using namespace ftxui;
 class c_tui
 {
 public:
-	c_tui() = default;
+	c_tui() : _screen(ScreenInteractive::Fullscreen()) {};
 	~c_tui() = default;
 
 	void render();
 
+	void add_log(std::string line);
 private:
+	ScreenInteractive _screen;
+	std::vector<std::string> log = {};
+
 	Component render_menu();
 	Component wrap_menu(std::string name, Component component);
 };

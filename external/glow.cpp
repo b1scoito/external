@@ -1,10 +1,6 @@
 #include "pch.hpp"
 #include "glow.hpp"
 
-#include "engine.hpp"
-#include "client.hpp"
-#include "entity.hpp"
-
 void c_glow::run()
 {
 	while ( var::b_is_running )

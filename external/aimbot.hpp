@@ -1,5 +1,8 @@
 #pragma once
 
+#include "engine.hpp"
+#include "client.hpp"
+
 class c_aimbot
 {
 private:
