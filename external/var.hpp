@@ -33,5 +33,5 @@ namespace var
 		inline safe_vector<c_entity> cached_entities = {};
 	}
 
-	inline std::atomic<bool> b_is_running = true;
+	inline bool b_is_running = true;
 }

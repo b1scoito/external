@@ -41,11 +41,8 @@ int main(int argc, const char *argv[]) {
 	std::thread(&c_skinchanger::run, g_skinchanger.get()).detach();
 	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
 
-	while (var::b_is_running)
-		timer::sleep(1000);
-
 	// Wait until stop signal
-	// g_tui->render();
+	g_tui->render();
 
 	var::b_is_running = false;
 

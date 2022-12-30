@@ -58,9 +58,6 @@ void c_skinchanger::run()
 		if (var::skins::models.empty())
 			continue;
 
-		if (g_client->in_menu())
-			continue;
-
 		auto target_knife = (int)sdk::structs::item_definitions::WEAPON_KNIFE_M9_BAYONET;
 		auto model_index = find_model_index_by_name("models/weapons/v_knife_m9_bay.mdl");
 

@@ -8,9 +8,9 @@ inline void on_entity_cache()
 		timer::sleep(250);
 
 		// Update entity
-		for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
-		{
-
-		}
+		//for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
+		//{
+		//
+		//}
 	}
 }
