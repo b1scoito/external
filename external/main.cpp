@@ -1,5 +1,8 @@
 #include "pch.hpp"
 
+// menu
+#include "tui.hpp"
+
 // features
 #include "aimbot.hpp"
 #include "bhop.hpp"
@@ -7,9 +10,6 @@
 #include "edgejump.hpp"
 #include "skinchanger.hpp"
 #include "triggerbot.hpp"
-
-// menu
-#include "tui.hpp"
 
 // cache
 #include "on_entity.hpp"

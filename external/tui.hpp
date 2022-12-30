@@ -9,22 +9,20 @@
 #include "weapon.hpp"
 
 using namespace ftxui;
+inline std::vector<std::string> event_log;
 
 class c_tui
 {
+private:	
+	Component render_menu();
+	Component wrap_menu(std::string name, Component component);
+
 public:
-	c_tui() : _screen(ScreenInteractive::Fullscreen()) {};
+	c_tui() = default;
 	~c_tui() = default;
 
 	void render();
-
-	void add_log(std::string line);
-private:
-	ScreenInteractive _screen;
-	std::vector<std::string> log = {};
-
-	Component render_menu();
-	Component wrap_menu(std::string name, Component component);
+	void append_log(std::string_view msg);
 };
 
 inline auto g_tui = std::unique_ptr<c_tui>();

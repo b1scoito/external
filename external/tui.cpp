@@ -81,36 +81,35 @@ void c_tui::render()
 	const auto aimbot_tab = Container::Vertical({
 		aimbot_menu,
 		triggerbot_menu,
-	}) | flex;
+	}) | flex | frame | vscroll_indicator;
 
 	// Visuals tab
 	const auto visuals_tab = Container::Vertical({
 		glow_menu,
 		skinchanger_menu,
-	}) | flex;
+	}) | flex | frame | vscroll_indicator;
 
 	// Misc tab
 	const auto misc_tab = Container::Vertical({
 		bhop_menu,
 		edgejump_menu,
-	}) | flex;
+	}) | flex | frame | vscroll_indicator;
 
 	// Players tab
 	const auto players_tab = Container::Vertical({
 
-	}) | flex;
+	}) | flex | frame | vscroll_indicator;
 
 	// Config tab
 	const auto config_tab = Container::Vertical({
 		config_menu,
-	}) | flex;
+	}) | flex | frame | vscroll_indicator;
 
-	int log_index = {};
-
+	int selected_log_entry = {};
 	// Players tab
 	const auto debug_tab = Container::Vertical({
-		Menu(&log, &log_index)
-	}) | flex;
+		Menu(&event_log, &selected_log_entry)
+	}) | flex | frame | vscroll_indicator;
 
 	int tab_selected = {};
 
@@ -136,19 +135,31 @@ void c_tui::render()
 			hbox({
 				tab_menu->Render(),
 				separator(),
-				tab_container->Render() | frame | vscroll_indicator,
+				tab_container->Render(),
 			}) | flex | border,
 		});
 	});
 
-	_screen.Loop(component);
+	auto screen = ScreenInteractive::Fullscreen();
+
+	var::ui::needs_update = true;
+	std::thread post_event([&] {
+		while (var::ui::needs_update) {
+			using namespace std::chrono_literals;
+			const auto refresh_time = 1.0s / 60.0;
+			std::this_thread::sleep_for(refresh_time);
+			screen.PostEvent(Event::Custom);
+		}
+	});
+
+	screen.Loop(component);
+
+	var::ui::needs_update = false;
+	post_event.join();
 }
 
-void c_tui::add_log(std::string line) {
-	_screen.Post([&] {
-		log.push_back(line);
-		_screen.PostEvent(Event::Custom); // Cause a new frame to be drawn.
-	});
+void c_tui::append_log(std::string_view msg) {
+	event_log.push_back(msg.data());
 }
 
 Component c_tui::render_menu() {
@@ -156,7 +167,9 @@ Component c_tui::render_menu() {
 		return hbox({
 			text("external"),
 			separator(),
-			text("my glow color") | color(Color::RGB((uint8_t)config.visuals.f_glow_r, (uint8_t)config.visuals.f_glow_g, (uint8_t)config.visuals.f_glow_b)),
+			text("my glow color") | color(Color::RGB((uint8_t)config.visuals.f_glow_r, 
+													(uint8_t)config.visuals.f_glow_g, 
+													(uint8_t)config.visuals.f_glow_b)),
 		}) | border;
 	});
 }

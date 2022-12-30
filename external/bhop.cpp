@@ -51,7 +51,7 @@ void c_bhop::run()
 			continue;
 
 		// Check if on ground and jump, otherwise set -jump
-		if ( (g_local.get_flags() & sdk::structs::flags::FL_ONGROUND) )
+		if ((g_local.get_flags() & sdk::structs::flags::FL_ONGROUND))
 			g_client->force_jump( 5 ); // +jump
 		else
 			if (g_client->get_force_jump() == 5)

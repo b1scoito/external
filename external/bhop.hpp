@@ -2,6 +2,7 @@
 
 #include "engine.hpp"
 #include "client.hpp"
+#include "tui.hpp"
 
 class c_bhop
 {
