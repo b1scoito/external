@@ -1,16 +1,13 @@
 #include "pch.hpp"
-
 #include "convar.hpp"
-#include "sdk.hpp"
 
 // From: https://www.unknowncheats.me/forum/counterstrike-global-offensive/181308-external-convarfinder.html
-
-const int c_convar_manager::get_flags() const
+int c_convar_manager::get_flags() const
 {
 	return g_memory->read<std::int32_t>(this->cvar_address + 0x14);
 }
 
-const std::string c_convar_manager::get_default_value() const
+std::string c_convar_manager::get_default_value() const
 {
 	auto convar_default_value = std::make_unique<char[]>(255);
 
@@ -20,7 +17,7 @@ const std::string c_convar_manager::get_default_value() const
 	return {};
 }
 
-const std::string c_convar_manager::get_string() const
+std::string c_convar_manager::get_string() const
 {
 	auto convar_string = std::make_unique<char[]>(255);
 
@@ -30,27 +27,27 @@ const std::string c_convar_manager::get_string() const
 	return {};
 }
 
-const float c_convar_manager::get_float() const
+float c_convar_manager::get_float() const
 {
 	return g_memory->read<float>(this->cvar_address + 0x2C);
 }
 
-const std::int32_t c_convar_manager::get_int() const
+std::int32_t c_convar_manager::get_int() const
 {
 	return g_memory->read<std::int32_t>(this->cvar_address + 0x30);
 }
 
-const void c_convar_manager::set(std::string value) const
+void c_convar_manager::set(std::string value) const
 {
 	g_memory->write(g_memory->read<std::uintptr_t>(this->cvar_address + 0x24), value.data(), 255);
 }
 
-const void c_convar_manager::set(float value) const
+void c_convar_manager::set(float value) const
 {
 	g_memory->write<float>(this->cvar_address + 0x2C, value);
 }
 
-const void c_convar_manager::set(std::int32_t value) const
+void c_convar_manager::set(std::int32_t value) const
 {
 	g_memory->write<std::int32_t>(this->cvar_address + 0x30, value);
 }

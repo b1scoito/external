@@ -66,7 +66,7 @@ bool c_basesdk::run()
 	return true;
 }
 
-const bool c_basesdk::check_for_version_mismatch() const
+bool c_basesdk::check_for_version_mismatch() const
 {
 	wchar_t filename[MAX_PATH] = {};
 	if (!GetModuleFileNameEx(g_memory->get_handle(), NULL, filename, MAX_PATH))

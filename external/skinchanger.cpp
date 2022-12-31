@@ -54,10 +54,10 @@ void c_skinchanger::run()
 		if (var::skins::models.empty())
 			continue;
 
-		auto target_knife = (int)sdk::structs::item_definitions::WEAPON_KNIFE_M9_BAYONET;
+		auto target_knife = (int)sdk::structs::e_item_definitions::WEAPON_KNIFE_M9_BAYONET;
 		auto model_index = find_model_index_by_name("models/weapons/v_knife_m9_bay.mdl");
 
-		for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list)
+		for (const auto& [weapon_id, weapon_info] : sdk::structs::m_item_list)
 		{
 			if (weapon_info.name == var::skins::models[config.visuals.i_sc_selected_model_index])
 			{

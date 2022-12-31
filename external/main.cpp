@@ -26,6 +26,7 @@ int main(int argc, const char *argv[]) {
 	config.run("external");
 
 	// Run update threads
+	// TODO: Finish proper caching
 	std::thread(on_world_cache).detach();
 	std::thread(on_entity_cache).detach();
 
@@ -38,6 +39,7 @@ int main(int argc, const char *argv[]) {
 	std::thread(&c_triggerbot::run, g_triggerbot.get()).detach();
 
 	// Wait until stop signal
+	// TODO: Migrate to ImGui
 	g_tui->render();
 
 	var::b_is_running = false;

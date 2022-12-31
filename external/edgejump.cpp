@@ -18,7 +18,7 @@ void c_edgejump::run() {
 		if (!g_engine->in_game())
 			continue;
 
-		if (!(g_local.get_flags() & sdk::structs::flags::FL_ONGROUND))
+		if (!(g_local.get_flags() & sdk::structs::e_flags::FL_ONGROUND))
 			continue;
 
 		auto vec_origin = g_local.origin();

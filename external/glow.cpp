@@ -47,7 +47,7 @@ void c_glow::run()
 			if ( !entity.get_entity() )
 				continue;
 
-			if ( entity.get_class_id() != (int)sdk::structs::class_index::CCSPlayer )
+			if ( entity.get_class_id() != (int)sdk::structs::e_class_index::CCSPlayer )
 				continue;
 
 			if ( entity.is_localplayer() )
@@ -70,7 +70,7 @@ void c_glow::run()
 
 			if (config.visuals.b_glow_health_based) {
 				// Health glow
-				const auto entity_health = entity.health();
+				const auto entity_health = entity.get_health();
 				glow.set(
 					1.f - (entity_health / 100.f),	// R
 					entity_health / 100.f,			// G

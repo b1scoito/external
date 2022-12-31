@@ -29,7 +29,7 @@ public:
 	~c_basesdk();
 
 	bool run();
-	const bool check_for_version_mismatch() const;
+	bool check_for_version_mismatch() const;
 
 	constexpr auto &get_engine_image()
 	{

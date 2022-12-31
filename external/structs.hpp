@@ -70,7 +70,7 @@ namespace sdk
 			std::uint8_t	dFilesDownloaded;
 		};
 
-		enum entity_glow_render_style : int
+		enum e_glow_render_style : int
 		{
 			GLOWRENDERSTYLE_DEFAULT = 0,
 			GLOWRENDERSTYLE_RIMGLOW3D,
@@ -115,7 +115,7 @@ namespace sdk
 		};										// Size: 0x38
 
 		/* baseentity flags */
-		enum flags : int
+		enum e_flags : int
 		{
 			FL_ONGROUND = (1 << 0),
 			FL_DUCKING = (1 << 1),
@@ -151,7 +151,7 @@ namespace sdk
 			FL_UNBLOCKABLE_BY_PLAYER = (1 << 31)
 		};
 
-		enum move_type : int
+		enum e_move_type : int
 		{
 			MOVETYPE_NONE = 0,
 			MOVETYPE_ISOMETRIC,
@@ -169,7 +169,7 @@ namespace sdk
 			MOVETYPE_MAX_BITS = 4
 		};
 
-		enum team_id : int
+		enum e_team_id : int
 		{
 			TEAM_UNASSIGNED = 0,
 			TEAM_SPECTATOR,
@@ -178,7 +178,7 @@ namespace sdk
 		};
 
 		/* baseentity lifestate */
-		enum life_state : int
+		enum e_life_state : int
 		{
 			LIFE_ALIVE = 0,
 			LIFE_DYING,
@@ -187,7 +187,7 @@ namespace sdk
 			LIFE_DISCARDBODY
 		};
 
-		enum bone_index : int
+		enum e_bone_index : int
 		{
 			BONE_INVALID = -1,
 			BONE_PELVIS,
@@ -276,7 +276,7 @@ namespace sdk
 			BONE_PRIMARY_JIGGLE_JNT,
 		};
 
-		enum game_type : int
+		enum e_game_type : int
 		{
 			GAMETYPE_UNKNOWN = -1,
 			GAMETYPE_CLASSIC,
@@ -288,7 +288,7 @@ namespace sdk
 			GAMETYPE_FREEFORALL
 		};
 
-		enum class class_index : int
+		enum class e_class_index : int
 		{
 			CAI_BaseNPC = 0,
 			CAK47,
@@ -576,7 +576,7 @@ namespace sdk
 			SporeTrail,
 		};
 
-		enum item_definitions : short
+		enum e_item_definitions : short
 		{
 			WEAPON_NONE = 0,
 			WEAPON_DEAGLE = 1,
@@ -716,6 +716,26 @@ namespace sdk
 			SPECIAL_AGENT_B_SQUADRON_OFFICER = 5601
 		};
 
+		enum e_weapon_type : int
+		{
+			WEAPONTYPE_KNIFE = 0,
+			WEAPONTYPE_PISTOL = 1,
+			WEAPONTYPE_SUBMACHINEGUN = 2,
+			WEAPONTYPE_RIFLE = 3,
+			WEAPONTYPE_SHOTGUN = 4,
+			WEAPONTYPE_SNIPER = 5,
+			WEAPONTYPE_MACHINEGUN = 6,
+			WEAPONTYPE_C4 = 7,
+			WEAPONTYPE_PLACEHOLDER = 8,
+			WEAPONTYPE_GRENADE = 9,
+			WEAPONTYPE_HEALTHSHOT = 11,
+			WEAPONTYPE_FISTS = 12,
+			WEAPONTYPE_BREACHCHARGE = 13,
+			WEAPONTYPE_BUMPMINE = 14,
+			WEAPONTYPE_TABLET = 15,
+			WEAPONTYPE_MELEE = 16
+		};
+
 		struct skinobj_t
 		{
 			skinobj_t(const char* name, const char* model, const char* kill_icon = nullptr)
@@ -726,7 +746,7 @@ namespace sdk
 			const char* kill_icon = nullptr;
 		};
 
-		const std::unordered_map<int, skinobj_t> item_list = {
+		const std::unordered_map<int, skinobj_t> m_item_list = {
 			{ sdk::structs::WEAPON_DEAGLE, { "Desert Eagle", "models/weapons/v_pist_deagle.mdl", "deagle" } },
 			{ sdk::structs::WEAPON_ELITE, { "Dual Berettas", "models/weapons/v_pist_elite.mdl", "elite" } },
 			{ sdk::structs::WEAPON_FIVESEVEN, { "Five-SeveN", "models/weapons/v_pist_fiveseven.mdl", "fiveseven" } },
@@ -781,6 +801,108 @@ namespace sdk
 			{ sdk::structs::WEAPON_KNIFE_STILETTO, { "Stiletto Knife", "models/weapons/v_knife_stiletto.mdl", "knife_stiletto" } },
 			{ sdk::structs::WEAPON_KNIFE_WIDOWMAKER, { "Talon Knife", "models/weapons/v_knife_widowmaker.mdl", "knife_widowmaker" } },
 			{ sdk::structs::WEAPON_KNIFE_SKELETON, { "Skeleton Knife", "models/weapons/v_knife_skeleton.mdl", "knife_skeleton" } },
+		};
+
+		class weapon_data_t
+		{
+		public:
+			std::byte pad0[0x14];			// 0x0000
+			int iMaxClip1;					// 0x0014
+			int iMaxClip2;					// 0x0018
+			int iDefaultClip1;				// 0x001C
+			int iDefaultClip2;				// 0x0020
+			int iPrimaryMaxReserveAmmo;		// 0x0024
+			int iSecondaryMaxReserveAmmo;	// 0x0028
+			const char* szWorldModel;		// 0x002C
+			const char* szViewModel;		// 0x0030
+			const char* szDroppedModel;		// 0x0034
+			std::byte pad1[0x50];			// 0x0038
+			const char* szHudName;			// 0x0088
+			const char* szWeaponName;		// 0x008C
+			std::byte pad2[0x2];			// 0x0090
+			bool bIsMeleeWeapon;			// 0x0092
+			std::byte pad3[0x9];			// 0x0093
+			float flWeaponWeight;			// 0x009C
+			std::byte pad4[0x4];			// 0x00A0
+			int iSlot;						// 0x00A4
+			int iPosition;					// 0x00A8
+			std::byte pad5[0x1C];			// 0x00AC
+			int nWeaponType;				// 0x00C8
+			std::byte pad6[0x4];			// 0x00CC
+			int iWeaponPrice;				// 0x00D0
+			int iKillAward;					// 0x00D4
+			const char* szAnimationPrefix;	// 0x00D8
+			float flCycleTime;				// 0x00DC
+			float flCycleTimeAlt;			// 0x00E0
+			std::byte pad8[0x8];			// 0x00E4
+			bool bFullAuto;					// 0x00EC
+			std::byte pad9[0x3];			// 0x00ED
+			int iDamage;					// 0x00F0
+			float flHeadShotMultiplier;		// 0x00F4
+			float flArmorRatio;				// 0x00F8
+			int iBullets;					// 0x00FC
+			float flPenetration;			// 0x0100
+			std::byte pad10[0x8];			// 0x0104
+			float flRange;					// 0x010C
+			float flRangeModifier;			// 0x0110
+			float flThrowVelocity;			// 0x0114
+			std::byte pad11[0xC];			// 0x0118
+			bool bHasSilencer;				// 0x0124
+			std::byte pad12[0xF];			// 0x0125
+			float flMaxSpeed[2];			// 0x0134
+			std::byte pad13[0x4];			// 0x013C
+			float flSpread[2];				// 0x0140
+			float flInaccuracyCrouch[2];	// 0x0148
+			float flInaccuracyStand[2];		// 0x0150
+			std::byte pad14[0x8];			// 0x0158
+			float flInaccuracyJump[2];		// 0x0160
+			float flInaccuracyLand[2];		// 0x0168
+			float flInaccuracyLadder[2];	// 0x0170
+			float flInaccuracyFire[2];		// 0x0178
+			float flInaccuracyMove[2];		// 0x0180
+			float flInaccuracyReload;		// 0x0188
+			int iRecoilSeed;				// 0x018C
+			float flRecoilAngle[2];			// 0x0190
+			float flRecoilAngleVariance[2];	// 0x0198
+			float flRecoilMagnitude[2];		// 0x01A0
+			float flRecoilMagnitudeVariance[2]; // 0x01A8
+			int iSpreadSeed;				// 0x01B0
+
+			bool is_gun() const {
+				switch (this->nWeaponType) {
+					case WEAPONTYPE_PISTOL:
+					case WEAPONTYPE_SUBMACHINEGUN:
+					case WEAPONTYPE_RIFLE:
+					case WEAPONTYPE_SHOTGUN:
+					case WEAPONTYPE_SNIPER:
+					case WEAPONTYPE_MACHINEGUN:
+						return true;
+				}
+
+				return false;
+			}
+		};
+
+		struct weapon_info_table_object_t
+		{
+			std::byte pad_0x0000[0x8]; // 0x0000
+			short item_definition_index; // 0x0008 
+			std::byte pad_0x000A[0x2]; // 0x000A
+			weapon_data_t* weapon_info; // 0x000C    WeaponInfo*
+		};
+
+		struct weapon_info_table_t
+		{
+			std::byte pad_0x0000[0x8]; // 0x0000
+			weapon_info_table_object_t* weapon_table; // 0x0008 
+			short max_index; // 0x000C 
+			std::byte pad_0x000E[0x6]; // 0x000E
+			short N00000006; // 0x0014 
+			short N000011D5; // 0x0016 
+			std::byte pad_0x0018[0x2]; // 0x0018
+			short last_index; // 0x001A 
+			int WeaponTable2; // 0x001C 
+			std::byte pad_0x0020[0x820]; // 0x0020
 		};
 	}
 }

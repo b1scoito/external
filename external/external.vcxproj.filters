@@ -73,6 +73,12 @@
     <Filter Include="utils\math">
       <UniqueIdentifier>{dc797bf0-75c7-426e-a915-ac3f765accd7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sdk\classes\entity">
+      <UniqueIdentifier>{ca0538ce-63c1-4e49-a9c6-8b1f91c879d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\classes\engine">
+      <UniqueIdentifier>{5e3b732d-4c56-4e59-a5b8-ebf922f36130}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -114,23 +120,11 @@
     <ClInclude Include="process.hpp">
       <Filter>utils\process</Filter>
     </ClInclude>
-    <ClInclude Include="entity.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="client.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
     <ClInclude Include="triggerbot.hpp">
       <Filter>cheats\triggerbot</Filter>
     </ClInclude>
     <ClInclude Include="vector.hpp">
       <Filter>sdk\datatypes</Filter>
-    </ClInclude>
-    <ClInclude Include="engine.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="convar.hpp">
-      <Filter>sdk\classes</Filter>
     </ClInclude>
     <ClInclude Include="skinchanger.hpp">
       <Filter>cheats\skinchanger</Filter>
@@ -143,9 +137,6 @@
     </ClInclude>
     <ClInclude Include="archivex.hpp">
       <Filter>utils\config</Filter>
-    </ClInclude>
-    <ClInclude Include="weapon.hpp">
-      <Filter>sdk\classes</Filter>
     </ClInclude>
     <ClInclude Include="tui.hpp">
       <Filter>utils\tui</Filter>
@@ -168,6 +159,21 @@
     <ClInclude Include="qangle.hpp">
       <Filter>sdk\datatypes</Filter>
     </ClInclude>
+    <ClInclude Include="entity.hpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="weapon.hpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="client.hpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="convar.hpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.hpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -189,18 +195,6 @@
     <ClCompile Include="triggerbot.cpp">
       <Filter>cheats\triggerbot</Filter>
     </ClCompile>
-    <ClCompile Include="client.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="convar.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="engine.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
     <ClCompile Include="skinchanger.cpp">
       <Filter>cheats\skinchanger</Filter>
     </ClCompile>
@@ -210,14 +204,26 @@
     <ClCompile Include="config.cpp">
       <Filter>utils\config</Filter>
     </ClCompile>
-    <ClCompile Include="weapon.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
     <ClCompile Include="tui.cpp">
       <Filter>utils\tui</Filter>
     </ClCompile>
     <ClCompile Include="edgejump.cpp">
       <Filter>cheats\edgejump</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="weapon.cpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="convar.cpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>sdk\classes\engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

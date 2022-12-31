@@ -54,12 +54,12 @@ void c_aimbot::run()
 
 		for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
 		{
-			const c_entity entity(g_memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10)));
+			const c_entity entity(g_memory->read<std::uintptr_t>(sdk::base->get_client_image().base + sdk::offsets::dwEntityList + (i * 0x10)), i);
 
 			if (!entity.get_entity())
 				continue;
 
-			if (entity.get_class_id() != (int)sdk::structs::class_index::CCSPlayer)
+			if (entity.get_class_id() != (int)sdk::structs::e_class_index::CCSPlayer)
 				continue;
 
 			if (entity.is_localplayer())

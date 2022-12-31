@@ -6,8 +6,6 @@
 inline void on_world_cache() {
 	while (var::b_is_running)
 	{
-		timer::sleep(1000);
-
 		// Clear variables outside game
 		if (!g_engine->in_game())
 		{
@@ -19,7 +17,7 @@ inline void on_world_cache() {
 		}
 
 		// Parse BSP when in game
-		static std::string current_map = "";
+		static std::string current_map;
 		std::string map = g_engine->get_map_name();
 		if (map != current_map) {
 			current_map = map;
@@ -42,5 +40,7 @@ inline void on_world_cache() {
 		// Populate model index list if none
 		if (g_model_index_list.empty())
 			g_skinchanger->populate_models();
+
+		timer::sleep(1000);
 	}
 }

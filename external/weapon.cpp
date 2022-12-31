@@ -1,41 +1,30 @@
 #include "pch.hpp"
 #include "weapon.hpp"
 
-const bool c_weapon::is_sniper() const {
-	return false;
-}
-const bool c_weapon::is_pistol() const {
-	return false;
-}
-const bool c_weapon::is_knife() const {
-	static const std::vector<sdk::structs::item_definitions> knives = {
-		sdk::structs::WEAPON_KNIFE_GG,
-		sdk::structs::WEAPON_KNIFE,
-		sdk::structs::WEAPON_KNIFE_T,
-		sdk::structs::WEAPON_KNIFE_GHOST,
-		sdk::structs::WEAPON_KNIFE_BAYONET,
-		sdk::structs::WEAPON_KNIFE_CSS,
-		sdk::structs::WEAPON_KNIFE_FLIP,
-		sdk::structs::WEAPON_KNIFE_GUT,
-		sdk::structs::WEAPON_KNIFE_KARAMBIT,
-		sdk::structs::WEAPON_KNIFE_M9_BAYONET,
-		sdk::structs::WEAPON_KNIFE_TACTICAL,
-		sdk::structs::WEAPON_KNIFE_FALCHION,
-		sdk::structs::WEAPON_KNIFE_SURVIVAL_BOWIE,
-		sdk::structs::WEAPON_KNIFE_BUTTERFLY,
-		sdk::structs::WEAPON_KNIFE_PUSH,
-		sdk::structs::WEAPON_KNIFE_CORD,
-		sdk::structs::WEAPON_KNIFE_CANIS,
-		sdk::structs::WEAPON_KNIFE_URSUS,
-		sdk::structs::WEAPON_KNIFE_GYPSY_JACKKNIFE,
-		sdk::structs::WEAPON_KNIFE_OUTDOOR,
-		sdk::structs::WEAPON_KNIFE_STILETTO,
-		sdk::structs::WEAPON_KNIFE_WIDOWMAKER,
-		sdk::structs::WEAPON_KNIFE_SKELETON,
-	};
-	return std::find(knives.begin(), knives.end(), this->index) != knives.end();
+// Thanks to: https://www.unknowncheats.me/forum/counterstrike-global-offensive/408596-ccsweapondata-itemdefinitionindex-internal-external.html
+sdk::structs::weapon_data_t c_weapon::get_weapon_data() const {
+	auto weapon_table = g_memory->read<sdk::structs::weapon_info_table_t>(sdk::base->get_client_image().base + sdk::offsets::dwWeaponTable);
+
+	for (std::int16_t i = 0; i <= weapon_table.last_index; i++)
+	{
+		auto current_weapon = g_memory->read<sdk::structs::weapon_info_table_object_t>((std::uintptr_t)weapon_table.weapon_table + sizeof(sdk::structs::weapon_info_table_object_t) * i); // weapon_data_t* pWeaponInfo; 0x000C WeaponInfo*
+		if (current_weapon.item_definition_index == this->index)
+			return g_memory->read<sdk::structs::weapon_data_t>((std::uintptr_t)current_weapon.weapon_info);
+	}
+
+	return {};
 }
 
-const bool c_weapon::is_grenade() const {
-	return false;
+std::int32_t c_weapon::get_table_index() const {
+	return g_memory->read<std::int32_t>(this->address + sdk::offsets::dwWeaponTableIndex);
+}
+
+std::string c_weapon::get_weapon_name_from_index() const {
+	for (const auto& [weapon_id, weapon_info] : sdk::structs::m_item_list)
+	{
+		if (weapon_id == this->index)
+			return std::string(weapon_info.name);
+	}
+
+	return {};
 }

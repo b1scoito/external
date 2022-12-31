@@ -33,10 +33,10 @@ void c_tui::render()
 		}),
 	}));
 
-	for (const auto& [weapon_id, weapon_info] : sdk::structs::item_list) {
+	/*for (const auto& [weapon_id, weapon_info] : sdk::structs::m_item_list) {
 		if (c_weapon(weapon_id).is_knife())
-			var::skins::models.push_back(weapon_info.name);
-	}
+			var::skins::models.emplace_back(weapon_info.name);
+	}*/
 
 	// Skin changer
 	const auto skinchanger_menu = wrap_menu(" - skin changer - ", Container::Vertical({
@@ -159,7 +159,7 @@ void c_tui::render()
 }
 
 void c_tui::append_log(std::string_view msg) {
-	event_log.push_back(msg.data());
+	event_log.emplace_back(msg.data());
 }
 
 Component c_tui::render_menu() {
