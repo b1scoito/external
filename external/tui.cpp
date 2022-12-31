@@ -33,10 +33,10 @@ void c_tui::render()
 		}),
 	}));
 
-	/*for (const auto& [weapon_id, weapon_info] : sdk::structs::m_item_list) {
-		if (c_weapon(weapon_id).is_knife())
+	for (const auto& [weapon_id, weapon_info] : sdk::structs::m_item_list) {
+		if (weapon_id > sdk::structs::WEAPON_KNIFE_BAYONET && weapon_id < sdk::structs::WEAPON_KNIFE_SKELETON)
 			var::skins::models.emplace_back(weapon_info.name);
-	}*/
+	}
 
 	// Skin changer
 	const auto skinchanger_menu = wrap_menu(" - skin changer - ", Container::Vertical({

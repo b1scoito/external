@@ -31,6 +31,9 @@ int main(int argc, const char *argv[]) {
 	std::thread(on_entity_cache).detach();
 
 	// Run cheat threads
+	// Fix: aimbot, edgejump
+	// Add: more features to: glow, skinchanger
+	// Change: triggerbot logic
 	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
 	std::thread(&c_bhop::run, g_bhop.get()).detach();
 	std::thread(&c_glow::run, g_glow.get()).detach();

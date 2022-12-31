@@ -29,9 +29,4 @@ public: // Read
 	sdk::structs::weapon_data_t get_weapon_data() const;
 	std::int32_t get_table_index() const;
 	std::string get_weapon_name_from_index() const;
-
-	bool is_sniper() const;
-	bool is_pistol() const;
-	bool is_knife() const;
-	bool is_grenade() const;
 };
