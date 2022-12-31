@@ -33,6 +33,15 @@ inline void on_world_cache() {
 			g_local = c_entity(addr, index);
 		}
 
+		// Populate model vector if none
+		if (var::skins::models.empty())
+		{
+			for (const auto& [weapon_id, weapon_info] : sdk::structs::m_item_list) {
+				if (weapon_id > sdk::structs::WEAPON_KNIFE_BAYONET && weapon_id < sdk::structs::WEAPON_KNIFE_SKELETON)
+					var::skins::models.emplace_back(weapon_info.name);
+			}
+		}
+
 		// Populate convar list if none
 		if (g_convar_list.empty())
 			g_convar->populate_convars();

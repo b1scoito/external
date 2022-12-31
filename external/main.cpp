@@ -1,7 +1,7 @@
 #include "pch.hpp"
 
 // menu
-#include "tui.hpp"
+#include "menu.hpp"
 
 // features
 #include "aimbot.hpp"
@@ -15,6 +15,7 @@
 #include "on_entity.hpp"
 #include "on_world.hpp"
 
+// TODO: Fix Release compile
 int main(int argc, const char *argv[]) {
 	std::atexit([]{ var::b_is_running = false; });
 
@@ -41,9 +42,16 @@ int main(int argc, const char *argv[]) {
 	std::thread(&c_skinchanger::run, g_skinchanger.get()).detach();
 	std::thread(&c_triggerbot::run, g_triggerbot.get()).detach();
 
+	// TODO: See what's causing all loops to lag after implementing ImGui
 	// Wait until stop signal
-	// TODO: Migrate to ImGui
-	g_tui->render();
+	if (!g_menu->setup())
+	{
+		g_menu->destroy();
+		return EXIT_FAILURE;
+	}
+
+	// Render loop
+	g_menu->render();
 
 	var::b_is_running = false;
 

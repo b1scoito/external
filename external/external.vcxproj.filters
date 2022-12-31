@@ -55,9 +55,6 @@
     <Filter Include="utils\config">
       <UniqueIdentifier>{dc99bdfa-8e54-4569-9337-abf1b401d8ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="utils\tui">
-      <UniqueIdentifier>{2862286a-f8b2-4079-8b9f-21c9396cdd1c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="sdk\cache">
       <UniqueIdentifier>{d2ffde6c-ba1d-4a93-afd2-f591807eee55}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     </Filter>
     <Filter Include="sdk\classes\engine">
       <UniqueIdentifier>{5e3b732d-4c56-4e59-a5b8-ebf922f36130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\menu">
+      <UniqueIdentifier>{2862286a-f8b2-4079-8b9f-21c9396cdd1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,8 +138,8 @@
     <ClInclude Include="archivex.hpp">
       <Filter>utils\config</Filter>
     </ClInclude>
-    <ClInclude Include="tui.hpp">
-      <Filter>utils\tui</Filter>
+    <ClInclude Include="menu.hpp">
+      <Filter>utils\menu</Filter>
     </ClInclude>
     <ClInclude Include="safe_vector.hpp">
       <Filter>sdk\cache</Filter>
@@ -204,8 +204,8 @@
     <ClCompile Include="config.cpp">
       <Filter>utils\config</Filter>
     </ClCompile>
-    <ClCompile Include="tui.cpp">
-      <Filter>utils\tui</Filter>
+    <ClCompile Include="menu.cpp">
+      <Filter>utils\menu</Filter>
     </ClCompile>
     <ClCompile Include="edgejump.cpp">
       <Filter>cheats\edgejump</Filter>

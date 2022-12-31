@@ -50,14 +50,14 @@
     <OutDir>.\out\dbg\</OutDir>
     <IntDir>.\out\dbg\obj\</IntDir>
     <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>.\out\rel\</OutDir>
     <IntDir>.\out\rel\obj\</IntDir>
     <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Release-x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Release-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnabled>true</VcpkgEnabled>
@@ -92,7 +92,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ftxui-component.lib;ftxui-dom.lib;ftxui-screen.lib;valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
@@ -124,9 +124,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>ftxui-component.lib;ftxui-dom.lib;ftxui-screen.lib;valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <ProgramDatabaseFile>$(TargetName).pdb</ProgramDatabaseFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -154,7 +155,7 @@
     <ClInclude Include="skinchanger.hpp" />
     <ClInclude Include="structs.hpp" />
     <ClInclude Include="triggerbot.hpp" />
-    <ClInclude Include="tui.hpp" />
+    <ClInclude Include="menu.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
     <ClInclude Include="vector.hpp" />
@@ -183,7 +184,7 @@
     </ClCompile>
     <ClCompile Include="skinchanger.cpp" />
     <ClCompile Include="triggerbot.cpp" />
-    <ClCompile Include="tui.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

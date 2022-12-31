@@ -5,6 +5,7 @@
 #include <shlobj.h>
 #include <fstream>
 #include <filesystem>
+#include <imgui.h>
 
 class c_config
 {
@@ -42,10 +43,7 @@ public:
 		bool b_glow_health_based = false;
 		bool b_glow_visible_only = false;
 
-		float f_glow_r = 0.0f;
-		float f_glow_g = 0.0f;
-		float f_glow_b = 255.0f;
-		float f_glow_a = 1.0f;
+		ImVec4 f_glow_color = {0.f, 0.f, 255.f, 1.f};
 
 		// Skin changer
 		bool b_sc_enable = false;

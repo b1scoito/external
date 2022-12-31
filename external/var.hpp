@@ -27,7 +27,7 @@ namespace var
 	namespace skins
 	{
 		inline std::string str_paint_kit = {};
-		inline std::vector<std::string> models = {};
+		inline std::vector<const char *> models = {};
 	}
 
 	namespace cache {
@@ -38,5 +38,5 @@ namespace var
 		inline std::atomic<bool> needs_update = {};
 	}
 
-	inline std::atomic<bool> b_is_running = true;
+	inline bool b_is_running = true;
 }

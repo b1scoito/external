@@ -75,15 +75,15 @@ void c_glow::run()
 					1.f - (entity_health / 100.f),	// R
 					entity_health / 100.f,			// G
 					0.f / 255.f,					// B
-					config.visuals.f_glow_a			// A
+					config.visuals.f_glow_color.w	// A
 				);
 			}
 			else {
 				glow.set(
-					config.visuals.f_glow_r / 255.f,	// R
-					config.visuals.f_glow_g / 255.f,	// G
-					config.visuals.f_glow_b / 255.f,	// B
-					config.visuals.f_glow_a				// A
+					config.visuals.f_glow_color.x,	// R
+					config.visuals.f_glow_color.y,	// G
+					config.visuals.f_glow_color.z,	// B
+					config.visuals.f_glow_color.w			// A
 				);
 			}
 
