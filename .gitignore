@@ -3,14 +3,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-*.build.props
-
 # User-specific files
 *.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+*.build.props
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -20,11 +19,11 @@ mono_crash.*
 
 # Build results
 [Dd]ebug/
-[Dd]bg/
 [Dd]ebugPublic/
 [Rr]elease/
-[Rr]el/
 [Rr]eleases/
+dbg/
+rel/
 x64/
 x86/
 [Ww][Ii][Nn]32/
@@ -305,7 +304,7 @@ node_modules/
 *.dsw
 *.dsp
 
-# Visual Studio 6 technical files 
+# Visual Studio 6 technical files
 *.ncb
 *.aps
 
