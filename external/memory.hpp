@@ -11,23 +11,23 @@ private:
 	HANDLE process_handle{};
 	DWORD process_id{};
 
-	bool memory_compare(const std::uint8_t* bData, const std::uint8_t* bMask, const char* szMask);
+	bool memory_compare(const std::uint8_t *bData, const std::uint8_t *bMask, const char *szMask);
 
 public:
 	c_memory() = default;
 	~c_memory() = default;
 
-	std::uintptr_t pattern_scan(std::uintptr_t dll_base, const char* sig, const char* mask);
-	std::uintptr_t read_chain(std::uintptr_t dw_address, const std::vector<std::uintptr_t>& offsets);
+	std::uintptr_t pattern_scan(std::uintptr_t dll_base, const char *sig, const char *mask);
+	std::uintptr_t read_chain(std::uintptr_t dw_address, const std::vector<std::uintptr_t> &offsets);
 
-	bool get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data);
+	bool get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t> &data);
 
 	bool attach();
 
 	bool read(std::uintptr_t dw_address, LPVOID lp_buffer, std::uintptr_t dw_size) const;
 
 	template <typename T>
-	T read(std::uintptr_t dwAddress, const T& tDefault = T())
+	T read(std::uintptr_t dwAddress, const T &tDefault = T())
 	{
 		T t_ret{};
 		if (!read(dwAddress, &t_ret, sizeof(T)))
@@ -53,7 +53,7 @@ public:
 	bool unload();
 
 	template <typename T>
-	bool write(std::uintptr_t dwAddress, const T& tValue)
+	bool write(std::uintptr_t dwAddress, const T &tValue)
 	{
 		return write(dwAddress, &tValue, sizeof(T));
 	}
@@ -73,7 +73,7 @@ public:
 		return true;
 	}
 
-	constexpr auto& get_handle() const 
+	constexpr auto &get_handle() const
 	{
 		return process_handle;
 	}

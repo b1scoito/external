@@ -1,7 +1,7 @@
 #include "pch.hpp"
 #include "memory.hpp"
 
-bool c_memory::memory_compare(const std::uint8_t* bData, const std::uint8_t* bMask, const char* szMask)
+bool c_memory::memory_compare(const std::uint8_t *bData, const std::uint8_t *bMask, const char *szMask)
 {
 	for (; *szMask; ++szMask, ++bData, ++bMask)
 	{
@@ -12,7 +12,7 @@ bool c_memory::memory_compare(const std::uint8_t* bData, const std::uint8_t* bMa
 	return (*szMask == NULL);
 }
 
-std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char* sig, const char* mask)
+std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char *sig, const char *mask)
 {
 	// for signatures that are hardcoded and not set
 	if (!dll_base || sig == nullptr || mask == nullptr)
@@ -21,7 +21,8 @@ std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char* sig, 
 	static std::uint32_t section_base_addr = {};
 	static std::uint32_t section_size = {};
 
-	std::call_once(grab_text_section_once, [this, dll_base]() {
+	std::call_once(grab_text_section_once, [this, dll_base]()
+				   {
 		const std::uint16_t dos_sig = read<std::uint16_t>(dll_base);
 		if (dos_sig != IMAGE_DOS_SIGNATURE)
 			return NULL;
@@ -62,8 +63,7 @@ std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char* sig, 
 			}
 		}
 
-		return 1;
-		});
+		return 1; });
 
 	if (!section_base_addr || !section_size)
 		return NULL;
@@ -73,14 +73,14 @@ std::uintptr_t c_memory::pattern_scan(std::uintptr_t dll_base, const char* sig, 
 	read(dll_base + section_base_addr, data.get(), section_size);
 	for (std::uint32_t i = 0; i < section_size; ++i)
 	{
-		if (memory_compare((const std::uint8_t*)(data.get() + i), (const std::uint8_t*)sig, mask))
+		if (memory_compare((const std::uint8_t *)(data.get() + i), (const std::uint8_t *)sig, mask))
 			return dll_base + section_base_addr + i;
 	}
 
 	return NULL;
 }
 
-std::uintptr_t c_memory::read_chain(std::uintptr_t dw_address, const std::vector<uintptr_t>& offsets)
+std::uintptr_t c_memory::read_chain(std::uintptr_t dw_address, const std::vector<uintptr_t> &offsets)
 {
 	auto result = read<std::uintptr_t>(dw_address + offsets.at(0));
 
@@ -107,13 +107,14 @@ bool c_memory::unload()
 	return CloseHandle(process_handle) != 0;
 }
 
-bool c_memory::get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t>& data)
+bool c_memory::get_module(std::wstring_view mod, std::pair<std::uintptr_t, std::uintptr_t> &data)
 {
 	HANDLE handle = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, process_id);
 	if (handle == INVALID_HANDLE_VALUE)
 		return false;
 
-	MODULEENTRY32 entry = {}; entry.dwSize = sizeof(entry);
+	MODULEENTRY32 entry = {};
+	entry.dwSize = sizeof(entry);
 	if (!Module32First(handle, &entry))
 	{
 		CloseHandle(handle);
@@ -141,7 +142,8 @@ bool c_memory::attach()
 	if (handle == INVALID_HANDLE_VALUE)
 		return false;
 
-	PROCESSENTRY32 entry = {}; entry.dwSize = sizeof(entry);
+	PROCESSENTRY32 entry = {};
+	entry.dwSize = sizeof(entry);
 	if (!Process32First(handle, &entry))
 	{
 		CloseHandle(handle);
@@ -150,7 +152,7 @@ bool c_memory::attach()
 
 	do
 	{
-		if (var::game::str_process == entry.szExeFile)
+		if (var::cs::str_process == entry.szExeFile)
 		{
 			process_id = entry.th32ProcessID;
 			CloseHandle(handle);

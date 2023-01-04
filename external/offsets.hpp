@@ -4,11 +4,13 @@
 
 // 2022-12-17 02:01:15.156766200 UTC
 
-namespace sdk {
+namespace sdk
+{
 	constexpr ::std::int64_t timestamp = 1671242475;
 	inline std::string current_game_version = xorstr("1539");
 
-	namespace netvars {
+	namespace netvars
+	{
 		static constexpr std::uintptr_t cs_gamerules_data = 0x0;
 		static constexpr std::uintptr_t m_ArmorValue = 0x117CC;
 		static constexpr std::uintptr_t m_Collision = 0x320;
@@ -106,7 +108,8 @@ namespace sdk {
 		static constexpr std::uintptr_t m_zoomLevel = 0x33E0;
 	} // namespace netvars
 
-	namespace offsets {
+	namespace offsets
+	{
 		static constexpr std::uintptr_t anim_overlays = 0x2990;
 		static constexpr std::uintptr_t clientstate_choked_commands = 0x4D30;
 		static constexpr std::uintptr_t clientstate_delta_ticks = 0x174;

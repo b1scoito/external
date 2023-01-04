@@ -43,9 +43,6 @@
     <Filter Include="utils\lazyimporter">
       <UniqueIdentifier>{ac5f3c1b-9dc1-4f31-985f-2d9915123ab2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="utils\console">
-      <UniqueIdentifier>{5e1921a1-a3d7-4c3a-b54d-70b6704edcd8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils\precompiled">
       <UniqueIdentifier>{a8478ac4-0a80-4b7e-8532-bb54415432f7}</UniqueIdentifier>
     </Filter>
@@ -55,13 +52,37 @@
     <Filter Include="cheats\aimbot">
       <UniqueIdentifier>{d6d82f66-cc70-4863-8875-e89a2df01529}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\config">
+      <UniqueIdentifier>{dc99bdfa-8e54-4569-9337-abf1b401d8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cache">
+      <UniqueIdentifier>{d2ffde6c-ba1d-4a93-afd2-f591807eee55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cache\entity">
+      <UniqueIdentifier>{97fb2fa9-adf5-4956-be49-ca44ede461d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cache\world">
+      <UniqueIdentifier>{ee67810e-58b4-457b-8925-fa511e95c64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cheats\edgejump">
+      <UniqueIdentifier>{6a25affa-6345-489b-aeb9-8a3f18de3620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\math">
+      <UniqueIdentifier>{dc797bf0-75c7-426e-a915-ac3f765accd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\classes\entity">
+      <UniqueIdentifier>{ca0538ce-63c1-4e49-a9c6-8b1f91c879d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\classes\engine">
+      <UniqueIdentifier>{5e3b732d-4c56-4e59-a5b8-ebf922f36130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\menu">
+      <UniqueIdentifier>{2862286a-f8b2-4079-8b9f-21c9396cdd1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
       <Filter>utils\precompiled</Filter>
-    </ClInclude>
-    <ClInclude Include="console.hpp">
-      <Filter>utils\console</Filter>
     </ClInclude>
     <ClInclude Include="memory.hpp">
       <Filter>utils\memory</Filter>
@@ -99,29 +120,59 @@
     <ClInclude Include="process.hpp">
       <Filter>utils\process</Filter>
     </ClInclude>
-    <ClInclude Include="entity.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="client.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
     <ClInclude Include="triggerbot.hpp">
       <Filter>cheats\triggerbot</Filter>
     </ClInclude>
     <ClInclude Include="vector.hpp">
       <Filter>sdk\datatypes</Filter>
     </ClInclude>
-    <ClInclude Include="engine.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="convar.hpp">
-      <Filter>sdk\classes</Filter>
-    </ClInclude>
     <ClInclude Include="skinchanger.hpp">
       <Filter>cheats\skinchanger</Filter>
     </ClInclude>
     <ClInclude Include="aimbot.hpp">
       <Filter>cheats\aimbot</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hpp">
+      <Filter>utils\config</Filter>
+    </ClInclude>
+    <ClInclude Include="archivex.hpp">
+      <Filter>utils\config</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.hpp">
+      <Filter>utils\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="safe_vector.hpp">
+      <Filter>sdk\cache</Filter>
+    </ClInclude>
+    <ClInclude Include="edgejump.hpp">
+      <Filter>cheats\edgejump</Filter>
+    </ClInclude>
+    <ClInclude Include="on_world.hpp">
+      <Filter>sdk\cache\world</Filter>
+    </ClInclude>
+    <ClInclude Include="on_entity.hpp">
+      <Filter>sdk\cache\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="math.hpp">
+      <Filter>utils\math</Filter>
+    </ClInclude>
+    <ClInclude Include="qangle.hpp">
+      <Filter>sdk\datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.hpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="weapon.hpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="client.hpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="convar.hpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.hpp">
+      <Filter>sdk\classes\engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,23 +195,35 @@
     <ClCompile Include="triggerbot.cpp">
       <Filter>cheats\triggerbot</Filter>
     </ClCompile>
-    <ClCompile Include="client.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="convar.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="engine.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>sdk\classes</Filter>
-    </ClCompile>
     <ClCompile Include="skinchanger.cpp">
       <Filter>cheats\skinchanger</Filter>
     </ClCompile>
     <ClCompile Include="aimbot.cpp">
       <Filter>cheats\aimbot</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>utils\config</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>utils\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="edgejump.cpp">
+      <Filter>cheats\edgejump</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="weapon.cpp">
+      <Filter>sdk\classes\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="convar.cpp">
+      <Filter>sdk\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>sdk\classes\engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

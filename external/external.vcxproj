@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -49,23 +49,30 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>.\out\dbg\</OutDir>
     <IntDir>.\out\dbg\obj\</IntDir>
+    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>.\out\rel\</OutDir>
     <IntDir>.\out\rel\obj\</IntDir>
+    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Release-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
-    <VcpkgEnabled>false</VcpkgEnabled>
-    <VcpkgAutoLink>true</VcpkgAutoLink>
+    <VcpkgEnabled>true</VcpkgEnabled>
+    <VcpkgAutoLink>false</VcpkgAutoLink>
     <VcpkgManifestInstall>true</VcpkgManifestInstall>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <VcpkgUseStatic>true</VcpkgUseStatic>
+    <VcpkgTriplet>
+    </VcpkgTriplet>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <VcpkgUseStatic>
-    </VcpkgUseStatic>
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+    <VcpkgTriplet>
+    </VcpkgTriplet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,12 +85,14 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
@@ -105,47 +114,62 @@
       <Optimization>MaxSpeed</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>-mllvm -sub -mllvm -sub_loop=2 -mllvm -bcf -mllvm -bcf_loop=1 -mllvm -bcf_prob=45 -mllvm -fla -mllvm -split -mllvm -split_num=2 %(AdditionalOptions)</AdditionalOptions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <ProgramDatabaseFile>$(TargetName).pdb</ProgramDatabaseFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="aimbot.hpp" />
+    <ClInclude Include="archivex.hpp" />
     <ClInclude Include="bhop.hpp" />
-    <ClInclude Include="console.hpp" />
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="convar.hpp" />
+    <ClInclude Include="edgejump.hpp" />
     <ClInclude Include="engine.hpp" />
     <ClInclude Include="entity.hpp" />
     <ClInclude Include="glow.hpp" />
     <ClInclude Include="keybind.hpp" />
     <ClInclude Include="lazy_importer.hpp" />
+    <ClInclude Include="math.hpp" />
     <ClInclude Include="memory.hpp" />
     <ClInclude Include="offsets.hpp" />
+    <ClInclude Include="on_entity.hpp" />
+    <ClInclude Include="on_world.hpp" />
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="process.hpp" />
+    <ClInclude Include="qangle.hpp" />
+    <ClInclude Include="safe_vector.hpp" />
     <ClInclude Include="sdk.hpp" />
     <ClInclude Include="skinchanger.hpp" />
     <ClInclude Include="structs.hpp" />
     <ClInclude Include="triggerbot.hpp" />
+    <ClInclude Include="menu.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="var.hpp" />
     <ClInclude Include="vector.hpp" />
     <ClInclude Include="client.hpp" />
+    <ClInclude Include="weapon.hpp" />
     <ClInclude Include="xorstr.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aimbot.cpp" />
     <ClCompile Include="bhop.cpp" />
     <ClCompile Include="client.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="convar.cpp" />
+    <ClCompile Include="edgejump.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="glow.cpp" />
@@ -160,6 +184,8 @@
     </ClCompile>
     <ClCompile Include="skinchanger.cpp" />
     <ClCompile Include="triggerbot.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

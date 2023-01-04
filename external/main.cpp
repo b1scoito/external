@@ -1,75 +1,57 @@
 #include "pch.hpp"
 
+// menu
+#include "menu.hpp"
+
+// features
+#include "aimbot.hpp"
 #include "bhop.hpp"
 #include "glow.hpp"
-#include "triggerbot.hpp"
+#include "edgejump.hpp"
 #include "skinchanger.hpp"
-#include "aimbot.hpp"
+#include "triggerbot.hpp"
 
-#include "engine.hpp"
-#include "client.hpp"
-#include "entity.hpp"
-#include "convar.hpp"
+// cache
+#include "on_entity.hpp"
+#include "on_world.hpp"
 
-#include <assert.h>
-
-INT WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd )
-{
-	std::atexit( []
-	{
-		var::b_is_running = false;
-	} );
+// TODO: Fix Release compile
+int main(int argc, const char *argv[]) {
+	std::atexit([]{ var::b_is_running = false; });
 
 	// Run SDK
-	if ( !sdk::base->run() )
+	if (!sdk::base->run())
 		return EXIT_FAILURE;
 
-	std::thread( [&]
+	// Run config system
+	config.run("external");
+
+	// Run update threads
+	// TODO: Finish proper caching
+	std::thread(on_world_cache).detach();
+	std::thread(on_entity_cache).detach();
+
+	// Run cheat threads
+	// Fix: aimbot, edgejump
+	// Add: more features to: glow, skinchanger
+	// Change: triggerbot logic
+	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
+	std::thread(&c_bhop::run, g_bhop.get()).detach();
+	std::thread(&c_glow::run, g_glow.get()).detach();
+	std::thread(&c_edgejump::run, g_edgejump.get()).detach();
+	std::thread(&c_skinchanger::run, g_skinchanger.get()).detach();
+	std::thread(&c_triggerbot::run, g_triggerbot.get()).detach();
+
+	// TODO: See what's causing all loops to lag after implementing ImGui
+	// Wait until stop signal
+	if (!g_menu->setup())
 	{
-		while ( var::b_is_running )
-		{
-			timer::sleep( 100 );
+		g_menu->destroy();
+		return EXIT_FAILURE;
+	}
 
-			// Cache
-			if ( !g_engine->in_game() )
-			{
-				g_local = c_entity();
-				g_convar_list.clear();
-				g_model_index_list.clear();
-				continue;
-			}
-
-			if (!g_local.get_entity())
-			{
-				const auto [addr, index] = g_client->get_local_player();
-				g_local = c_entity( addr, index );
-			}
-
-			if ( g_convar_list.empty() )
-				g_convar->populate_list();
-
-			if ( g_model_index_list.empty() )
-				g_skinchanger->populate_model_index_list();
-		}
-	}).detach();
-
-	// Run bhop
-	g_bhop->run();
-
-	// Run glow
-	g_glow->run( var::keybinds::toggle_glow_key );
-
-	// Run trigger bot
-	g_triggerbot->run( var::keybinds::hold_triggerbot_key );
-
-	// Run skin changer
-	g_skinchanger->run( var::keybinds::toggle_skinchanger_key );
-
-	// Run aimbot
-	g_aimbot->run( var::keybinds::hold_aimbot_key );
-
-	while ( !LI_FN(GetAsyncKeyState).cached()( VK_DELETE ) )
-		timer::sleep( 50 );
+	// Render loop
+	g_menu->render();
 
 	var::b_is_running = false;
 
