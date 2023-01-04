@@ -1,1 +1,2 @@
-external/* linguist-detectable=true
+*.cpp linguist-detectable=true
+*.hpp linguist-detectable=true
