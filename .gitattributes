@@ -1,2 +1,1 @@
-*.cpp linguist-detectable
-*.hpp linguist-detectable
+external/ -linguist-vendored
