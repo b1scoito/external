@@ -15,7 +15,6 @@
 #include "on_entity.hpp"
 #include "on_world.hpp"
 
-// TODO: Fix Release compile
 int main(int argc, const char *argv[]) {
 	std::atexit([]{ var::b_is_running = false; });
 
@@ -33,7 +32,7 @@ int main(int argc, const char *argv[]) {
 
 	// Run cheat threads
 	// Fix: aimbot, edgejump
-	// Add: more features to: glow, skinchanger
+	// Add: more features to: glow, skin changer
 	// Change: triggerbot logic
 	std::thread(&c_aimbot::run, g_aimbot.get()).detach();
 	std::thread(&c_bhop::run, g_bhop.get()).detach();

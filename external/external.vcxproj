@@ -49,15 +49,15 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>.\out\dbg\</OutDir>
     <IntDir>.\out\dbg\obj\</IntDir>
-    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\biscoito\Desktop\projeto\dev\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>.\out\rel\</OutDir>
     <IntDir>.\out\rel\obj\</IntDir>
-    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Release-x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\biscoito\Desktop\projeto\dev\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\build\Release-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnabled>true</VcpkgEnabled>
@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -127,7 +127,7 @@
       <AdditionalDependencies>valve-bsp-parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <ProgramDatabaseFile>$(TargetName).pdb</ProgramDatabaseFile>
-      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -46,11 +46,11 @@ void c_aimbot::run()
 			continue;
 
 		const auto calculate_angle = [&](Vector local_pos, Vector enemy_pos, Vector view_angles) -> Vector {
-			return ((enemy_pos - local_pos).ToAngle() - view_angles);
+			return ((enemy_pos - local_pos) - view_angles);
 		};
 
-		float best_fov_local = { config.aimbot.f_aim_fov };
-		best_angle = Vector{};
+		this->best_fov_local = {};
+		this->best_angle = Vector{};
 
 		for (std::int32_t i = 1; i < g_engine->get_max_player_count(); i++)
 		{

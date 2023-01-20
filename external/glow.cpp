@@ -83,7 +83,7 @@ void c_glow::run()
 					config.visuals.f_glow_color.x,	// R
 					config.visuals.f_glow_color.y,	// G
 					config.visuals.f_glow_color.z,	// B
-					config.visuals.f_glow_color.w			// A
+					config.visuals.f_glow_color.w	// A
 				);
 			}
 

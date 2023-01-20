@@ -10,6 +10,7 @@ private:
 	int last_frame = {};
 	
 	float best_fov = {};
+	float best_fov_local = { config.aimbot.f_aim_fov };
 	Vector best_angle = Vector{};
 
 	float function_elapsed = {};

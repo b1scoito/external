@@ -190,16 +190,6 @@ public:
 			std::fpclassify(this->z) == FP_ZERO);
 	}
 
-	// From: https://github.com/eccentricPACHARA/csgoexternalaimbot/blob/main/vector.h#L36
-	[[nodiscard]] constexpr const Vector ToAngle() const noexcept
-	{
-		return Vector {
-			std::atan2(-z, std::hypot(x, y)) * (180.f / std::numbers::pi_v<float>),
-			std::atan2(y, x) * (180.f / std::numbers::pi_v<float>),
-			0.0f
-		};
-	}
-
 	[[nodiscard]] Vector2D ToVector2D() const
 	{
 		return Vector2D(this->x, this->y);
