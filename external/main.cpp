@@ -17,7 +17,7 @@
 
 // TODO: Fix Release compile
 int main(int argc, const char *argv[]) {
-	std::atexit([]{ var::b_is_running = false; });
+	std::atexit([] { var::b_is_running = false; });
 
 	// Run SDK
 	if (!sdk::base->run())
@@ -54,6 +54,9 @@ int main(int argc, const char *argv[]) {
 	g_menu->render();
 
 	var::b_is_running = false;
+
+	std::cout << "Hello world" << std::endl;
+	std::cin.get();
 
 	return EXIT_SUCCESS;
 }

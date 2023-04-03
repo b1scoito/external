@@ -7,7 +7,7 @@
 namespace sdk
 {
 	constexpr ::std::int64_t timestamp = 1675411406;
-	inline std::string current_game_version = xorstr("1544");
+	inline std::string current_game_version = xorstr("1548");
 
 	namespace netvars
 	{

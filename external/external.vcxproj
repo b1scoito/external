@@ -49,8 +49,8 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>.\out\dbg\</OutDir>
     <IntDir>.\out\dbg\obj\</IntDir>
-    <IncludePath>C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\biscoito\Desktop\coisas\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\coisas\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\Lua\5.1\include;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\thirdparty\liblzma\include;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Lua\5.1\lib;C:\Users\biscoito\Desktop\projeto\dev\vcpkg\installed\x86-windows-static\lib;C:\Users\biscoito\Desktop\projeto\dev\valve-bsp-parser\build\Debug-x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
